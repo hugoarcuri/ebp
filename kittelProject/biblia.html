@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Reina Valera 1960</title>
 <script src="rv1960.js"></script>
+<script src="interlinear_lookup.js"></script>
 <script src="strong_index.js"></script>
 <script src="datos_strong.js"></script>
 <script src="datos.js"></script>
@@ -118,10 +119,10 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 .verse { padding: 4px 0; font-size: var(--verse-font-size, 16px); line-height: 1.8; color: var(--text); }
 .verse .v-num { font-size: 11px; font-weight: 700; color: var(--accent); margin-right: 4px; cursor: pointer; }
 
-.word-unit { display: inline-flex; flex-direction: column; align-items: center; vertical-align: top; margin: 0 3px; }
-.word-unit .strong { font-size: 0.55em; font-weight: 600; color: #4a90e2; line-height: 1.1; text-align: center; white-space: nowrap; cursor: pointer; }
-.word-unit .strong:hover { color: #2a6cb8; text-decoration: underline; }
-.word-unit .word { font-size: 1em; line-height: 1.4; cursor: pointer; }
+.wu { display: inline-flex; flex-direction: column; align-items: center; vertical-align: top; margin: 0 3px; }
+.wu .s { font-size: 0.55em; font-weight: 600; color: #4a90e2; line-height: 1.1; text-align: center; white-space: nowrap; cursor: pointer; }
+.wu .s:hover { color: #2a6cb8; text-decoration: underline; }
+.wu .w { font-size: 1em; line-height: 1.4; cursor: pointer; }
 
 .strong-tooltip {
     position: absolute;
@@ -148,7 +149,7 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 .dark .strong-tooltip .trans { color: #aaa; }
 .strong-tooltip .def { margin-top: 6px; font-size: 12px; color: #444; display: block; }
 .dark .strong-tooltip .def { color: #ccc; }
-.word-unit { cursor: pointer; }
+.wu { cursor: pointer; }
 
 .word-info-overlay {
     position: fixed; inset: 0; background: rgba(0,0,0,0.5);
@@ -344,7 +345,7 @@ let highlights = JSON.parse(localStorage.getItem('bibliaHighlights') || '{}');
 
 const STRONG_MAP = {};
 if (typeof STRONG_DATA !== 'undefined') {
-    STRONG_DATA.forEach(e => { STRONG_MAP[e.n] = e; });
+    STRONG_DATA.forEach(e => { STRONG_MAP[e.l + e.n] = e; });
 }
 
 const KITTEL_BY_LEMMA = {};
@@ -518,27 +519,19 @@ function escHtml(s) {
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function markStrongWords(text, verseRef) {
-    if (!strongEnabled || !STRONG_INDEX || !STRONG_INDEX.single) return text;
-    
-    const isAT = AT_BOOKS.includes(currentBook);
-    const isNT = NT_BOOKS.includes(currentBook);
-    var debugMode = window.location.search.indexOf('debug=1') >= 0;
-    
-    // Step 1: tokenize the verse text
-    const tokens = text.match(/(<[^>]+>)|([a-záéíóúüñ]+)|([^a-záéíóúüñ<]+)/gi) || [text];
-    
-    // Step 2: build word objects with their Strong associations
-    var wordObjects = [];
+function buildWordObjects(text) {
+    var isAT = AT_BOOKS.includes(currentBook);
+    var isNT = NT_BOOKS.includes(currentBook);
+    var tokens = text.match(/(<[^>]+>)|([a-záéíóúüñ]+)|([^a-záéíóúüñ<]+)/gi) || [text];
+    var result = [];
     tokens.forEach(function(token) {
         if (token.charAt(0) === '<' && token.charAt(token.length - 1) === '>') {
-            wordObjects.push({ type: 'html', html: token });
+            result.push({ type: 'html', html: token });
             return;
         }
         if (/^[a-záéíóúüñ]+$/i.test(token)) {
             var stripped = stripAccents(token.toLowerCase());
             var entry = STRONG_INDEX.single[stripped];
-            
             var strongs = [];
             if (entry) {
                 var strongNumsStr = entry.split('||')[0];
@@ -549,54 +542,172 @@ function markStrongWords(text, verseRef) {
                     return true;
                 });
             }
-            
-            wordObjects.push({
-                type: 'word',
-                word: token,
-                strongs: strongs
-            });
+            result.push({ type: 'word', text: token, strongs: strongs });
             return;
         }
-        // Non-word (spaces, punctuation)
-        wordObjects.push({ type: 'separator', text: token });
+        result.push({ type: 'sep', text: token });
     });
-    
-    // Step 3: debug logging
-    if (debugMode) {
-        wordObjects.forEach(function(obj) {
-            if (obj.type === 'word') {
-                var strongStr = obj.strongs.length > 0 ? obj.strongs.join(',') : '(ninguno)';
-                console.log('🔍 Palabra: ' + obj.word + ' -> ' + strongStr + '  [' + (verseRef || '') + ']');
-            }
-        });
-    }
-    
-    // Step 4: render from word objects
-    return wordObjects.map(function(obj) {
+    return result;
+}
+
+function renderWordObjects(objects) {
+    return objects.map(function(obj) {
         if (obj.type === 'html') return obj.html;
-        if (obj.type === 'separator') return obj.text;
-        
-        // Word unit
+        if (obj.type === 'sep') return obj.text;
         var strongDiv = '';
         if (obj.strongs.length > 0) {
             var badgeHtml = obj.strongs.map(function(num) {
-                var nVal = parseInt(num.replace(/\D/g, ''));
-                var detail = STRONG_MAP[nVal];
-                if (detail) {
-                    return '<span data-strong="' + num + '" data-lemma="' + escHtml(detail.w) + '" data-translit="' + escHtml(detail.t) + '" data-def="' + escHtml(detail.d.slice(0, 120).replace(/\n/g, ' ')) + '">' + num + '</span>';
+                var detail = STRONG_MAP[num];
+                if (window.location.search.indexOf('debug=1') >= 0) {
+                    console.log('Strong solicitado: ' + num +
+                        ' | Diccionario usado: ' + (num.charAt(0) === 'H' ? 'Hebrew' : 'Greek') +
+                        ' | Resultado: ' + (detail ? (detail.w || detail.t || '(encontrado)') : 'NO ENCONTRADO'));
                 }
-                return '<span data-strong="' + num + '">' + num + '</span>';
+                if (detail) {
+                    return '<span data-s="' + num + '" data-l="' + escHtml(detail.w) + '" data-t="' + escHtml(detail.t) + '" data-d="' + escHtml(detail.d.slice(0, 120).replace(/\n/g, ' ')) + '">' + num + '</span>';
+                }
+                return '<span data-s="' + num + '">' + num + '</span>';
             }).join(' ');
-            strongDiv = '<div class="strong">' + badgeHtml + '</div>';
+            strongDiv = '<div class="s">' + badgeHtml + '</div>';
         }
-        
-        var dataAttrs = 'data-word="' + escHtml(obj.word) + '"';
-        if (obj.strongs.length > 0) {
-            dataAttrs += ' data-strongs="' + escHtml(obj.strongs.join(',')) + '"';
-        }
-        
-        return '<div class="word-unit" ' + dataAttrs + '>' + strongDiv + '<span class="word">' + obj.word + '</span></div>';
+        var attrs = 'data-w="' + escHtml(obj.text) + '"';
+        if (obj.strongs.length > 0) attrs += ' data-n="' + escHtml(obj.strongs.join(',')) + '"';
+        return '<div class="wu" ' + attrs + '>' + strongDiv + '<span class="w">' + obj.text + '</span></div>';
     }).join('');
+}
+
+function lemmatize(w) {
+    var candidates = [w];
+    // Plural → singular
+    if (w.endsWith('ces') && w.length > 4) { candidates.push(w.slice(0, -3) + 'z'); }
+    if (w.endsWith('es') && w.length > 4) { candidates.push(w.slice(0, -2)); }
+    if (w.endsWith('es') && w.length > 4) { candidates.push(w.slice(0, -1)); }
+    if (w.endsWith('s') && w.length > 3 && !w.endsWith('es')) { candidates.push(w.slice(0, -1)); }
+    // Verb → infinitive: -ar
+    ['aron','ado','ando','aba','aban','abas','ara','ase','aste','\u00e9','\u00f3'].forEach(function(e) {
+        if (w.endsWith(e) && w.length > e.length + 1) candidates.push(w.slice(0, -e.length) + 'ar');
+    });
+    // Verb → infinitive: -er/-ir  
+    ['ieron','ido','iendo','\u00eda','\u00edan','iera','iese','iste'].forEach(function(e) {
+        if (w.endsWith(e) && w.length > e.length + 1) {
+            candidates.push(w.slice(0, -e.length) + 'er');
+            candidates.push(w.slice(0, -e.length) + 'ir');
+        }
+    });
+    if (w.endsWith('yeron') && w.length > 6) candidates.push(w.slice(0, -5) + 'er');
+    return candidates;
+}
+
+var FUNC_WORDS = {
+    'el':1,'la':1,'los':1,'las':1,'lo':1,'un':1,'una':1,'unos':1,'unas':1,
+    'y':1,'e':1,'o':1,'u':1,'ni':1,'que':1,'como':1,'pero':1,'sino':1,'mas':1,
+    'a':1,'ante':1,'bajo':1,'con':1,'contra':1,'de':1,'desde':1,'durante':1,'en':1,'entre':1,
+    'hacia':1,'hasta':1,'mediante':1,'para':1,'por':1,'segun':1,'sin':1,'sobre':1,'tras':1,
+    'me':1,'te':1,'se':1,'nos':1,'os':1,'le':1,'les':1,'mi':1,'tu':1,'su':1,
+    'mis':1,'tus':1,'sus':1,'del':1,'al':1,'no':1,'si':1,'ya':1,
+    'yo':1,'tu':1,'ella':1,'ello':1,'nosotros':1,'vosotros':1,'ellos':1,'ellas':1,'usted':1,
+    'quien':1,'quienes':1,'cual':1,'cuales':1,'cuanto':1,'donde':1,'cuando':1,
+    'muy':1,'tan':1,'tanto':1,'bien':1,'mal':1,'tambien':1,'aun':1,'cada':1,
+    'todo':1,'toda':1,'todos':1,'todas':1,'otro':1,'otra':1,'otros':1,'otras':1,
+    'este':1,'esta':1,'esto':1,'estos':1,'estas':1,'ese':1,'esa':1,'eso':1,'esos':1,'esas':1,
+    'aquel':1,'aquella':1,'aquello':1,'aquellos':1,'aquellas':1,
+    'he':1,'has':1,'ha':1,'han':1,'hemos':1,'habeis':1,'habia':1,'habian':1,'habra':1,
+    'hay':1,'hubo':1,'era':1,'eras':1,'eramos':1,'eran':1,'fue':1,'fueron':1,'sea':1,'sean':1,
+    'soy':1,'eres':1,'es':1,'somos':1,'sois':1,'son':1,'sido':1,'siendo':1,
+    'estoy':1,'estas':1,'estamos':1,'estais':1,'estan':1,'estaba':1,'estaban':1,
+    'estuvo':1,'estuvieron':1,'estara':1,'estaran':1
+};
+
+function findStrongFallback(word, isOT, isNT) {
+    if (typeof STRONG_INDEX === 'undefined' || !STRONG_INDEX.single) return [];
+    var lower = word.toLowerCase();
+    var candidates = lemmatize(lower);
+    var seen = {}, unique = [];
+    for (var i = 0; i < candidates.length; i++) {
+        var key = stripAccents(candidates[i]);
+        if (!seen[key]) { seen[key] = true; unique.push(key); }
+    }
+    var isFuncWord = FUNC_WORDS[stripAccents(lower)] !== undefined;
+    var debug = window.location.search.indexOf('debug=1') >= 0;
+    if (isFuncWord) {
+        if (debug) console.log('Palabra: ' + word + ' | Confianza: baja (funcional) | Resultado: ocultar');
+        return [];
+    }
+    function strongInfo(num) {
+        if (typeof STRONG_MAP === 'undefined') return { lemma: '', def: '' };
+        var e = STRONG_MAP[num];
+        return { lemma: e ? e.w || '' : '', def: e ? e.d || '' : '' };
+    }
+    var bestMatch = null, bestCount = Infinity, bestKey = null;
+    for (var i = 0; i < unique.length; i++) {
+        var entry = STRONG_INDEX.single[unique[i]];
+        if (!entry) continue;
+        var allNums = entry.split('||')[0].split(';');
+        var filtered = [];
+        for (var j = 0; j < allNums.length; j++) {
+            var num = allNums[j];
+            if (isOT && num.charAt(0) === 'H') filtered.push(num);
+            else if (isNT && num.charAt(0) === 'G') filtered.push(num);
+        }
+        if (filtered.length > 0 && filtered.length < bestCount) {
+            bestMatch = filtered;
+            bestCount = filtered.length;
+            bestKey = unique[i];
+        }
+    }
+    if (!bestMatch) return [];
+    if (bestCount > 1) {
+        if (debug) {
+            var info = strongInfo(bestMatch[0]);
+            console.log('Palabra: ' + word + '\nStrong asignado: ' + bestMatch[0] + '\nLema Strong: ' + info.lemma + '\nDefinicion: ' + info.def.slice(0, 120) + '\nCoincidencia: baja (' + bestCount + ' candidatos)');
+        }
+        return [];
+    }
+    if (debug) {
+        var info = strongInfo(bestMatch[0]);
+        console.log('Palabra: ' + word + '\nStrong asignado: ' + bestMatch[0] + '\nLema Strong: ' + info.lemma + '\nDefinicion: ' + info.def.slice(0, 120) + '\nCoincidencia: alta');
+    }
+    return bestMatch;
+}
+
+function markStrongWords(text, verseRef) {
+    if (!strongEnabled) return text;
+    var isOT = false, isNT = false;
+    var refMatch = verseRef && verseRef.match(/(.+) \d+:\d+$/);
+    if (refMatch) {
+        var book = refMatch[1];
+        isOT = AT_BOOKS.indexOf(book) >= 0;
+        isNT = NT_BOOKS.indexOf(book) >= 0;
+    }
+    var wordStrongs = (typeof INTERLINEAR_LOOKUP !== 'undefined' && INTERLINEAR_LOOKUP[verseRef]) ? INTERLINEAR_LOOKUP[verseRef] : null;
+    var tokens = text.match(/(<[^>]+>)|([a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1]+)|([^a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1<]+)/gi) || [text];
+    var wordIdx = 0;
+    var debugMode = window.location.search.indexOf('debug=1') >= 0;
+    var objects = tokens.map(function(token) {
+        if (token.charAt(0) === '<' && token.charAt(token.length - 1) === '>') return { type: 'html', html: token };
+        if (/^[a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1]+$/i.test(token)) {
+            var strongs = [];
+            var fromInterlinear = false;
+            if (wordStrongs && wordIdx < wordStrongs.length) {
+                strongs = wordStrongs[wordIdx];
+                if (strongs && strongs.length > 0) fromInterlinear = true;
+            }
+            if ((!strongs || strongs.length === 0) && (isOT || isNT)) strongs = findStrongFallback(token, isOT, isNT);
+            if (debugMode && strongs && strongs.length > 0) {
+                var origen = fromInterlinear ? 'interlinear' : 'fallback';
+                var strongStr = strongs.join(',');
+                var idxPalabra = wordIdx + 1;
+                console.log('[diagnostico] palabra:\x22' + token + '\x22 | strong:' + strongStr + ' | indice palabra:' + idxPalabra + ' | origen:' + origen);
+            } else if (debugMode) {
+                var idxPalabra = wordIdx + 1;
+                console.log('[diagnostico] palabra:\x22' + token + '\x22 | strong:NONE | indice palabra:' + idxPalabra + ' | origen:N/A');
+            }
+            wordIdx++;
+            return { type: 'word', text: token, strongs: strongs || [] };
+        }
+        return { type: 'sep', text: token };
+    });
+    return renderWordObjects(objects);
 }
 
 function showWelcome() {
@@ -788,7 +899,7 @@ function searchBible(query) {
             strongMatches.slice(0, 50).forEach(function(e) {
                 var num = e.l + e.n;
                 var syns = e.s ? e.s.join(', ') : '';
-                strongHtml += '<div class="verse" style="cursor:pointer;padding:6px 0;" data-strong="' + num + '">' +
+                strongHtml += '<div class="verse" style="cursor:pointer;padding:6px 0;" data-s="' + num + '">' +
                     '<span class="v-num" style="font-size:11px;">' + num + '</span> ' +
                     (e.w ? '<span style="font-size:18px;font-weight:700;direction:rtl;unicode-bidi:embed;margin-right:8px;">' + escHtml(e.w) + '</span>' : '') +
                     (e.t ? '<span style="font-style:italic;color:var(--text-muted);margin-right:8px;">' + escHtml(e.t) + '</span>' : '') +
@@ -801,9 +912,9 @@ function searchBible(query) {
             strongHtml += '</div>';
             view.innerHTML = strongHtml;
             
-            view.querySelectorAll('.verse[data-strong]').forEach(function(el) {
+            view.querySelectorAll('.verse[data-s]').forEach(function(el) {
                 el.addEventListener('click', function() {
-                    var num = this.dataset.strong;
+                    var num = this.dataset.s;
                     showWordInfo(num, num, 'Strong: ' + num);
                 });
             });
@@ -973,9 +1084,13 @@ function showWordInfo(word, strongsStr, ref) {
         entry.className = 'word-info-entry';
         if (allNums.length > 1) entry.style.display = idx === 0 ? 'block' : 'none';
         
-        var nVal = parseInt(num.replace(/\D/g, ''));
-        var detail = STRONG_MAP[nVal];
-        
+        var detail = STRONG_MAP[num];
+        if (window.location.search.indexOf('debug=1') >= 0) {
+            console.log('[word-info] Strong solicitado: ' + num +
+                ' | Diccionario usado: ' + (num.charAt(0) === 'H' ? 'Hebrew' : 'Greek') +
+                ' | Resultado: ' + (detail ? (detail.w || detail.t || '(encontrado)') : 'NO ENCONTRADO'));
+        }
+
         var html = '<div class="strong-num">' + num + '</div>';
         
         if (detail) {
@@ -1035,10 +1150,10 @@ document.getElementById('wordInfoOverlay').addEventListener('click', function(e)
 
 // Double-click on word-unit
 document.getElementById('content').addEventListener('dblclick', function(e) {
-    var unit = e.target.closest('.word-unit');
+    var unit = e.target.closest('.wu');
     if (!unit) return;
-    var word = unit.dataset.word;
-    var strongs = unit.dataset.strongs;
+    var word = unit.dataset.w;
+    var strongs = unit.dataset.n;
     var verseEl = unit.closest('.verse');
     var ref = '';
     if (verseEl) {
@@ -1066,12 +1181,12 @@ document.getElementById('wordInfoBody').addEventListener('click', function(e) {
 // Keyboard shortcuts
 
 document.getElementById('content').addEventListener('mouseover', function(e) {
-    var strongEl = e.target.closest('.word-unit .strong');
+    var strongEl = e.target.closest('.wu .s');
     if (!strongEl) return;
-    var badge = strongEl.querySelector('[data-strong]');
+    var badge = strongEl.querySelector('[data-s]');
     if (!badge) return;
     var tooltip = document.getElementById('strongTooltip');
-    tooltip.innerHTML = '<b>' + badge.dataset.strong + '</b> <span class="orig">' + (badge.dataset.lemma || '') + '</span> <span class="trans">' + (badge.dataset.translit || '') + '</span><span class="def">' + (badge.dataset.def || '') + '</span>';
+    tooltip.innerHTML = '<b>' + badge.dataset.s + '</b> <span class="orig">' + (badge.dataset.l || '') + '</span> <span class="trans">' + (badge.dataset.t || '') + '</span><span class="def">' + (badge.dataset.d || '') + '</span>';
     tooltip.style.display = 'block';
     var rect = strongEl.getBoundingClientRect();
     tooltip.style.left = (rect.left + window.scrollX) + 'px';
@@ -1080,7 +1195,7 @@ document.getElementById('content').addEventListener('mouseover', function(e) {
 });
 
 document.getElementById('content').addEventListener('mouseout', function(e) {
-    if (e.target.closest('.word-unit .strong')) {
+    if (e.target.closest('.wu .s')) {
         var tooltip = document.getElementById('strongTooltip');
         tooltip.style.opacity = '0';
         setTimeout(function() { tooltip.style.display = 'none'; }, 200);
@@ -1088,11 +1203,19 @@ document.getElementById('content').addEventListener('mouseout', function(e) {
 });
 
 document.getElementById('content').addEventListener('click', function(e) {
-    var strongEl = e.target.closest('.word-unit .strong');
+    var debugMode = window.location.search.indexOf('debug=1') >= 0;
+    var unit = e.target.closest('.wu');
+    if (unit && debugMode && !e.target.closest('.wu .s')) {
+        var w = unit.dataset.w;
+        var n = unit.dataset.n;
+        console.log('Palabra: ' + w + ' -> Strong: ' + (n || '(ninguno)'));
+        return;
+    }
+    var strongEl = e.target.closest('.wu .s');
     if (strongEl) {
-        var badge = strongEl.querySelector('[data-strong]');
+        var badge = strongEl.querySelector('[data-s]');
         if (badge) {
-            var strongNum = badge.dataset.strong;
+            var strongNum = badge.dataset.s;
             try {
                 var parentDoc = window.parent.document;
                 var fk = parentDoc.getElementById('frameKittel');
