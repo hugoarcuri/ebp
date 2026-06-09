@@ -29,6 +29,7 @@
     --welcome-bg: #F5F0E5;
     --badge-h: #C8A87A;
     --badge-g: #7F222D;
+    --entry-font-size: 16px;
 }
 /* SECTION: dark-mode */
 .dark {
@@ -76,7 +77,7 @@ header {
 .search-container { width: 100%; }
 .search-container input { 
     width: 100%; 
-    padding: 6px 12px; 
+    padding: 10px 14px; 
     border: none; 
     border-radius: 6px; 
     font-size: 14px; 
@@ -179,8 +180,8 @@ main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
 #entry-view .entry-header .header-meta .copy-btn, #entry-view .entry-header .header-meta .fav-btn { background: none; border: 1px solid var(--sidebar-border); font-size: 12px; padding: 3px 10px; border-radius: 6px; cursor: pointer; color: var(--text-muted); }
 #entry-view .entry-header .header-meta .copy-btn:hover, #entry-view .entry-header .header-meta .fav-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 #entry-view .entry-header .header-meta .fav-btn.saved { background: var(--accent); color: #fff; border-color: var(--accent); }
-#entry-view { font-size: var(--entry-font-size, 16px); }
-#entry-view .entry-def { font-size: 1em; line-height: 1.85; color: var(--text); }
+#entry-view { font-size: var(--entry-font-size); }
+#entry-view .entry-def { line-height: 1.85; color: var(--text); }
 #entry-view .entry-def .strong-link { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: 600; }
 #entry-view .entry-def .strong-link:hover { color: var(--accent-dark); text-decoration: none; }
 #entry-view .entry-def .word-orig { font-size: 1.1em; font-weight: 700; }
@@ -210,7 +211,6 @@ main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
     #entry-view { padding: 16px; }
     #entry-view .entry-card { padding: 18px; }
     #entry-view .entry-header .word-line { font-size: 22px; }
-    #entry-view .entry-def { font-size: 16px; }
 }
 @media (max-width: 450px) {
     header { gap: 4px; padding: 6px 8px; }
@@ -325,7 +325,7 @@ function init() {
     buildWordIndex();
     var h = entries.filter(function(e) { return e.l === 'H'; }).length;
     var g = entries.filter(function(e) { return e.l === 'G'; }).length;
-    entryViewEl.style.setProperty('--entry-font-size', fontSize + 'px');
+    applyFontSize(fontSize);
     searchEl.addEventListener('input', function() { onSearch(); });
     searchEl.addEventListener('focus', function() { sidebarEl.classList.remove('sidebar-hidden'); });
     if (searchEl.value) onSearch(); else showWelcome();
@@ -529,11 +529,17 @@ function escHtml(s) {
     return d.innerHTML;
 }
 
-function changeFont(delta) {
-    fontSize = Math.min(28, Math.max(12, fontSize + delta));
-    localStorage.setItem('strongFontSize', fontSize);
-    entryViewEl.style.setProperty('--entry-font-size', fontSize + 'px');
+function applyFontSize(size) {
+    fontSize = Math.min(40, Math.max(8, size));
+    document.documentElement.style.setProperty('--entry-font-size', fontSize + 'px');
+    var el = entryViewEl.querySelector('.entry-def');
+    if (el) el.style.fontSize = fontSize + 'px';
     fontSizeLabel.textContent = fontSize;
+    localStorage.setItem('strongFontSize', fontSize);
+}
+
+function changeFont(delta) {
+    applyFontSize(fontSize + delta);
 }
 
 

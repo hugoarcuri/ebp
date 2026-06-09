@@ -61,7 +61,7 @@ header {
 .search-container { width: 100%; }
 .search-container input { 
     width: 100%; 
-    padding: 6px 12px; 
+    padding: 10px 14px; 
     border: none; 
     border-radius: 6px; 
     font-size: 14px; 
@@ -641,6 +641,7 @@ function searchBible(query) {
     view.querySelectorAll('.verse[data-ref]').forEach(el => {
         el.addEventListener('click', function() {
             const ref = this.dataset.ref;
+            document.getElementById('search').value = ref;
             console.log('Versículo seleccionado:', ref);
             const lastSpace = ref.lastIndexOf(' ');
             const book = ref.slice(0, lastSpace);
@@ -675,6 +676,7 @@ function goToPrevChapter() {
     if (!currentBook || !currentChapter) return;
     if (currentChapter > 1) {
         currentChapter--;
+        document.getElementById('search').value = currentBook + ' ' + currentChapter;
         showChapter();
     }
 }
@@ -684,6 +686,7 @@ function goToNextChapter() {
     const maxCh = Object.keys(BIBLE_DATA[currentBook]).length;
     if (currentChapter < maxCh) {
         currentChapter++;
+        document.getElementById('search').value = currentBook + ' ' + currentChapter;
         showChapter();
     }
 }
@@ -790,7 +793,7 @@ function initNav() {
                 const item = document.createElement('div');
                 item.className = `nav-item ${name === currentBook ? 'active' : ''}`;
                 item.innerHTML = `<span>${name}</span> <span>❯</span>`;
-                item.onclick = () => renderNav('chapters', name);
+                item.onclick = () => { document.getElementById('search').value = name; renderNav('chapters', name); };
                 navContent.appendChild(item);
             });
         } else if (view === 'chapters') {
@@ -808,7 +811,7 @@ function initNav() {
                 const item = document.createElement('div');
                 item.className = `nav-grid-item ${ch == currentChapter ? 'active' : ''}`;
                 item.textContent = ch;
-                item.onclick = () => renderNav('verses', book, ch);
+                item.onclick = () => { document.getElementById('search').value = book + ' ' + ch; renderNav('verses', book, ch); };
                 grid.appendChild(item);
             });
             navContent.appendChild(grid);
@@ -826,6 +829,7 @@ function initNav() {
                 item.className = 'nav-item';
                 item.innerHTML = `<span>Versículo ${v}</span>`;
                 item.onclick = () => {
+                    document.getElementById('search').value = book + ' ' + chapter + ':' + v;
                     currentBook = book;
                     currentChapter = parseInt(chapter);
                     showChapter();

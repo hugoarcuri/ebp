@@ -27,6 +27,7 @@
     --scrollbar-thumb: #C8B88A;
     --griego-color: #2A0808;
     --welcome-bg: #F5F2EB;
+    --entry-font-size: 16px;
 }
 /* SECTION: dark-mode */
 .dark {
@@ -73,7 +74,7 @@ header {
 .search-container { width: 100%; }
 .search-container input { 
     width: 100%; 
-    padding: 6px 12px; 
+    padding: 10px 14px; 
     border: none; 
     border-radius: 6px; 
     font-size: 14px; 
@@ -179,8 +180,8 @@ main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
 #entry-view .entry-header .header-meta .fav-btn:hover, #entry-view .entry-header .header-meta .copy-btn:hover, #entry-view .entry-header .header-meta .share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 #entry-view .entry-header .header-meta .fav-btn.saved { background: var(--accent); color: #fff; border-color: var(--accent); }
 .mobile-back { display: none; }
-#entry-view { font-size: var(--entry-font-size, 16px); }
-#entry-view .entry-text { font-size: 1em; line-height: 1.85; color: var(--text); transition: color 0.2s; }
+#entry-view { font-size: var(--entry-font-size); }
+#entry-view .entry-text { line-height: 1.85; color: var(--text); transition: color 0.2s; }
 #entry-view .entry-text br { content: ""; display: block; margin-top: 14px; }
 #entry-view .entry-text .greek-word { font-size: 1.15em; font-weight: 700; }
 #entry-view .entry-text .section-title { font-size: 1.1em; font-weight: 700; }
@@ -218,7 +219,6 @@ main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
     #entry-view { padding: 16px; }
     #entry-view .entry-card { padding: 18px; }
     #entry-view .entry-header .griego { font-size: 22px; }
-    #entry-view .entry-text { font-size: 17px; }
     .welcome h2 { font-size: 24px; }
     .welcome .quick-card { padding: 8px 14px; font-size: 12px; }
 }
@@ -240,7 +240,6 @@ main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
     #entry-view { padding: 10px 10px 48px; }
     #entry-view .entry-card { padding: 12px; }
     #entry-view .entry-header .griego { font-size: 17px; }
-    #entry-view .entry-text { font-size: 14px; }
 }
 </style>
 </head>
@@ -381,8 +380,7 @@ function toggleFav(idx) {
 function init() {
     entries = KITTEL_DATA; /* SECTION: datos-cargados */
     buildWordIndex();
-    fontSizeLabel.textContent = fontSize;
-    entryViewEl.style.setProperty('--entry-font-size', fontSize + 'px');
+    applyFontSize(fontSize);
     var totalTerms = entries.reduce(function(a, e) { return a + e.e.length; }, 0);
     var grRaw = '';
     searchEl.addEventListener('focus', function() {
@@ -689,11 +687,8 @@ window.addEventListener('message', function(e) {
         localStorage.setItem('kittelDark', isDark);
     }
     if (e.data.type === 'fontChange') {
-        var sz = Math.min(28, Math.max(12, parseInt(e.data.size) || 16));
-        fontSize = sz;
-        localStorage.setItem('kittelFontSize', sz);
-        entryViewEl.style.setProperty('--entry-font-size', sz + 'px');
-        fontSizeLabel.textContent = sz;
+        var sz = Math.min(40, Math.max(8, parseInt(e.data.size) || 16));
+        applyFontSize(sz);
     }
 });
 
@@ -703,11 +698,17 @@ function escHtml(s) {
     return d.innerHTML;
 }
 
-function changeFont(delta) {
-    fontSize = Math.min(28, Math.max(12, fontSize + delta));
-    localStorage.setItem('kittelFontSize', fontSize);
-    entryViewEl.style.setProperty('--entry-font-size', fontSize + 'px');
+function applyFontSize(size) {
+    fontSize = Math.min(40, Math.max(8, size));
+    document.documentElement.style.setProperty('--entry-font-size', fontSize + 'px');
+    var el = entryViewEl.querySelector('.entry-text');
+    if (el) el.style.fontSize = fontSize + 'px';
     fontSizeLabel.textContent = fontSize;
+    localStorage.setItem('kittelFontSize', fontSize);
+}
+
+function changeFont(delta) {
+    applyFontSize(fontSize + delta);
 }
 
 
