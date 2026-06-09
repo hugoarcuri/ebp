@@ -518,54 +518,84 @@ function escHtml(s) {
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function markStrongWords(text) {
+function markStrongWords(text, verseRef) {
     if (!strongEnabled || !STRONG_INDEX || !STRONG_INDEX.single) return text;
     
     const isAT = AT_BOOKS.includes(currentBook);
     const isNT = NT_BOOKS.includes(currentBook);
+    var debugMode = window.location.search.indexOf('debug=1') >= 0;
     
+    // Step 1: tokenize the verse text
     const tokens = text.match(/(<[^>]+>)|([a-záéíóúüñ]+)|([^a-záéíóúüñ<]+)/gi) || [text];
     
-    return tokens.map(function(token) {
-        if (token.charAt(0) === '<' && token.charAt(token.length - 1) === '>') return token;
-        
+    // Step 2: build word objects with their Strong associations
+    var wordObjects = [];
+    tokens.forEach(function(token) {
+        if (token.charAt(0) === '<' && token.charAt(token.length - 1) === '>') {
+            wordObjects.push({ type: 'html', html: token });
+            return;
+        }
         if (/^[a-záéíóúüñ]+$/i.test(token)) {
-            const stripped = stripAccents(token.toLowerCase());
-            const entry = STRONG_INDEX.single[stripped];
+            var stripped = stripAccents(token.toLowerCase());
+            var entry = STRONG_INDEX.single[stripped];
             
-            var filteredNums = [];
+            var strongs = [];
             if (entry) {
                 var strongNumsStr = entry.split('||')[0];
                 var allNums = strongNumsStr.split(';');
-                filteredNums = allNums.filter(function(num) {
+                strongs = allNums.filter(function(num) {
                     if (isAT) return num.startsWith('H');
                     if (isNT) return num.startsWith('G');
                     return true;
                 });
             }
             
-            var strongDiv = '';
-            if (filteredNums.length > 0) {
-                var badgeHtml = filteredNums.map(function(num) {
-                    var nVal = parseInt(num.replace(/\D/g, ''));
-                    var detail = STRONG_MAP[nVal];
-                    if (detail) {
-                        return '<span data-strong="' + num + '" data-lemma="' + escHtml(detail.w) + '" data-translit="' + escHtml(detail.t) + '" data-def="' + escHtml(detail.d.slice(0, 120).replace(/\n/g, ' ')) + '">' + num + '</span>';
-                    }
-                    return '<span data-strong="' + num + '">' + num + '</span>';
-                }).join(' ');
-                strongDiv = '<div class="strong">' + badgeHtml + '</div>';
+            wordObjects.push({
+                type: 'word',
+                word: token,
+                strongs: strongs
+            });
+            return;
+        }
+        // Non-word (spaces, punctuation)
+        wordObjects.push({ type: 'separator', text: token });
+    });
+    
+    // Step 3: debug logging
+    if (debugMode) {
+        wordObjects.forEach(function(obj) {
+            if (obj.type === 'word') {
+                var strongStr = obj.strongs.length > 0 ? obj.strongs.join(',') : '(ninguno)';
+                console.log('🔍 Palabra: ' + obj.word + ' -> ' + strongStr + '  [' + (verseRef || '') + ']');
             }
-            
-            var dataAttrs = 'data-word="' + escHtml(token) + '"';
-            if (filteredNums.length > 0) {
-                dataAttrs += ' data-strongs="' + escHtml(filteredNums.join(',')) + '"';
-            }
-            
-            return '<div class="word-unit" ' + dataAttrs + '>' + strongDiv + '<span class="word">' + token + '</span></div>';
+        });
+    }
+    
+    // Step 4: render from word objects
+    return wordObjects.map(function(obj) {
+        if (obj.type === 'html') return obj.html;
+        if (obj.type === 'separator') return obj.text;
+        
+        // Word unit
+        var strongDiv = '';
+        if (obj.strongs.length > 0) {
+            var badgeHtml = obj.strongs.map(function(num) {
+                var nVal = parseInt(num.replace(/\D/g, ''));
+                var detail = STRONG_MAP[nVal];
+                if (detail) {
+                    return '<span data-strong="' + num + '" data-lemma="' + escHtml(detail.w) + '" data-translit="' + escHtml(detail.t) + '" data-def="' + escHtml(detail.d.slice(0, 120).replace(/\n/g, ' ')) + '">' + num + '</span>';
+                }
+                return '<span data-strong="' + num + '">' + num + '</span>';
+            }).join(' ');
+            strongDiv = '<div class="strong">' + badgeHtml + '</div>';
         }
         
-        return token;
+        var dataAttrs = 'data-word="' + escHtml(obj.word) + '"';
+        if (obj.strongs.length > 0) {
+            dataAttrs += ' data-strongs="' + escHtml(obj.strongs.join(',')) + '"';
+        }
+        
+        return '<div class="word-unit" ' + dataAttrs + '>' + strongDiv + '<span class="word">' + obj.word + '</span></div>';
     }).join('');
 }
 
@@ -618,7 +648,8 @@ function showChapter() {
     
     let html = `<div class="chapter-card"><div class="chapter-title">${currentBook} ${currentChapter}</div>`;
     for (const [vNum, vText] of Object.entries(chapterData)) {
-        const processedText = markStrongWords(vText);
+        var verseRef = currentBook + ' ' + currentChapter + ':' + vNum;
+        const processedText = markStrongWords(vText, verseRef);
         html += `<div class="verse"><span class="v-num">${vNum}</span>${processedText}</div>`;
     }
     html += '</div>';
@@ -799,7 +830,7 @@ function searchBible(query) {
         const regex = new RegExp(`(${q})`, 'gi');
         let text = r.text.length > 120 ? r.text.slice(0, 120) + '…' : r.text;
         const highlightedText = text.replace(regex, '<mark style="background: #ffd700; color: #000;">$1</mark>');
-        const finalText = markStrongWords(highlightedText);
+        const finalText = markStrongWords(highlightedText, ref);
         
         html += `<div class="verse" style="cursor:pointer;padding:4px 0;" data-ref="${ref}"><span class="v-num">${ref}</span> ${finalText}</div>`;
     }
