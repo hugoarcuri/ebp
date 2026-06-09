@@ -106,7 +106,7 @@ var layoutToggle = document.getElementById('layoutToggle');
 // Clear search history on reload
 globalSearch.value = '';
 
-var isDark = true;
+var isDark = localStorage.getItem('globalDark') !== 'false';
 if (isDark) document.documentElement.classList.add('dark');
 updateDarkIcon();
 
@@ -121,7 +121,13 @@ function updateDarkIcon() {
 }
 
 darkToggle.addEventListener('click', function() {
-    // Disabled dark toggle to keep it always dark
+    isDark = !isDark;
+    document.documentElement.classList.toggle('dark', isDark);
+    localStorage.setItem('globalDark', isDark);
+    updateDarkIcon();
+    frameKittel.contentWindow.postMessage({ type: 'toggleDark', dark: isDark }, '*');
+    frameBiblia.contentWindow.postMessage({ type: 'toggleDark', dark: isDark }, '*');
+    frameStrong.contentWindow.postMessage({ type: 'toggleDark', dark: isDark }, '*');
 });
 
 layoutToggle.addEventListener('click', function() {
