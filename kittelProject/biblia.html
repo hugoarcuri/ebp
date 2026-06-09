@@ -115,7 +115,8 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 #content { flex: 1; overflow-y: auto; position: relative; }
 #bible-view { padding: 20px; max-width: 900px; margin: 0 auto; }
 .chapter-card { background: var(--card-bg); border-radius: 12px; padding: 30px; box-shadow: var(--shadow); }
-.chapter-title { font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 20px; text-align: center; border-bottom: 3px solid var(--accent); padding-bottom: 10px; }
+.chapter-title { font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 12px; text-align: center; border-bottom: 3px solid var(--accent); padding-bottom: 10px; }
+.chapter-stats { font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 16px; padding: 6px 12px; background: var(--card-bg); border-radius: 6px; border: 1px solid var(--border-color); }
 .verse { padding: 4px 0; font-size: var(--verse-font-size, 16px); line-height: 1.8; color: var(--text); }
 .verse .v-num { font-size: 11px; font-weight: 700; color: var(--accent); margin-right: 4px; cursor: pointer; }
 
@@ -123,6 +124,10 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 .wu .s { font-size: 0.55em; font-weight: 600; color: #4a90e2; line-height: 1.1; text-align: center; white-space: nowrap; cursor: pointer; }
 .wu .s:hover { color: #2a6cb8; text-decoration: underline; }
 .wu .w { font-size: 1em; line-height: 1.4; cursor: pointer; }
+.wu-has-strong .w { color: #2563eb; }
+.wu-no-strong .w { color: #9ca3af; }
+.dark .wu-has-strong .w { color: #60a5fa; }
+.dark .wu-no-strong .w { color: #6b7280; }
 
 .strong-tooltip {
     position: absolute;
@@ -570,9 +575,10 @@ function renderWordObjects(objects) {
             }).join(' ');
             strongDiv = '<div class="s">' + badgeHtml + '</div>';
         }
+        var wuClass = obj.strongs.length > 0 ? 'wu wu-has-strong' : 'wu wu-no-strong';
         var attrs = 'data-w="' + escHtml(obj.text) + '"';
         if (obj.strongs.length > 0) attrs += ' data-n="' + escHtml(obj.strongs.join(',')) + '"';
-        return '<div class="wu" ' + attrs + '>' + strongDiv + '<span class="w">' + obj.text + '</span></div>';
+        return '<div class="' + wuClass + '" ' + attrs + '>' + strongDiv + '<span class="w">' + obj.text + '</span></div>';
     }).join('');
 }
 
@@ -594,7 +600,10 @@ function lemmatize(w) {
             candidates.push(w.slice(0, -e.length) + 'ir');
         }
     });
-    if (w.endsWith('yeron') && w.length > 6) candidates.push(w.slice(0, -5) + 'er');
+    if (w.endsWith('yeron') && w.length > 6) {
+        candidates.push(w.slice(0, -5) + 'er');
+        candidates.push(w.slice(0, -5) + 'ir');
+    }
     return candidates;
 }
 
@@ -621,14 +630,8 @@ var FUNC_WORDS = {
 function findStrongFallback(word, isOT, isNT) {
     if (typeof STRONG_INDEX === 'undefined' || !STRONG_INDEX.single) return [];
     var lower = word.toLowerCase();
-    var candidates = lemmatize(lower);
-    var seen = {}, unique = [];
-    for (var i = 0; i < candidates.length; i++) {
-        var key = stripAccents(candidates[i]);
-        if (!seen[key]) { seen[key] = true; unique.push(key); }
-    }
-    var isFuncWord = FUNC_WORDS[stripAccents(lower)] !== undefined;
     var debug = window.location.search.indexOf('debug=1') >= 0;
+    var isFuncWord = FUNC_WORDS[stripAccents(lower)] !== undefined;
     if (isFuncWord) {
         if (debug) console.log('Palabra: ' + word + ' | Confianza: baja (funcional) | Resultado: ocultar');
         return [];
@@ -638,17 +641,45 @@ function findStrongFallback(word, isOT, isNT) {
         var e = STRONG_MAP[num];
         return { lemma: e ? e.w || '' : '', def: e ? e.d || '' : '' };
     }
+    function filterByTestament(nums) {
+        var out = [];
+        for (var j = 0; j < nums.length; j++) {
+            var num = nums[j];
+            if (isOT && num.charAt(0) === 'H') out.push(num);
+            else if (isNT && num.charAt(0) === 'G') out.push(num);
+        }
+        return out;
+    }
+    // Try original form first
+    var originalKey = stripAccents(lower);
+    var originalEntry = STRONG_INDEX.single[originalKey];
+    if (originalEntry) {
+        var filtered = filterByTestament(originalEntry.split('||')[0].split(';'));
+        if (filtered.length === 1) {
+            if (debug) {
+                var info = strongInfo(filtered[0]);
+                console.log('Palabra: ' + word + '\nStrong asignado: ' + filtered[0] + '\nLema Strong: ' + info.lemma + '\nDefinicion: ' + info.def.slice(0, 120) + '\nCoincidencia: alta (forma original)');
+            }
+            return filtered;
+        }
+        if (filtered.length > 1) {
+            if (debug) console.log('Palabra: ' + word + ' | Confianza: baja (original ambiguo) | Resultado: ocultar');
+            return [];
+        }
+        // filtered.length === 0: wrong testament, fall through to lemma
+    }
+    // Fall back to lemma candidates
+    var candidates = lemmatize(lower);
+    var seen = {}, unique = [];
+    for (var i = 0; i < candidates.length; i++) {
+        var key = stripAccents(candidates[i]);
+        if (!seen[key]) { seen[key] = true; unique.push(key); }
+    }
     var bestMatch = null, bestCount = Infinity, bestKey = null;
     for (var i = 0; i < unique.length; i++) {
         var entry = STRONG_INDEX.single[unique[i]];
         if (!entry) continue;
-        var allNums = entry.split('||')[0].split(';');
-        var filtered = [];
-        for (var j = 0; j < allNums.length; j++) {
-            var num = allNums[j];
-            if (isOT && num.charAt(0) === 'H') filtered.push(num);
-            else if (isNT && num.charAt(0) === 'G') filtered.push(num);
-        }
+        var filtered = filterByTestament(entry.split('||')[0].split(';'));
         if (filtered.length > 0 && filtered.length < bestCount) {
             bestMatch = filtered;
             bestCount = filtered.length;
@@ -757,7 +788,7 @@ function showChapter() {
 
     const maxCh = Object.keys(chapters).length;
     
-    let html = `<div class="chapter-card"><div class="chapter-title">${currentBook} ${currentChapter}</div>`;
+    let html = `<div class="chapter-card"><div class="chapter-title">${currentBook} ${currentChapter}</div><div id="chapterStats" class="chapter-stats"></div>`;
     for (const [vNum, vText] of Object.entries(chapterData)) {
         var verseRef = currentBook + ' ' + currentChapter + ':' + vNum;
         const processedText = markStrongWords(vText, verseRef);
@@ -766,6 +797,10 @@ function showChapter() {
     html += '</div>';
     view.innerHTML = html;
     applyHighlights();
+    var totalWus = view.querySelectorAll('.wu').length;
+    var withStrong = view.querySelectorAll('.wu-has-strong').length;
+    var pct = totalWus > 0 ? (withStrong / totalWus * 100).toFixed(1) : '0.0';
+    document.getElementById('chapterStats').textContent = 'Total palabras: ' + totalWus + ' | Con Strong: ' + withStrong + ' | Sin Strong: ' + (totalWus - withStrong) + ' | Reconocido: ' + pct + '%';
 
     document.getElementById('prevCh').disabled = currentChapter <= 1;
     document.getElementById('nextCh').disabled = currentChapter >= maxCh;
