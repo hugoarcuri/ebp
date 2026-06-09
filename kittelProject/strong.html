@@ -179,7 +179,8 @@ main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
 #entry-view .entry-header .header-meta .copy-btn, #entry-view .entry-header .header-meta .fav-btn { background: none; border: 1px solid var(--sidebar-border); font-size: 12px; padding: 3px 10px; border-radius: 6px; cursor: pointer; color: var(--text-muted); }
 #entry-view .entry-header .header-meta .copy-btn:hover, #entry-view .entry-header .header-meta .fav-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 #entry-view .entry-header .header-meta .fav-btn.saved { background: var(--accent); color: #fff; border-color: var(--accent); }
-#entry-view .entry-def { font-size: 17px; line-height: 1.85; color: var(--text); }
+#entry-view { font-size: var(--entry-font-size, 16px); }
+#entry-view .entry-def { font-size: 1em; line-height: 1.85; color: var(--text); }
 #entry-view .entry-def .strong-link { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: 600; }
 #entry-view .entry-def .strong-link:hover { color: var(--accent-dark); text-decoration: none; }
 #entry-view .entry-def .word-orig { font-size: 1.1em; font-weight: 700; }
@@ -324,13 +325,13 @@ function init() {
     buildWordIndex();
     var h = entries.filter(function(e) { return e.l === 'H'; }).length;
     var g = entries.filter(function(e) { return e.l === 'G'; }).length;
+    entryViewEl.style.setProperty('--entry-font-size', fontSize + 'px');
     searchEl.addEventListener('input', function() { onSearch(); });
     searchEl.addEventListener('focus', function() { sidebarEl.classList.remove('sidebar-hidden'); });
     if (searchEl.value) onSearch(); else showWelcome();
-    document.querySelectorAll('.font-btn').forEach(function(btn) {
-        if (btn.id === 'fontIncr') btn.addEventListener('click', function() { changeFont(1); });
-        if (btn.id === 'fontDecr') btn.addEventListener('click', function() { changeFont(-1); });
-    });
+    document.getElementById('fontIncr').addEventListener('click', function() { changeFont(1); });
+    document.getElementById('fontDecr').addEventListener('click', function() { changeFont(-1); });
+
     document.querySelectorAll('#langFilter button').forEach(function(btn) {
         btn.addEventListener('click', function() {
             langFilter = btn.dataset.lang;
@@ -489,7 +490,6 @@ function showEntry(idx) {
             </div>
             <div class="entry-def">${defWithLinks(def)}</div>
         </div>`;
-    entryViewEl.querySelector('.entry-def').style.fontSize = fontSize + 'px';
     entryViewEl.scrollTop = 0;
     entryViewEl.querySelectorAll('.strong-link').forEach(function(link) {
         link.addEventListener('click', function(ev) {
@@ -532,8 +532,7 @@ function escHtml(s) {
 function changeFont(delta) {
     fontSize = Math.min(28, Math.max(12, fontSize + delta));
     localStorage.setItem('strongFontSize', fontSize);
-    const el = entryViewEl.querySelector('.entry-def');
-    if (el) el.style.fontSize = fontSize + 'px';
+    entryViewEl.style.setProperty('--entry-font-size', fontSize + 'px');
     fontSizeLabel.textContent = fontSize;
 }
 

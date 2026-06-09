@@ -179,7 +179,8 @@ main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
 #entry-view .entry-header .header-meta .fav-btn:hover, #entry-view .entry-header .header-meta .copy-btn:hover, #entry-view .entry-header .header-meta .share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 #entry-view .entry-header .header-meta .fav-btn.saved { background: var(--accent); color: #fff; border-color: var(--accent); }
 .mobile-back { display: none; }
-#entry-view .entry-text { font-size: 18px; line-height: 1.85; color: var(--text); transition: color 0.2s; }
+#entry-view { font-size: var(--entry-font-size, 16px); }
+#entry-view .entry-text { font-size: 1em; line-height: 1.85; color: var(--text); transition: color 0.2s; }
 #entry-view .entry-text br { content: ""; display: block; margin-top: 14px; }
 #entry-view .entry-text .greek-word { font-size: 1.15em; font-weight: 700; }
 #entry-view .entry-text .section-title { font-size: 1.1em; font-weight: 700; }
@@ -362,6 +363,7 @@ const searchEl = document.getElementById('search');
 const sidebarEl = document.getElementById('sidebar');
 const sidebarResults = document.querySelector('.sidebar-results');
 const entryViewEl = document.getElementById('entry-view');
+const fontSizeLabel = document.getElementById('fontSizeLabel');
 if (isDark) document.documentElement.classList.add('dark');
 
 /* SECTION: favoritos */
@@ -379,6 +381,8 @@ function toggleFav(idx) {
 function init() {
     entries = KITTEL_DATA; /* SECTION: datos-cargados */
     buildWordIndex();
+    fontSizeLabel.textContent = fontSize;
+    entryViewEl.style.setProperty('--entry-font-size', fontSize + 'px');
     var totalTerms = entries.reduce(function(a, e) { return a + e.e.length; }, 0);
     var grRaw = '';
     searchEl.addEventListener('focus', function() {
@@ -423,6 +427,9 @@ function init() {
             onSearch();
         });
     });
+
+    document.getElementById('fontIncr').addEventListener('click', function() { changeFont(1); });
+    document.getElementById('fontDecr').addEventListener('click', function() { changeFont(-1); });
 }
 
 /* SECTION: word-index */
@@ -643,7 +650,6 @@ function showEntry(idx) {
             </div>
             <div class="entry-text">${text}</div>
         </div>`;
-    entryViewEl.querySelector('.entry-text').style.fontSize = fontSize + 'px';
     entryViewEl.scrollTop = 0;
     entryViewEl.querySelector('.fav-btn')?.addEventListener('click', () => toggleFav(idx));
     entryViewEl.querySelector('.copy-btn')?.addEventListener('click', () => {
@@ -686,8 +692,7 @@ window.addEventListener('message', function(e) {
         var sz = Math.min(28, Math.max(12, parseInt(e.data.size) || 16));
         fontSize = sz;
         localStorage.setItem('kittelFontSize', sz);
-        var el = entryViewEl.querySelector('.entry-text');
-        if (el) el.style.fontSize = sz + 'px';
+        entryViewEl.style.setProperty('--entry-font-size', sz + 'px');
         fontSizeLabel.textContent = sz;
     }
 });
@@ -701,8 +706,7 @@ function escHtml(s) {
 function changeFont(delta) {
     fontSize = Math.min(28, Math.max(12, fontSize + delta));
     localStorage.setItem('kittelFontSize', fontSize);
-    const el = entryViewEl.querySelector('.entry-text');
-    if (el) el.style.fontSize = fontSize + 'px';
+    entryViewEl.style.setProperty('--entry-font-size', fontSize + 'px');
     fontSizeLabel.textContent = fontSize;
 }
 
