@@ -118,11 +118,10 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 .verse { padding: 4px 0; font-size: var(--verse-font-size, 16px); line-height: 1.8; color: var(--text); }
 .verse .v-num { font-size: 11px; font-weight: 700; color: var(--accent); margin-right: 4px; cursor: pointer; }
 
-.word-block { display: inline-flex; flex-direction: column; align-items: center; margin: 0; vertical-align: top; }
-.word-block .strongs { font-size: 0.55em; font-weight: 600; color: #4a90e2; line-height: 1.15; text-align: center; white-space: nowrap; margin-bottom: 1px; }
-.word-block .strongs .strong-badge { cursor: pointer; margin: 0 1px; transition: color 0.2s; }
-.word-block .strongs .strong-badge:hover { color: #2a6cb8; text-decoration: underline; }
-.word-block .word { font-size: 1em; line-height: 1.4; }
+.word-unit { display: inline-flex; flex-direction: column; align-items: center; vertical-align: top; margin: 0 3px; }
+.word-unit .strong { font-size: 0.55em; font-weight: 600; color: #4a90e2; line-height: 1.1; text-align: center; white-space: nowrap; cursor: pointer; }
+.word-unit .strong:hover { color: #2a6cb8; text-decoration: underline; }
+.word-unit .word { font-size: 1em; line-height: 1.4; cursor: pointer; }
 
 .strong-tooltip {
     position: absolute;
@@ -149,7 +148,7 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 .dark .strong-tooltip .trans { color: #aaa; }
 .strong-tooltip .def { margin-top: 6px; font-size: 12px; color: #444; display: block; }
 .dark .strong-tooltip .def { color: #ccc; }
-.word-block { cursor: pointer; }
+.word-unit { cursor: pointer; }
 
 .word-info-overlay {
     position: fixed; inset: 0; background: rgba(0,0,0,0.5);
@@ -534,30 +533,28 @@ function markStrongWords(text) {
             const stripped = stripAccents(token.toLowerCase());
             const entry = STRONG_INDEX.single[stripped];
             
-            var strongsHtml = '';
             var filteredNums = [];
             if (entry) {
                 var strongNumsStr = entry.split('||')[0];
                 var allNums = strongNumsStr.split(';');
-                
                 filteredNums = allNums.filter(function(num) {
                     if (isAT) return num.startsWith('H');
                     if (isNT) return num.startsWith('G');
                     return true;
                 });
-
-                if (filteredNums.length > 0) {
-                    strongsHtml = '<div class="strongs">' + 
-                        filteredNums.map(function(num) {
-                            var nVal = parseInt(num.replace(/\D/g, ''));
-                            var detail = STRONG_MAP[nVal];
-                            if (detail) {
-                                return '<span class="strong-badge" data-strong="' + num + '" data-lemma="' + escHtml(detail.w) + '" data-translit="' + escHtml(detail.t) + '" data-def="' + escHtml(detail.d.slice(0, 120).replace(/\n/g, ' ')) + '">' + num + '</span>';
-                            }
-                            return '<span class="strong-badge" data-strong="' + num + '">' + num + '</span>';
-                        }).join(' ') + 
-                        '</div>';
-                }
+            }
+            
+            var strongDiv = '';
+            if (filteredNums.length > 0) {
+                var badgeHtml = filteredNums.map(function(num) {
+                    var nVal = parseInt(num.replace(/\D/g, ''));
+                    var detail = STRONG_MAP[nVal];
+                    if (detail) {
+                        return '<span data-strong="' + num + '" data-lemma="' + escHtml(detail.w) + '" data-translit="' + escHtml(detail.t) + '" data-def="' + escHtml(detail.d.slice(0, 120).replace(/\n/g, ' ')) + '">' + num + '</span>';
+                    }
+                    return '<span data-strong="' + num + '">' + num + '</span>';
+                }).join(' ');
+                strongDiv = '<div class="strong">' + badgeHtml + '</div>';
             }
             
             var dataAttrs = 'data-word="' + escHtml(token) + '"';
@@ -565,7 +562,7 @@ function markStrongWords(text) {
                 dataAttrs += ' data-strongs="' + escHtml(filteredNums.join(',')) + '"';
             }
             
-            return '<span class="word-block" ' + dataAttrs + '>' + strongsHtml + '<span class="word">' + token + '</span></span>';
+            return '<div class="word-unit" ' + dataAttrs + '>' + strongDiv + '<span class="word">' + token + '</span></div>';
         }
         
         return token;
@@ -1005,13 +1002,13 @@ document.getElementById('wordInfoOverlay').addEventListener('click', function(e)
     if (e.target === this) this.classList.remove('open');
 });
 
-// Double-click on word-block
+// Double-click on word-unit
 document.getElementById('content').addEventListener('dblclick', function(e) {
-    var block = e.target.closest('.word-block');
-    if (!block) return;
-    var word = block.dataset.word;
-    var strongs = block.dataset.strongs;
-    var verseEl = block.closest('.verse');
+    var unit = e.target.closest('.word-unit');
+    if (!unit) return;
+    var word = unit.dataset.word;
+    var strongs = unit.dataset.strongs;
+    var verseEl = unit.closest('.verse');
     var ref = '';
     if (verseEl) {
         var vNum = verseEl.querySelector('.v-num');
@@ -1038,39 +1035,41 @@ document.getElementById('wordInfoBody').addEventListener('click', function(e) {
 // Keyboard shortcuts
 
 document.getElementById('content').addEventListener('mouseover', function(e) {
-    if (e.target.classList.contains('strong-badge')) {
-        const badge = e.target;
-        const tooltip = document.getElementById('strongTooltip');
-        const { lemma, translit, def } = badge.dataset;
-        const strongNum = badge.dataset.strong;
-
-        tooltip.innerHTML = `<b>${strongNum}</b> <span class="orig">${lemma}</span> <span class="trans">${translit}</span><span class="def">${def}</span>`;
-        tooltip.style.display = 'block';
-        
-        const rect = badge.getBoundingClientRect();
-        tooltip.style.left = (rect.left + window.scrollX) + 'px';
-        tooltip.style.top = (rect.top + window.scrollY - tooltip.offsetHeight - 8) + 'px';
-        
-        setTimeout(() => { tooltip.style.opacity = '1'; }, 10);
-    }
+    var strongEl = e.target.closest('.word-unit .strong');
+    if (!strongEl) return;
+    var badge = strongEl.querySelector('[data-strong]');
+    if (!badge) return;
+    var tooltip = document.getElementById('strongTooltip');
+    tooltip.innerHTML = '<b>' + badge.dataset.strong + '</b> <span class="orig">' + (badge.dataset.lemma || '') + '</span> <span class="trans">' + (badge.dataset.translit || '') + '</span><span class="def">' + (badge.dataset.def || '') + '</span>';
+    tooltip.style.display = 'block';
+    var rect = strongEl.getBoundingClientRect();
+    tooltip.style.left = (rect.left + window.scrollX) + 'px';
+    tooltip.style.top = (rect.top + window.scrollY - tooltip.offsetHeight - 8) + 'px';
+    setTimeout(function() { tooltip.style.opacity = '1'; }, 10);
 });
 
 document.getElementById('content').addEventListener('mouseout', function(e) {
-    if (e.target.classList.contains('strong-badge')) {
-        const tooltip = document.getElementById('strongTooltip');
+    if (e.target.closest('.word-unit .strong')) {
+        var tooltip = document.getElementById('strongTooltip');
         tooltip.style.opacity = '0';
-        setTimeout(() => { tooltip.style.display = 'none'; }, 200);
+        setTimeout(function() { tooltip.style.display = 'none'; }, 200);
     }
 });
 
 document.getElementById('content').addEventListener('click', function(e) {
-    if (e.target.classList.contains('strong-badge')) {
-        const strongNum = e.target.dataset.strong;
-        // Broadcast search to Kittel and Strong panels
-        const frameKittel = window.parent.document.getElementById('frameKittel');
-        const frameStrong = window.parent.document.getElementById('frameStrong');
-        if (frameKittel) frameKittel.contentWindow.postMessage({ type: 'search', query: strongNum }, '*');
-        if (frameStrong) frameStrong.contentWindow.postMessage({ type: 'search', query: strongNum }, '*');
+    var strongEl = e.target.closest('.word-unit .strong');
+    if (strongEl) {
+        var badge = strongEl.querySelector('[data-strong]');
+        if (badge) {
+            var strongNum = badge.dataset.strong;
+            try {
+                var parentDoc = window.parent.document;
+                var fk = parentDoc.getElementById('frameKittel');
+                var fs = parentDoc.getElementById('frameStrong');
+                if (fk) fk.contentWindow.postMessage({ type: 'search', query: strongNum }, '*');
+                if (fs) fs.contentWindow.postMessage({ type: 'search', query: strongNum }, '*');
+            } catch(e) {}
+        }
     }
 });
 
