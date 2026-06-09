@@ -7,6 +7,7 @@
 <script src="rv1960.js"></script>
 <script src="strong_index.js"></script>
 <script src="datos_strong.js"></script>
+<script src="datos.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -148,6 +149,88 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 .dark .strong-tooltip .trans { color: #aaa; }
 .strong-tooltip .def { margin-top: 6px; font-size: 12px; color: #444; display: block; }
 .dark .strong-tooltip .def { color: #ccc; }
+.word-block { cursor: pointer; }
+
+.word-info-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px); z-index: 3000;
+    display: none; align-items: center; justify-content: center;
+    padding: 20px;
+}
+.word-info-overlay.open { display: flex; }
+.word-info-panel {
+    background: var(--card-bg); color: var(--text);
+    border-radius: 14px; max-width: 520px; width: 100%;
+    max-height: 80vh; overflow-y: auto;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+    padding: 0; animation: fadeSlideIn 0.2s ease;
+}
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.word-info-header {
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex; justify-content: space-between; align-items: flex-start;
+}
+.word-info-header h3 { font-size: 18px; font-weight: 800; margin: 0; }
+.word-info-header .close-btn {
+    background: none; border: none; font-size: 22px;
+    cursor: pointer; color: var(--text-muted);
+    padding: 0 4px; line-height: 1;
+}
+.word-info-header .close-btn:hover { color: var(--text); }
+.word-info-body { padding: 16px 20px; }
+.word-info-entry {
+    background: rgba(0,0,0,0.03); border-radius: 10px;
+    padding: 14px; margin-bottom: 12px;
+}
+.dark .word-info-entry { background: rgba(255,255,255,0.05); }
+.word-info-entry:last-child { margin-bottom: 0; }
+.word-info-entry .strong-num {
+    font-size: 13px; font-weight: 700; color: #4a90e2;
+    margin-bottom: 6px;
+}
+.word-info-entry .lemma-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 6px;
+}
+.word-info-entry .orig-lemma {
+    font-size: 22px; font-weight: 700;
+    direction: rtl; unicode-bidi: embed;
+}
+.word-info-entry .translit-lemma {
+    font-size: 14px; font-style: italic; color: var(--text-muted);
+}
+.word-info-entry .definition {
+    font-size: 13px; line-height: 1.5; color: var(--text);
+    margin-top: 6px;
+}
+.word-info-entry .kittel-ref {
+    margin-top: 10px; padding: 8px 10px;
+    background: rgba(74, 144, 226, 0.1);
+    border-radius: 6px; font-size: 13px;
+    border-left: 3px solid #4a90e2;
+}
+.word-info-entry .kittel-ref a {
+    color: #4a90e2; text-decoration: none; font-weight: 600;
+}
+.word-info-entry .kittel-ref a:hover { text-decoration: underline; }
+.word-info-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    padding: 0 20px 16px;
+}
+.word-info-tabs .tab-btn {
+    background: rgba(0,0,0,0.04); border: 1px solid var(--border-color);
+    color: var(--text-muted); font-size: 12px; font-weight: 600;
+    padding: 5px 12px; border-radius: 20px; cursor: pointer;
+}
+.dark .word-info-tabs .tab-btn { background: rgba(255,255,255,0.06); }
+.word-info-tabs .tab-btn:hover { border-color: #4a90e2; color: #4a90e2; }
+.word-info-tabs .tab-btn.active { background: #4a90e2; color: #fff; border-color: #4a90e2; }
+.word-info-empty { padding: 20px; text-align: center; color: var(--text-muted); font-size: 14px; }
+
 .selection-menu {
     position: absolute;
     z-index: 2100;
@@ -219,6 +302,19 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 
 <div id="strongTooltip" class="strong-tooltip"></div>
 <div id="highlightMenu" class="highlight-menu"></div>
+<div id="wordInfoOverlay" class="word-info-overlay">
+    <div class="word-info-panel">
+        <div class="word-info-header">
+            <div>
+                <h3 id="wordInfoWord"></h3>
+                <span id="wordInfoRef" style="font-size:12px;color:var(--text-muted);"></span>
+            </div>
+            <button class="close-btn" id="wordInfoClose">✕</button>
+        </div>
+        <div class="word-info-body" id="wordInfoBody"></div>
+        <div class="word-info-tabs" id="wordInfoTabs"></div>
+    </div>
+</div>
 
 <div class="nav-overlay" id="navOverlay"></div>
 <div class="nav-panel" id="navPanel">
@@ -244,12 +340,39 @@ let currentBook = null;
 let currentChapter = null;
 let searchResults = [];
 let searchFilter = 'ALL';
-let strongEnabled = false;
+let strongEnabled = localStorage.getItem('bibliaStrong') === 'true';
 let highlights = JSON.parse(localStorage.getItem('bibliaHighlights') || '{}');
 
 const STRONG_MAP = {};
 if (typeof STRONG_DATA !== 'undefined') {
     STRONG_DATA.forEach(e => { STRONG_MAP[e.n] = e; });
+}
+
+const KITTEL_BY_LEMMA = {};
+if (typeof KITTEL_DATA !== 'undefined') {
+    KITTEL_DATA.forEach(function(entry) {
+        if (entry.g) {
+            var normalized = entry.g.trim().toLowerCase();
+            if (!KITTEL_BY_LEMMA[normalized]) {
+                KITTEL_BY_LEMMA[normalized] = [];
+            }
+            KITTEL_BY_LEMMA[normalized].push(entry);
+        }
+    });
+}
+
+function findKittelForLemma(lemma) {
+    if (!lemma || !KITTEL_BY_LEMMA) return null;
+    var key = lemma.trim().toLowerCase();
+    if (KITTEL_BY_LEMMA[key]) return KITTEL_BY_LEMMA[key];
+    if (key.length > 2) {
+        for (var k in KITTEL_BY_LEMMA) {
+            if (k.includes(key) || key.includes(k)) {
+                return KITTEL_BY_LEMMA[k];
+            }
+        }
+    }
+    return null;
 }
 
 const BOOK_NAMES = Object.keys(BIBLE_DATA);
@@ -391,30 +514,33 @@ function showHighlightMenu(e, ref) {
     menu.style.top = e.pageY + 'px';
 }
 
+function escHtml(s) {
+    if (!s) return '';
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
 function markStrongWords(text) {
     if (!strongEnabled || !STRONG_INDEX || !STRONG_INDEX.single) return text;
     
     const isAT = AT_BOOKS.includes(currentBook);
     const isNT = NT_BOOKS.includes(currentBook);
     
-    // Tokenize: HTML tags, words, or other (spaces/punctuation)
     const tokens = text.match(/(<[^>]+>)|([a-záéíóúüñ]+)|([^a-záéíóúüñ<]+)/gi) || [text];
     
     return tokens.map(function(token) {
-        // HTML tag — pass through
         if (token.charAt(0) === '<' && token.charAt(token.length - 1) === '>') return token;
         
-        // Word — wrap in word-block with optional Strong numbers above
         if (/^[a-záéíóúüñ]+$/i.test(token)) {
             const stripped = stripAccents(token.toLowerCase());
             const entry = STRONG_INDEX.single[stripped];
             
             var strongsHtml = '';
+            var filteredNums = [];
             if (entry) {
                 var strongNumsStr = entry.split('||')[0];
                 var allNums = strongNumsStr.split(';');
                 
-                var filteredNums = allNums.filter(function(num) {
+                filteredNums = allNums.filter(function(num) {
                     if (isAT) return num.startsWith('H');
                     if (isNT) return num.startsWith('G');
                     return true;
@@ -434,10 +560,14 @@ function markStrongWords(text) {
                 }
             }
             
-            return '<span class="word-block">' + strongsHtml + '<span class="word">' + token + '</span></span>';
+            var dataAttrs = 'data-word="' + escHtml(token) + '"';
+            if (filteredNums.length > 0) {
+                dataAttrs += ' data-strongs="' + escHtml(filteredNums.join(',')) + '"';
+            }
+            
+            return '<span class="word-block" ' + dataAttrs + '>' + strongsHtml + '<span class="word">' + token + '</span></span>';
         }
         
-        // Non-word (spaces, punctuation) — pass through
         return token;
     }).join('');
 }
@@ -610,6 +740,51 @@ function searchBible(query) {
     console.log('Resultados encontrados:', results.length);
     
     const view = document.getElementById('bible-view');
+    if (results.length === 0 && STRONG_DATA) {
+        // Try searching in Strong data (Hebrew/Greek, transliteration, synonyms)
+        var strongMatches = [];
+        var qLower = q.toLowerCase();
+        STRONG_DATA.forEach(function(e) {
+            var match = false;
+            if (e.w && stripAccents(e.w.toLowerCase()).includes(qLower)) match = true;
+            if (e.t && e.t.toLowerCase().includes(qLower)) match = true;
+            if (e.s) e.s.forEach(function(syn) {
+                if (stripAccents(syn.toLowerCase()).includes(qLower)) match = true;
+            });
+            if (String(e.n).includes(q) || String(e.l).toLowerCase() + e.n === q) match = true;
+            if (match) strongMatches.push(e);
+        });
+        
+        if (strongMatches.length > 0) {
+            var strongHtml = '<div class="chapter-card"><div class="chapter-title">Búsqueda en Léxico: ' + query + '</div>';
+            strongMatches.slice(0, 50).forEach(function(e) {
+                var num = e.l + e.n;
+                var syns = e.s ? e.s.join(', ') : '';
+                strongHtml += '<div class="verse" style="cursor:pointer;padding:6px 0;" data-strong="' + num + '">' +
+                    '<span class="v-num" style="font-size:11px;">' + num + '</span> ' +
+                    (e.w ? '<span style="font-size:18px;font-weight:700;direction:rtl;unicode-bidi:embed;margin-right:8px;">' + escHtml(e.w) + '</span>' : '') +
+                    (e.t ? '<span style="font-style:italic;color:var(--text-muted);margin-right:8px;">' + escHtml(e.t) + '</span>' : '') +
+                    '<span style="font-size:12px;color:var(--text);">' + escHtml((syns ? syns + ' — ' : '') + (e.d || '').slice(0, 100)) + '</span>' +
+                    '</div>';
+            });
+            if (strongMatches.length > 50) {
+                strongHtml += '<div class="verse" style="color:var(--text-muted);text-align:center;padding:8px;">… y ' + (strongMatches.length - 50) + ' resultados más</div>';
+            }
+            strongHtml += '</div>';
+            view.innerHTML = strongHtml;
+            
+            view.querySelectorAll('.verse[data-strong]').forEach(function(el) {
+                el.addEventListener('click', function() {
+                    var num = this.dataset.strong;
+                    showWordInfo(num, num, 'Strong: ' + num);
+                });
+            });
+            
+            searchResults = [];
+            return;
+        }
+    }
+    
     if (results.length === 0) {
         view.innerHTML = `<div class="welcome"><h2>Sin resultados</h2><p class="sub">No se encontraron versículos para "${query}"</p></div>`;
         searchResults = [];
@@ -711,22 +886,156 @@ document.querySelectorAll('#searchFilter .btn-tool[data-filter]').forEach(btn =>
     });
 });
 
-document.getElementById('strongToggle').addEventListener('click', function() {
-    strongEnabled = !strongEnabled;
-    this.textContent = `Strong: ${strongEnabled ? 'On' : 'Off'}`;
-    this.classList.toggle('active', strongEnabled);
+function setStrongEnabled(val) {
+    strongEnabled = val;
+    localStorage.setItem('bibliaStrong', strongEnabled);
+    var btn = document.getElementById('strongToggle');
+    btn.textContent = 'Strong: ' + (strongEnabled ? 'On' : 'Off');
+    btn.classList.toggle('active', strongEnabled);
     if (currentBook && currentChapter) {
         showChapter();
     } else if (searchResults.length > 0) {
         searchBible(document.getElementById('search').value);
     }
+}
+
+document.getElementById('strongToggle').addEventListener('click', function() {
+    setStrongEnabled(!strongEnabled);
+});
+
+// Word info panel (double-click)
+function showWordInfo(word, strongsStr, ref) {
+    var overlay = document.getElementById('wordInfoOverlay');
+    document.getElementById('wordInfoWord').textContent = word;
+    document.getElementById('wordInfoRef').textContent = ref || '';
+    
+    var body = document.getElementById('wordInfoBody');
+    var tabs = document.getElementById('wordInfoTabs');
+    body.innerHTML = '';
+    tabs.innerHTML = '';
+    
+    if (!strongsStr) {
+        body.innerHTML = '<div class="word-info-empty">No hay información Strong disponible para esta palabra.</div>';
+        overlay.classList.add('open');
+        return;
+    }
+    
+    var allNums = strongsStr.split(',').filter(Boolean);
+    
+    // If multiple Strong numbers, create tabs
+    if (allNums.length > 1) {
+        allNums.forEach(function(num, idx) {
+            var tab = document.createElement('button');
+            tab.className = 'tab-btn' + (idx === 0 ? ' active' : '');
+            tab.textContent = num;
+            tab.dataset.idx = idx;
+            tab.addEventListener('click', function() {
+                tabs.querySelectorAll('.tab-btn').forEach(function(t) { t.classList.remove('active'); });
+                this.classList.add('active');
+                body.querySelectorAll('.word-info-entry').forEach(function(e, i) {
+                    e.style.display = i === parseInt(this.dataset.idx) ? 'block' : 'none';
+                }.bind(this));
+            });
+            tabs.appendChild(tab);
+        });
+    }
+    
+    allNums.forEach(function(num, idx) {
+        var entry = document.createElement('div');
+        entry.className = 'word-info-entry';
+        if (allNums.length > 1) entry.style.display = idx === 0 ? 'block' : 'none';
+        
+        var nVal = parseInt(num.replace(/\D/g, ''));
+        var detail = STRONG_MAP[nVal];
+        
+        var html = '<div class="strong-num">' + num + '</div>';
+        
+        if (detail) {
+            html += '<div class="lemma-row">';
+            if (detail.w) {
+                html += '<span class="orig-lemma">' + escHtml(detail.w) + '</span>';
+            }
+            if (detail.t) {
+                html += '<span class="translit-lemma">' + escHtml(detail.t) + '</span>';
+            }
+            html += '</div>';
+            
+            if (detail.s && detail.s.length) {
+                html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">' +
+                    'Sinónimos: ' + detail.s.join(', ') + '</div>';
+            }
+            
+            if (detail.d) {
+                html += '<div class="definition">' + escHtml(detail.d) + '</div>';
+            }
+            
+            // Kittel cross-reference for Greek lemmas
+            if (num.startsWith('G') && detail.w) {
+                var kittelRefs = findKittelForLemma(detail.w);
+                if (kittelRefs && kittelRefs.length > 0) {
+                    html += '<div class="kittel-ref">';
+                    html += '<strong style="color:#4a90e2;">📖 Kittel / TDNT</strong><br>';
+                    kittelRefs.forEach(function(kr) {
+                        var pageStr = kr.p ? ' — pág. ' + kr.p : '';
+                        if (kr.t && kr.t.length > 100) {
+                            var preview = kr.t.slice(0, 150).replace(/\n/g, ' ') + '…';
+                            html += '<div style="margin-top:4px;">' + escHtml(preview) + '</div>';
+                        }
+                        html += '<a href="#" class="kittel-link" data-page="' + (kr.p || '') + '" data-text="' + escHtml(kr.t || '') + '">Ver artículo en Kittel' + pageStr + '</a>';
+                    });
+                    html += '</div>';
+                }
+            }
+        } else {
+            html += '<div class="definition">No se encontró información detallada para este número.</div>';
+        }
+        
+        entry.innerHTML = html;
+        body.appendChild(entry);
+    });
+    
+    overlay.classList.add('open');
+}
+
+// Close info panel
+document.getElementById('wordInfoClose').addEventListener('click', function() {
+    document.getElementById('wordInfoOverlay').classList.remove('open');
+});
+document.getElementById('wordInfoOverlay').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+});
+
+// Double-click on word-block
+document.getElementById('content').addEventListener('dblclick', function(e) {
+    var block = e.target.closest('.word-block');
+    if (!block) return;
+    var word = block.dataset.word;
+    var strongs = block.dataset.strongs;
+    var verseEl = block.closest('.verse');
+    var ref = '';
+    if (verseEl) {
+        var vNum = verseEl.querySelector('.v-num');
+        if (vNum) ref = (currentBook || '') + ' ' + (currentChapter || '') + ':' + vNum.textContent;
+    }
+    showWordInfo(word, strongs, ref);
+});
+
+// Handle clicks on Kittel links inside info panel
+document.getElementById('wordInfoBody').addEventListener('click', function(e) {
+    if (e.target.classList.contains('kittel-link')) {
+        e.preventDefault();
+        var query = e.target.dataset.text || e.target.textContent;
+        try {
+            var parentDoc = window.parent.document;
+            var fk = parentDoc.getElementById('frameKittel');
+            var fs = parentDoc.getElementById('frameStrong');
+            if (fk) fk.contentWindow.postMessage({ type: 'search', query: query }, '*');
+            if (fs) fs.contentWindow.postMessage({ type: 'search', query: query }, '*');
+        } catch(e) {}
+    }
 });
 
 // Keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowLeft' && !e.ctrlKey && !e.metaKey) { goToPrevChapter(); }
-    if (e.key === 'ArrowRight' && !e.ctrlKey && !e.metaKey) { goToNextChapter(); }
-});
 
 document.getElementById('content').addEventListener('mouseover', function(e) {
     if (e.target.classList.contains('strong-badge')) {
@@ -875,6 +1184,9 @@ window.addEventListener('message', function(e) {
     if (e.data.type === 'fontChange') {
         document.querySelectorAll('.verse').forEach(function(el) { el.style.fontSize = e.data.size + 'px'; });
     }
+    if (e.data.type === 'strongToggle') {
+        setStrongEnabled(e.data.enabled);
+    }
 });
 
 // Font Size Control
@@ -903,6 +1215,11 @@ document.getElementById('fontIncr').addEventListener('click', () => {
 
 // Initial application of font size
 applyFontSize(currentFontSize);
+
+// Init strong toggle state from localStorage
+var strongBtn = document.getElementById('strongToggle');
+strongBtn.textContent = 'Strong: ' + (strongEnabled ? 'On' : 'Off');
+strongBtn.classList.toggle('active', strongEnabled);
 
 // Init
 document.getElementById('search').value = '';
