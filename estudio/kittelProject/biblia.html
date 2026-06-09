@@ -6,6 +6,7 @@
 <title>Reina Valera 1960</title>
 <script src="rv1960.js"></script>
 <script src="strong_index.js"></script>
+<script src="datos_strong.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -50,7 +51,7 @@ header {
     align-items: center; 
 }
 .brand { display: flex; align-items: center; gap: 8px; }
-.brand .logo { height: 24px; width: auto; border-radius: 3px; }
+.brand .logo { height: 29px; width: auto; border-radius: 3px; }
 .brand h1 { font-size: 15px; font-weight: 700; }
 .menu-btn { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 2px; opacity: 0.8; }
 
@@ -111,39 +112,46 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 #bible-view { padding: 20px; max-width: 900px; margin: 0 auto; }
 .chapter-card { background: var(--card-bg); border-radius: 12px; padding: 30px; box-shadow: var(--shadow); }
 .chapter-title { font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 20px; text-align: center; border-bottom: 3px solid var(--accent); padding-bottom: 10px; }
-.verse { padding: 4px 0; font-size: 16px; line-height: 1.8; color: var(--text); }
+.verse { padding: 4px 0; font-size: 16px; line-height: 2.4; color: var(--text); }
 .verse .v-num { font-size: 11px; font-weight: 700; color: var(--accent); vertical-align: super; margin-right: 6px; cursor: pointer; }
+
+.word-group {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: bottom;
+    margin-right: 2px;
+}
 .strong-badge {
     background: var(--accent);
     color: #fff;
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 700;
-    padding: 0 4px;
-    border-radius: 4px;
-    margin: 0 2px;
+    padding: 0 2px;
+    border-radius: 2px;
     cursor: pointer;
-    vertical-align: baseline;
-    position: relative;
+    line-height: 1;
+    margin-bottom: 1px;
 }
 .strong-badge:hover { background: var(--accent-dark); }
-.strong-badge::after {
-    content: attr(data-strong);
+
+.strong-tooltip {
     position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+    z-index: 1000;
     background: #333;
     color: #fff;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 10px;
-    white-space: nowrap;
-    opacity: 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+    max-width: 250px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     pointer-events: none;
+    display: none;
+    opacity: 0;
     transition: opacity 0.2s;
-    z-index: 10;
 }
-.strong-badge:hover::after { opacity: 1; }
+.strong-tooltip b { color: var(--accent-light); }
 
 .welcome { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
 .welcome h2 { font-size: 28px; color: var(--accent); margin-bottom: 10px; }
@@ -166,11 +174,18 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
             <img class="logo" src="https://cautivoestrella.org/wp-content/uploads/IMG/reina-velera-1960.jpg" alt="Biblia">
             <h1>Reina Valera 1960</h1>
         </div>
-        <button class="menu-btn" id="menuBtn" title="Menú">☰</button>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="font-ctrl">
+                <button class="btn-tool" id="fontDecr">A−</button>
+                <span id="fontSizeLabel">16</span>
+                <button class="btn-tool" id="fontIncr">A+</button>
+            </div>
+            <button class="menu-btn" id="menuBtn" title="Menú">☰</button>
+        </div>
     </div>
     <div class="header-row-2">
         <div class="search-container">
-            <input type="text" id="search" placeholder="Buscar versículo o palabra..." autocomplete="off" autofocus>
+            <input type="text" id="search" placeholder="Buscar versículo o palabra..." autocomplete="off">
         </div>
     </div>
     <div class="header-row-3">
@@ -180,13 +195,7 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
             <button class="btn-tool" data-filter="NT">NT</button>
             <button class="btn-tool" id="strongToggle">Strong: Off</button>
         </div>
-        <div class="toolbar-right">
-            <div class="font-ctrl">
-                <button class="btn-tool" id="fontDecr">A−</button>
-                <span id="fontSizeLabel">16</span>
-                <button class="btn-tool" id="fontIncr">A+</button>
-            </div>
-        </div>
+        <div class="toolbar-right"></div>
     </div>
 </header>
 
@@ -305,13 +314,16 @@ function stripAccents(s) {
 function markStrongWords(text) {
     if (!strongEnabled || !STRONG_INDEX || !STRONG_INDEX.single) return text;
     
-    // Regex to match words (sequences of letters)
     return text.replace(/\b([a-záéíóúüñ]+)\b/gi, (match) => {
         const stripped = stripAccents(match.toLowerCase());
-        if (STRONG_INDEX.single[stripped]) {
-            // Format is "H123;G456||word"
-            const strongNums = STRONG_INDEX.single[stripped].split('||')[0];
-            return `<span class="strong-badge" data-strong="${strongNums}">${match}</span>`;
+        const entry = STRONG_INDEX.single[stripped];
+        if (entry) {
+            const strongNumsStr = entry.split('||')[0];
+            const strongNums = strongNumsStr.split(';');
+            const badges = strongNums.map(num => 
+                `<span class="strong-badge" data-strong="${num}">${num}</span>`
+            ).join('');
+            return `<span class="word-group">${badges}<span class="word-text">${match}</span></span>`;
         }
         return match;
     });
@@ -358,9 +370,12 @@ function showChapter() {
         return;
     }
 
-    const maxCh = Object.keys(chapters).length;
-    document.getElementById('refLabel').textContent = `${currentBook} ${currentChapter}`;
+    // Save last passage to localStorage
+    localStorage.setItem('lastBook', currentBook);
+    localStorage.setItem('lastChapter', currentChapter);
 
+    const maxCh = Object.keys(chapters).length;
+    
     let html = `<div class="chapter-card"><div class="chapter-title">${currentBook} ${currentChapter}</div>`;
     for (const [vNum, vText] of Object.entries(chapterData)) {
         const processedText = markStrongWords(vText);
@@ -519,9 +534,6 @@ function goToNextChapter() {
 }
 document.getElementById('prevCh').addEventListener('click', goToPrevChapter);
 document.getElementById('nextCh').addEventListener('click', goToNextChapter);
-document.getElementById('mobileBack').addEventListener('click', () => {
-    document.getElementById('sidebar').classList.remove('sidebar-hidden');
-});
 
 let searchTimer;
 document.getElementById('search').addEventListener('input', function() {
@@ -676,7 +688,18 @@ window.addEventListener('message', function(e) {
 
 // Init
 document.getElementById('search').value = '';
-showWelcome();
+const lastBook = localStorage.getItem('lastBook');
+const lastChapter = localStorage.getItem('lastChapter');
+
+if (lastBook && lastChapter) {
+    currentBook = lastBook;
+    currentChapter = parseInt(lastChapter);
+    showChapter();
+} else {
+    currentBook = 'Génesis';
+    currentChapter = 1;
+    showChapter();
+}
 </script>
 </body>
 </html>

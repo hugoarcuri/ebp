@@ -65,7 +65,7 @@ header {
     align-items: center; 
 }
 .brand { display: flex; align-items: center; gap: 8px; }
-.brand .logo { height: 24px; width: auto; border-radius: 3px; }
+.brand .logo { height: 29px; width: auto; border-radius: 3px; }
 .brand h1 { font-size: 15px; font-weight: 700; }
 .menu-btn { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 2px; opacity: 0.8; }
 
@@ -252,11 +252,18 @@ main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
             <img class="logo" src="logo.png" alt="Kittel">
             <h1>Kittel</h1>
         </div>
-        <button class="menu-btn" id="menuBtn">☰</button>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="font-ctrl">
+                <button class="btn-tool" id="fontDecr">A−</button>
+                <span id="fontSizeLabel">16</span>
+                <button class="btn-tool" id="fontIncr">A+</button>
+            </div>
+            <button class="menu-btn" id="menuBtn">☰</button>
+        </div>
     </div>
     <div class="header-row-2">
         <div class="search-container">
-            <input type="text" id="search" placeholder="Escribí una palabra en español…" autocomplete="off" autofocus>
+            <input type="text" id="search" placeholder="Escribí una palabra en español…" autocomplete="off">
         </div>
     </div>
     <div class="header-row-3">
@@ -264,13 +271,7 @@ main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
             <button class="btn-tool active" data-lang="ES">ES</button>
             <button class="btn-tool" data-lang="GR">GR</button>
         </div>
-        <div class="toolbar-right">
-            <div class="font-ctrl">
-                <button class="btn-tool" id="fontDecr">A−</button>
-                <span id="fontSizeLabel">16</span>
-                <button class="btn-tool" id="fontIncr">A+</button>
-            </div>
-        </div>
+        <div class="toolbar-right"></div>
     </div>
 </header>
 

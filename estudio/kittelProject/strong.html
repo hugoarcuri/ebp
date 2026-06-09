@@ -49,7 +49,7 @@
 }
 /* SECTION: reset-base */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; transition: background 0.2s, color 0.2s; }
+body { font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; transition: background 0.2s, color 0.2s; overflow-x: hidden; width: 100vw; }
 /* SECTION: header */
 header { 
     background: var(--header-bg); 
@@ -233,11 +233,18 @@ main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
             <img class="logo" src="logo.png" alt="Strong">
             <h1>Strong's Dictionary</h1>
         </div>
-        <button class="menu-btn" id="menuBtn">☰</button>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="font-ctrl">
+                <button class="btn-tool" id="fontDecr">A−</button>
+                <span id="fontSizeLabel">16</span>
+                <button class="btn-tool" id="fontIncr">A+</button>
+            </div>
+            <button class="menu-btn" id="menuBtn">☰</button>
+        </div>
     </div>
     <div class="header-row-2">
         <div class="search-container">
-            <input type="text" id="search" placeholder="Buscar por palabra española, Strong, hebreo o griego…" autocomplete="off" autofocus>
+            <input type="text" id="search" placeholder="Buscar por palabra española, Strong, hebreo o griego…" autocomplete="off">
         </div>
     </div>
     <div class="header-row-3">
@@ -245,13 +252,7 @@ main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
             <button class="btn-tool active" data-lang="H">H</button>
             <button class="btn-tool" data-lang="G">G</button>
         </div>
-        <div class="toolbar-right">
-            <div class="font-ctrl">
-                <button class="btn-tool" id="fontDecr">A−</button>
-                <span id="fontSizeLabel">16</span>
-                <button class="btn-tool" id="fontIncr">A+</button>
-            </div>
-        </div>
+        <div class="toolbar-right"></div>
     </div>
 </header>
 
