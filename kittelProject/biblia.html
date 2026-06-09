@@ -6,6 +6,7 @@
 <title>Reina Valera 1960</title>
 <script src="rv1960.js"></script>
 <script src="interlinear_lookup.js"></script>
+<script src="aliases.js"></script>
 <script src="strong_index.js"></script>
 <script src="datos_strong.js"></script>
 <script src="datos.js"></script>
@@ -649,6 +650,28 @@ function findStrongFallback(word, isOT, isNT) {
             else if (isNT && num.charAt(0) === 'G') out.push(num);
         }
         return out;
+    }
+    // Check manual aliases first
+    if (typeof MANUAL_ALIASES !== 'undefined') {
+        var aliasKey = stripAccents(lower);
+        var aliasLemma = MANUAL_ALIASES[aliasKey];
+        if (aliasLemma) {
+            var aliasEntry = STRONG_INDEX.single[stripAccents(aliasLemma)];
+            if (aliasEntry) {
+                var filtered = filterByTestament(aliasEntry.split('||')[0].split(';'));
+                if (filtered.length === 1) {
+                    if (debug) {
+                        var info = strongInfo(filtered[0]);
+                        console.log('Palabra: ' + word + '\nStrong asignado: ' + filtered[0] + '\nLema Strong: ' + info.lemma + '\nDefinicion: ' + info.def.slice(0, 120) + '\nCoincidencia: alta (alias manual)');
+                    }
+                    return filtered;
+                }
+                if (filtered.length > 1) {
+                    if (debug) console.log('Palabra: ' + word + ' | Confianza: baja (alias ambiguo) | Resultado: ocultar');
+                    return [];
+                }
+            }
+        }
     }
     // Try original form first
     var originalKey = stripAccents(lower);
