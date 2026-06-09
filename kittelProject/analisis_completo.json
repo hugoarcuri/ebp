@@ -1,0 +1,10733 @@
+{
+  "stats": {
+    "total_words": 705827,
+    "strong_words": 338681,
+    "interlinear_words": 319822,
+    "fallback_words": 18859,
+    "missing_words": 367146,
+    "global_pct": 48.0,
+    "ot_total": 540911,
+    "ot_strong": 231234,
+    "ot_pct": 42.7,
+    "nt_total": 164916,
+    "nt_strong": 107447,
+    "nt_pct": 65.2,
+    "theoretical_pct": 53.7,
+    "theoretical_strong": 379074,
+    "still_missing": 326753,
+    "strong_index_entries": 8326,
+    "aliases_count": 738
+  },
+  "top_missing": [
+    {
+      "word": "de",
+      "freq": 38635
+    },
+    {
+      "word": "y",
+      "freq": 32386
+    },
+    {
+      "word": "a",
+      "freq": 17798
+    },
+    {
+      "word": "la",
+      "freq": 15358
+    },
+    {
+      "word": "que",
+      "freq": 15032
+    },
+    {
+      "word": "el",
+      "freq": 14103
+    },
+    {
+      "word": "los",
+      "freq": 13780
+    },
+    {
+      "word": "en",
+      "freq": 11739
+    },
+    {
+      "word": "por",
+      "freq": 5043
+    },
+    {
+      "word": "para",
+      "freq": 4950
+    },
+    {
+      "word": "las",
+      "freq": 4899
+    },
+    {
+      "word": "del",
+      "freq": 4897
+    },
+    {
+      "word": "con",
+      "freq": 4277
+    },
+    {
+      "word": "se",
+      "freq": 4044
+    },
+    {
+      "word": "lo",
+      "freq": 3709
+    },
+    {
+      "word": "al",
+      "freq": 3129
+    },
+    {
+      "word": "porque",
+      "freq": 2783
+    },
+    {
+      "word": "es",
+      "freq": 2611
+    },
+    {
+      "word": "hijos",
+      "freq": 2571
+    },
+    {
+      "word": "su",
+      "freq": 2557
+    },
+    {
+      "word": "él",
+      "freq": 2436
+    },
+    {
+      "word": "sobre",
+      "freq": 2424
+    },
+    {
+      "word": "como",
+      "freq": 2261
+    },
+    {
+      "word": "le",
+      "freq": 2079
+    },
+    {
+      "word": "hijo",
+      "freq": 2008
+    },
+    {
+      "word": "un",
+      "freq": 1825
+    },
+    {
+      "word": "me",
+      "freq": 1797
+    },
+    {
+      "word": "te",
+      "freq": 1772
+    },
+    {
+      "word": "sus",
+      "freq": 1754
+    },
+    {
+      "word": "pero",
+      "freq": 1632
+    },
+    {
+      "word": "pueblo",
+      "freq": 1560
+    },
+    {
+      "word": "casa",
+      "freq": 1519
+    },
+    {
+      "word": "cuando",
+      "freq": 1499
+    },
+    {
+      "word": "ellos",
+      "freq": 1453
+    },
+    {
+      "word": "yo",
+      "freq": 1356
+    },
+    {
+      "word": "pues",
+      "freq": 1342
+    },
+    {
+      "word": "entonces",
+      "freq": 1320
+    },
+    {
+      "word": "contra",
+      "freq": 1228
+    },
+    {
+      "word": "tu",
+      "freq": 1148
+    },
+    {
+      "word": "si",
+      "freq": 1131
+    },
+    {
+      "word": "fue",
+      "freq": 1095
+    },
+    {
+      "word": "no",
+      "freq": 1090
+    },
+    {
+      "word": "mi",
+      "freq": 1075
+    },
+    {
+      "word": "ha",
+      "freq": 1042
+    },
+    {
+      "word": "tú",
+      "freq": 1030
+    },
+    {
+      "word": "mí",
+      "freq": 1016
+    },
+    {
+      "word": "mas",
+      "freq": 1011
+    },
+    {
+      "word": "una",
+      "freq": 1010
+    },
+    {
+      "word": "está",
+      "freq": 1006
+    },
+    {
+      "word": "vosotros",
+      "freq": 921
+    },
+    {
+      "word": "os",
+      "freq": 914
+    },
+    {
+      "word": "he",
+      "freq": 893
+    },
+    {
+      "word": "ti",
+      "freq": 889
+    },
+    {
+      "word": "les",
+      "freq": 846
+    },
+    {
+      "word": "así",
+      "freq": 828
+    },
+    {
+      "word": "cual",
+      "freq": 823
+    },
+    {
+      "word": "ella",
+      "freq": 821
+    },
+    {
+      "word": "había",
+      "freq": 813
+    },
+    {
+      "word": "jerusalén",
+      "freq": 811
+    },
+    {
+      "word": "aquí",
+      "freq": 785
+    },
+    {
+      "word": "dijo",
+      "freq": 774
+    },
+    {
+      "word": "hizo",
+      "freq": 745
+    },
+    {
+      "word": "son",
+      "freq": 738
+    },
+    {
+      "word": "también",
+      "freq": 726
+    },
+    {
+      "word": "ni",
+      "freq": 687
+    },
+    {
+      "word": "cosas",
+      "freq": 623
+    },
+    {
+      "word": "más",
+      "freq": 616
+    },
+    {
+      "word": "desde",
+      "freq": 592
+    },
+    {
+      "word": "e",
+      "freq": 584
+    },
+    {
+      "word": "después",
+      "freq": 580
+    },
+    {
+      "word": "o",
+      "freq": 578
+    },
+    {
+      "word": "era",
+      "freq": 571
+    },
+    {
+      "word": "entre",
+      "freq": 554
+    },
+    {
+      "word": "sino",
+      "freq": 545
+    },
+    {
+      "word": "ciudad",
+      "freq": 542
+    },
+    {
+      "word": "hecho",
+      "freq": 499
+    },
+    {
+      "word": "estaba",
+      "freq": 491
+    },
+    {
+      "word": "aquel",
+      "freq": 488
+    },
+    {
+      "word": "han",
+      "freq": 479
+    },
+    {
+      "word": "tanto",
+      "freq": 479
+    },
+    {
+      "word": "todo",
+      "freq": 478
+    },
+    {
+      "word": "corazón",
+      "freq": 474
+    },
+    {
+      "word": "tus",
+      "freq": 471
+    },
+    {
+      "word": "sea",
+      "freq": 471
+    },
+    {
+      "word": "fueron",
+      "freq": 454
+    },
+    {
+      "word": "nos",
+      "freq": 442
+    },
+    {
+      "word": "quien",
+      "freq": 440
+    },
+    {
+      "word": "este",
+      "freq": 425
+    },
+    {
+      "word": "dio",
+      "freq": 424
+    },
+    {
+      "word": "esto",
+      "freq": 423
+    },
+    {
+      "word": "naciones",
+      "freq": 412
+    },
+    {
+      "word": "ojos",
+      "freq": 400
+    },
+    {
+      "word": "cuales",
+      "freq": 391
+    },
+    {
+      "word": "nosotros",
+      "freq": 386
+    },
+    {
+      "word": "cada",
+      "freq": 375
+    },
+    {
+      "word": "conforme",
+      "freq": 364
+    },
+    {
+      "word": "gran",
+      "freq": 364
+    },
+    {
+      "word": "hay",
+      "freq": 361
+    },
+    {
+      "word": "cuanto",
+      "freq": 361
+    },
+    {
+      "word": "hasta",
+      "freq": 360
+    },
+    {
+      "word": "ciudades",
+      "freq": 353
+    },
+    {
+      "word": "bien",
+      "freq": 351
+    },
+    {
+      "word": "ser",
+      "freq": 349
+    },
+    {
+      "word": "están",
+      "freq": 347
+    },
+    {
+      "word": "has",
+      "freq": 345
+    },
+    {
+      "word": "mal",
+      "freq": 341
+    },
+    {
+      "word": "luego",
+      "freq": 335
+    },
+    {
+      "word": "esta",
+      "freq": 334
+    },
+    {
+      "word": "sin",
+      "freq": 322
+    },
+    {
+      "word": "causa",
+      "freq": 314
+    },
+    {
+      "word": "estaban",
+      "freq": 309
+    },
+    {
+      "word": "sido",
+      "freq": 306
+    },
+    {
+      "word": "soy",
+      "freq": 301
+    },
+    {
+      "word": "serán",
+      "freq": 289
+    },
+    {
+      "word": "según",
+      "freq": 287
+    },
+    {
+      "word": "hacer",
+      "freq": 286
+    },
+    {
+      "word": "dios",
+      "freq": 276
+    },
+    {
+      "word": "delante",
+      "freq": 272
+    },
+    {
+      "word": "hombres",
+      "freq": 271
+    },
+    {
+      "word": "voz",
+      "freq": 266
+    },
+    {
+      "word": "qué",
+      "freq": 265
+    },
+    {
+      "word": "otro",
+      "freq": 265
+    },
+    {
+      "word": "ya",
+      "freq": 264
+    },
+    {
+      "word": "donde",
+      "freq": 262
+    },
+    {
+      "word": "vino",
+      "freq": 259
+    },
+    {
+      "word": "haré",
+      "freq": 257
+    },
+    {
+      "word": "mis",
+      "freq": 257
+    },
+    {
+      "word": "grande",
+      "freq": 251
+    },
+    {
+      "word": "misericordia",
+      "freq": 251
+    },
+    {
+      "word": "sí",
+      "freq": 250
+    },
+    {
+      "word": "ofrenda",
+      "freq": 249
+    },
+    {
+      "word": "puso",
+      "freq": 245
+    },
+    {
+      "word": "todos",
+      "freq": 240
+    },
+    {
+      "word": "ante",
+      "freq": 238
+    },
+    {
+      "word": "rey",
+      "freq": 237
+    },
+    {
+      "word": "vida",
+      "freq": 237
+    },
+    {
+      "word": "habían",
+      "freq": 233
+    },
+    {
+      "word": "cabeza",
+      "freq": 233
+    },
+    {
+      "word": "hicieron",
+      "freq": 232
+    },
+    {
+      "word": "parte",
+      "freq": 229
+    },
+    {
+      "word": "día",
+      "freq": 228
+    },
+    {
+      "word": "habéis",
+      "freq": 227
+    },
+    {
+      "word": "poder",
+      "freq": 223
+    },
+    {
+      "word": "junto",
+      "freq": 219
+    },
+    {
+      "word": "eres",
+      "freq": 211
+    },
+    {
+      "word": "hace",
+      "freq": 210
+    },
+    {
+      "word": "luz",
+      "freq": 208
+    },
+    {
+      "word": "holocausto",
+      "freq": 204
+    },
+    {
+      "word": "pueblos",
+      "freq": 202
+    },
+    {
+      "word": "lado",
+      "freq": 201
+    },
+    {
+      "word": "ellas",
+      "freq": 200
+    },
+    {
+      "word": "eran",
+      "freq": 198
+    },
+    {
+      "word": "manera",
+      "freq": 197
+    },
+    {
+      "word": "cosa",
+      "freq": 195
+    },
+    {
+      "word": "haya",
+      "freq": 190
+    },
+    {
+      "word": "éste",
+      "freq": 189
+    },
+    {
+      "word": "lugar",
+      "freq": 188
+    },
+    {
+      "word": "bet",
+      "freq": 187
+    },
+    {
+      "word": "estas",
+      "freq": 185
+    },
+    {
+      "word": "tierra",
+      "freq": 183
+    },
+    {
+      "word": "contigo",
+      "freq": 183
+    },
+    {
+      "word": "vez",
+      "freq": 183
+    },
+    {
+      "word": "tiene",
+      "freq": 181
+    },
+    {
+      "word": "efraín",
+      "freq": 181
+    },
+    {
+      "word": "respondió",
+      "freq": 173
+    },
+    {
+      "word": "hemos",
+      "freq": 170
+    },
+    {
+      "word": "campo",
+      "freq": 167
+    },
+    {
+      "word": "campamento",
+      "freq": 167
+    },
+    {
+      "word": "casas",
+      "freq": 167
+    },
+    {
+      "word": "reposo",
+      "freq": 167
+    },
+    {
+      "word": "muchos",
+      "freq": 166
+    },
+    {
+      "word": "hacia",
+      "freq": 165
+    },
+    {
+      "word": "levantó",
+      "freq": 163
+    },
+    {
+      "word": "cómo",
+      "freq": 163
+    },
+    {
+      "word": "gente",
+      "freq": 162
+    },
+    {
+      "word": "descendencia",
+      "freq": 161
+    },
+    {
+      "word": "aun",
+      "freq": 158
+    },
+    {
+      "word": "vio",
+      "freq": 157
+    },
+    {
+      "word": "reinó",
+      "freq": 156
+    },
+    {
+      "word": "expiación",
+      "freq": 156
+    },
+    {
+      "word": "mismo",
+      "freq": 155
+    },
+    {
+      "word": "pecado",
+      "freq": 154
+    },
+    {
+      "word": "codos",
+      "freq": 153
+    },
+    {
+      "word": "reunión",
+      "freq": 152
+    },
+    {
+      "word": "toda",
+      "freq": 151
+    },
+    {
+      "word": "allí",
+      "freq": 149
+    },
+    {
+      "word": "desierto",
+      "freq": 149
+    },
+    {
+      "word": "tras",
+      "freq": 148
+    },
+    {
+      "word": "nuestro",
+      "freq": 146
+    },
+    {
+      "word": "aunque",
+      "freq": 145
+    },
+    {
+      "word": "dado",
+      "freq": 144
+    },
+    {
+      "word": "bronce",
+      "freq": 144
+    },
+    {
+      "word": "jehová",
+      "freq": 143
+    },
+    {
+      "word": "además",
+      "freq": 142
+    },
+    {
+      "word": "éstos",
+      "freq": 141
+    },
+    {
+      "word": "antes",
+      "freq": 141
+    },
+    {
+      "word": "aquella",
+      "freq": 140
+    },
+    {
+      "word": "acerca",
+      "freq": 140
+    },
+    {
+      "word": "dijeron",
+      "freq": 138
+    },
+    {
+      "word": "fin",
+      "freq": 137
+    },
+    {
+      "word": "vuestros",
+      "freq": 135
+    },
+    {
+      "word": "ejército",
+      "freq": 135
+    },
+    {
+      "word": "mano",
+      "freq": 133
+    },
+    {
+      "word": "paz",
+      "freq": 133
+    },
+    {
+      "word": "dicho",
+      "freq": 131
+    },
+    {
+      "word": "medio",
+      "freq": 129
+    },
+    {
+      "word": "será",
+      "freq": 129
+    },
+    {
+      "word": "sean",
+      "freq": 127
+    },
+    {
+      "word": "habiendo",
+      "freq": 125
+    },
+    {
+      "word": "hubo",
+      "freq": 125
+    },
+    {
+      "word": "uno",
+      "freq": 124
+    },
+    {
+      "word": "conmigo",
+      "freq": 123
+    },
+    {
+      "word": "otra",
+      "freq": 121
+    },
+    {
+      "word": "días",
+      "freq": 121
+    },
+    {
+      "word": "grandes",
+      "freq": 120
+    },
+    {
+      "word": "diciendo",
+      "freq": 120
+    },
+    {
+      "word": "enemigos",
+      "freq": 120
+    },
+    {
+      "word": "padre",
+      "freq": 119
+    },
+    {
+      "word": "muchas",
+      "freq": 119
+    },
+    {
+      "word": "sur",
+      "freq": 119
+    },
+    {
+      "word": "multitud",
+      "freq": 119
+    },
+    {
+      "word": "aquellos",
+      "freq": 119
+    },
+    {
+      "word": "jefes",
+      "freq": 119
+    },
+    {
+      "word": "incienso",
+      "freq": 119
+    },
+    {
+      "word": "salvación",
+      "freq": 118
+    },
+    {
+      "word": "mientras",
+      "freq": 117
+    },
+    {
+      "word": "todas",
+      "freq": 117
+    },
+    {
+      "word": "aún",
+      "freq": 116
+    },
+    {
+      "word": "malo",
+      "freq": 116
+    },
+    {
+      "word": "libro",
+      "freq": 116
+    },
+    {
+      "word": "ira",
+      "freq": 115
+    },
+    {
+      "word": "unos",
+      "freq": 115
+    },
+    {
+      "word": "puesto",
+      "freq": 114
+    },
+    {
+      "word": "fuere",
+      "freq": 113
+    },
+    {
+      "word": "oír",
+      "freq": 113
+    },
+    {
+      "word": "templo",
+      "freq": 113
+    },
+    {
+      "word": "bueno",
+      "freq": 111
+    },
+    {
+      "word": "volvió",
+      "freq": 110
+    },
+    {
+      "word": "estoy",
+      "freq": 110
+    },
+    {
+      "word": "hombre",
+      "freq": 109
+    },
+    {
+      "word": "vestidos",
+      "freq": 109
+    },
+    {
+      "word": "haga",
+      "freq": 109
+    },
+    {
+      "word": "lugares",
+      "freq": 108
+    },
+    {
+      "word": "ahora",
+      "freq": 107
+    },
+    {
+      "word": "tiempo",
+      "freq": 107
+    },
+    {
+      "word": "ruego",
+      "freq": 106
+    },
+    {
+      "word": "noche",
+      "freq": 106
+    },
+    {
+      "word": "eso",
+      "freq": 105
+    },
+    {
+      "word": "estos",
+      "freq": 104
+    },
+    {
+      "word": "ciertamente",
+      "freq": 103
+    },
+    {
+      "word": "heredad",
+      "freq": 101
+    },
+    {
+      "word": "verdad",
+      "freq": 100
+    },
+    {
+      "word": "utensilios",
+      "freq": 100
+    },
+    {
+      "word": "príncipes",
+      "freq": 98
+    },
+    {
+      "word": "habrá",
+      "freq": 98
+    },
+    {
+      "word": "obra",
+      "freq": 97
+    },
+    {
+      "word": "maldad",
+      "freq": 97
+    },
+    {
+      "word": "haber",
+      "freq": 97
+    },
+    {
+      "word": "pos",
+      "freq": 96
+    },
+    {
+      "word": "principales",
+      "freq": 96
+    },
+    {
+      "word": "hubiere",
+      "freq": 95
+    },
+    {
+      "word": "nuestros",
+      "freq": 95
+    },
+    {
+      "word": "dos",
+      "freq": 94
+    },
+    {
+      "word": "nada",
+      "freq": 94
+    },
+    {
+      "word": "señor",
+      "freq": 94
+    },
+    {
+      "word": "da",
+      "freq": 93
+    },
+    {
+      "word": "muy",
+      "freq": 93
+    },
+    {
+      "word": "límite",
+      "freq": 93
+    },
+    {
+      "word": "cuerpo",
+      "freq": 93
+    },
+    {
+      "word": "amón",
+      "freq": 93
+    },
+    {
+      "word": "presencia",
+      "freq": 92
+    },
+    {
+      "word": "carnero",
+      "freq": 91
+    },
+    {
+      "word": "fuera",
+      "freq": 91
+    },
+    {
+      "word": "hacen",
+      "freq": 91
+    },
+    {
+      "word": "mucho",
+      "freq": 90
+    },
+    {
+      "word": "canaán",
+      "freq": 89
+    },
+    {
+      "word": "pusieron",
+      "freq": 89
+    },
+    {
+      "word": "sois",
+      "freq": 88
+    },
+    {
+      "word": "hice",
+      "freq": 87
+    },
+    {
+      "word": "muerte",
+      "freq": 87
+    },
+    {
+      "word": "mejor",
+      "freq": 87
+    },
+    {
+      "word": "atrio",
+      "freq": 87
+    },
+    {
+      "word": "joven",
+      "freq": 86
+    },
+    {
+      "word": "josafat",
+      "freq": 86
+    },
+    {
+      "word": "caballos",
+      "freq": 84
+    },
+    {
+      "word": "tienen",
+      "freq": 83
+    },
+    {
+      "word": "llevó",
+      "freq": 83
+    },
+    {
+      "word": "tuvo",
+      "freq": 83
+    },
+    {
+      "word": "jefe",
+      "freq": 83
+    },
+    {
+      "word": "ofrendas",
+      "freq": 83
+    },
+    {
+      "word": "sumo",
+      "freq": 83
+    },
+    {
+      "word": "quienes",
+      "freq": 82
+    },
+    {
+      "word": "vive",
+      "freq": 82
+    },
+    {
+      "word": "estará",
+      "freq": 82
+    },
+    {
+      "word": "salieron",
+      "freq": 81
+    },
+    {
+      "word": "propia",
+      "freq": 81
+    },
+    {
+      "word": "ésta",
+      "freq": 80
+    },
+    {
+      "word": "contados",
+      "freq": 80
+    },
+    {
+      "word": "otros",
+      "freq": 79
+    },
+    {
+      "word": "acamparon",
+      "freq": 79
+    },
+    {
+      "word": "nación",
+      "freq": 78
+    },
+    {
+      "word": "pasar",
+      "freq": 77
+    },
+    {
+      "word": "león",
+      "freq": 77
+    },
+    {
+      "word": "ello",
+      "freq": 77
+    },
+    {
+      "word": "llegó",
+      "freq": 76
+    },
+    {
+      "word": "territorio",
+      "freq": 76
+    },
+    {
+      "word": "siendo",
+      "freq": 76
+    },
+    {
+      "word": "veces",
+      "freq": 76
+    },
+    {
+      "word": "jóvenes",
+      "freq": 75
+    },
+    {
+      "word": "dar",
+      "freq": 75
+    },
+    {
+      "word": "levántate",
+      "freq": 74
+    },
+    {
+      "word": "muertos",
+      "freq": 74
+    },
+    {
+      "word": "volver",
+      "freq": 74
+    },
+    {
+      "word": "alguno",
+      "freq": 74
+    },
+    {
+      "word": "alrededor",
+      "freq": 74
+    },
+    {
+      "word": "mayor",
+      "freq": 73
+    },
+    {
+      "word": "norte",
+      "freq": 73
+    },
+    {
+      "word": "príncipe",
+      "freq": 73
+    },
+    {
+      "word": "fuerza",
+      "freq": 72
+    },
+    {
+      "word": "pecados",
+      "freq": 72
+    },
+    {
+      "word": "solo",
+      "freq": 71
+    },
+    {
+      "word": "grosura",
+      "freq": 71
+    },
+    {
+      "word": "ver",
+      "freq": 70
+    },
+    {
+      "word": "bajo",
+      "freq": 70
+    },
+    {
+      "word": "reino",
+      "freq": 69
+    },
+    {
+      "word": "siquem",
+      "freq": 69
+    },
+    {
+      "word": "demás",
+      "freq": 69
+    },
+    {
+      "word": "holocaustos",
+      "freq": 69
+    },
+    {
+      "word": "volvieron",
+      "freq": 69
+    },
+    {
+      "word": "haz",
+      "freq": 68
+    },
+    {
+      "word": "tengo",
+      "freq": 68
+    },
+    {
+      "word": "tan",
+      "freq": 68
+    },
+    {
+      "word": "ir",
+      "freq": 68
+    },
+    {
+      "word": "dentro",
+      "freq": 68
+    },
+    {
+      "word": "caballo",
+      "freq": 68
+    },
+    {
+      "word": "padres",
+      "freq": 68
+    },
+    {
+      "word": "familia",
+      "freq": 67
+    },
+    {
+      "word": "orden",
+      "freq": 67
+    },
+    {
+      "word": "dieron",
+      "freq": 67
+    },
+    {
+      "word": "carneros",
+      "freq": 67
+    },
+    {
+      "word": "acaso",
+      "freq": 66
+    },
+    {
+      "word": "somos",
+      "freq": 66
+    },
+    {
+      "word": "buena",
+      "freq": 65
+    },
+    {
+      "word": "pasó",
+      "freq": 65
+    },
+    {
+      "word": "abimelec",
+      "freq": 65
+    },
+    {
+      "word": "tomó",
+      "freq": 65
+    },
+    {
+      "word": "amor",
+      "freq": 64
+    },
+    {
+      "word": "enemigo",
+      "freq": 64
+    },
+    {
+      "word": "pondré",
+      "freq": 63
+    },
+    {
+      "word": "puertas",
+      "freq": 62
+    },
+    {
+      "word": "mujer",
+      "freq": 61
+    },
+    {
+      "word": "manos",
+      "freq": 61
+    },
+    {
+      "word": "inmundo",
+      "freq": 61
+    },
+    {
+      "word": "decir",
+      "freq": 61
+    },
+    {
+      "word": "salió",
+      "freq": 60
+    },
+    {
+      "word": "hiciste",
+      "freq": 60
+    },
+    {
+      "word": "palabra",
+      "freq": 60
+    },
+    {
+      "word": "mató",
+      "freq": 60
+    },
+    {
+      "word": "vi",
+      "freq": 60
+    },
+    {
+      "word": "oriente",
+      "freq": 59
+    },
+    {
+      "word": "extremo",
+      "freq": 59
+    },
+    {
+      "word": "haréis",
+      "freq": 59
+    },
+    {
+      "word": "tienes",
+      "freq": 58
+    },
+    {
+      "word": "suyo",
+      "freq": 58
+    },
+    {
+      "word": "visto",
+      "freq": 58
+    },
+    {
+      "word": "cabezas",
+      "freq": 58
+    },
+    {
+      "word": "balaam",
+      "freq": 58
+    },
+    {
+      "word": "botín",
+      "freq": 58
+    },
+    {
+      "word": "varones",
+      "freq": 57
+    },
+    {
+      "word": "tendrá",
+      "freq": 57
+    },
+    {
+      "word": "siempre",
+      "freq": 57
+    },
+    {
+      "word": "oro",
+      "freq": 57
+    },
+    {
+      "word": "vestiduras",
+      "freq": 57
+    },
+    {
+      "word": "esté",
+      "freq": 56
+    },
+    {
+      "word": "tuyo",
+      "freq": 56
+    },
+    {
+      "word": "quién",
+      "freq": 56
+    },
+    {
+      "word": "menor",
+      "freq": 55
+    },
+    {
+      "word": "harán",
+      "freq": 55
+    },
+    {
+      "word": "vinieron",
+      "freq": 55
+    },
+    {
+      "word": "juventud",
+      "freq": 55
+    },
+    {
+      "word": "guerra",
+      "freq": 55
+    },
+    {
+      "word": "mismos",
+      "freq": 55
+    },
+    {
+      "word": "di",
+      "freq": 54
+    },
+    {
+      "word": "vuestro",
+      "freq": 54
+    },
+    {
+      "word": "nuestra",
+      "freq": 54
+    },
+    {
+      "word": "palabras",
+      "freq": 54
+    },
+    {
+      "word": "angustia",
+      "freq": 54
+    },
+    {
+      "word": "fuego",
+      "freq": 54
+    },
+    {
+      "word": "israel",
+      "freq": 53
+    },
+    {
+      "word": "castigo",
+      "freq": 53
+    },
+    {
+      "word": "fui",
+      "freq": 53
+    },
+    {
+      "word": "algún",
+      "freq": 53
+    },
+    {
+      "word": "fuese",
+      "freq": 53
+    },
+    {
+      "word": "viene",
+      "freq": 52
+    },
+    {
+      "word": "alto",
+      "freq": 52
+    },
+    {
+      "word": "sólo",
+      "freq": 52
+    },
+    {
+      "word": "hiciere",
+      "freq": 52
+    },
+    {
+      "word": "efod",
+      "freq": 52
+    },
+    {
+      "word": "cristo",
+      "freq": 52
+    },
+    {
+      "word": "bienes",
+      "freq": 51
+    },
+    {
+      "word": "haciendo",
+      "freq": 51
+    },
+    {
+      "word": "puerta",
+      "freq": 51
+    },
+    {
+      "word": "buen",
+      "freq": 51
+    },
+    {
+      "word": "efa",
+      "freq": 51
+    },
+    {
+      "word": "habló",
+      "freq": 51
+    },
+    {
+      "word": "tenga",
+      "freq": 51
+    },
+    {
+      "word": "furor",
+      "freq": 51
+    },
+    {
+      "word": "vuestras",
+      "freq": 51
+    },
+    {
+      "word": "prójimo",
+      "freq": 51
+    },
+    {
+      "word": "tuvieron",
+      "freq": 50
+    },
+    {
+      "word": "camino",
+      "freq": 50
+    },
+    {
+      "word": "seré",
+      "freq": 50
+    },
+    {
+      "word": "otras",
+      "freq": 50
+    },
+    {
+      "word": "comenzó",
+      "freq": 50
+    },
+    {
+      "word": "santo",
+      "freq": 50
+    },
+    {
+      "word": "nunca",
+      "freq": 50
+    },
+    {
+      "word": "puede",
+      "freq": 49
+    },
+    {
+      "word": "estuvo",
+      "freq": 49
+    },
+    {
+      "word": "haced",
+      "freq": 49
+    },
+    {
+      "word": "vuestra",
+      "freq": 49
+    },
+    {
+      "word": "hebrón",
+      "freq": 49
+    },
+    {
+      "word": "hacía",
+      "freq": 49
+    },
+    {
+      "word": "asunto",
+      "freq": 49
+    },
+    {
+      "word": "lino",
+      "freq": 49
+    },
+    {
+      "word": "frente",
+      "freq": 49
+    },
+    {
+      "word": "fiesta",
+      "freq": 49
+    },
+    {
+      "word": "preparado",
+      "freq": 48
+    },
+    {
+      "word": "levantaron",
+      "freq": 48
+    },
+    {
+      "word": "nombre",
+      "freq": 48
+    },
+    {
+      "word": "ley",
+      "freq": 48
+    },
+    {
+      "word": "arroyo",
+      "freq": 48
+    },
+    {
+      "word": "porción",
+      "freq": 48
+    },
+    {
+      "word": "macho",
+      "freq": 48
+    },
+    {
+      "word": "iniquidad",
+      "freq": 48
+    },
+    {
+      "word": "remanente",
+      "freq": 48
+    },
+    {
+      "word": "necesario",
+      "freq": 48
+    },
+    {
+      "word": "edad",
+      "freq": 47
+    },
+    {
+      "word": "pasaron",
+      "freq": 47
+    },
+    {
+      "word": "poner",
+      "freq": 47
+    },
+    {
+      "word": "venido",
+      "freq": 47
+    },
+    {
+      "word": "juntamente",
+      "freq": 47
+    },
+    {
+      "word": "iba",
+      "freq": 46
+    },
+    {
+      "word": "trabajo",
+      "freq": 46
+    },
+    {
+      "word": "semejante",
+      "freq": 46
+    },
+    {
+      "word": "autoridad",
+      "freq": 46
+    },
+    {
+      "word": "arriba",
+      "freq": 45
+    },
+    {
+      "word": "echó",
+      "freq": 45
+    },
+    {
+      "word": "sacrificios",
+      "freq": 45
+    },
+    {
+      "word": "ten",
+      "freq": 45
+    },
+    {
+      "word": "vieron",
+      "freq": 44
+    },
+    {
+      "word": "altísimo",
+      "freq": 44
+    },
+    {
+      "word": "cubrió",
+      "freq": 44
+    },
+    {
+      "word": "dónde",
+      "freq": 44
+    },
+    {
+      "word": "consigo",
+      "freq": 44
+    },
+    {
+      "word": "seréis",
+      "freq": 44
+    },
+    {
+      "word": "justicia",
+      "freq": 44
+    },
+    {
+      "word": "podrá",
+      "freq": 43
+    },
+    {
+      "word": "adonde",
+      "freq": 43
+    },
+    {
+      "word": "fuerzas",
+      "freq": 43
+    },
+    {
+      "word": "levantará",
+      "freq": 43
+    },
+    {
+      "word": "pastores",
+      "freq": 43
+    },
+    {
+      "word": "venga",
+      "freq": 43
+    },
+    {
+      "word": "cautivos",
+      "freq": 43
+    },
+    {
+      "word": "teniendo",
+      "freq": 42
+    },
+    {
+      "word": "comer",
+      "freq": 42
+    },
+    {
+      "word": "mucha",
+      "freq": 42
+    },
+    {
+      "word": "va",
+      "freq": 42
+    },
+    {
+      "word": "cilicio",
+      "freq": 42
+    },
+    {
+      "word": "modo",
+      "freq": 42
+    },
+    {
+      "word": "decretos",
+      "freq": 42
+    },
+    {
+      "word": "dice",
+      "freq": 42
+    },
+    {
+      "word": "mía",
+      "freq": 41
+    },
+    {
+      "word": "éstas",
+      "freq": 41
+    },
+    {
+      "word": "esperanza",
+      "freq": 41
+    },
+    {
+      "word": "trajo",
+      "freq": 40
+    },
+    {
+      "word": "dejaron",
+      "freq": 40
+    },
+    {
+      "word": "dejó",
+      "freq": 40
+    },
+    {
+      "word": "abundancia",
+      "freq": 40
+    },
+    {
+      "word": "venir",
+      "freq": 40
+    },
+    {
+      "word": "hago",
+      "freq": 40
+    },
+    {
+      "word": "sacrificio",
+      "freq": 40
+    },
+    {
+      "word": "muerto",
+      "freq": 40
+    },
+    {
+      "word": "asera",
+      "freq": 40
+    },
+    {
+      "word": "vendrá",
+      "freq": 40
+    },
+    {
+      "word": "gloria",
+      "freq": 40
+    },
+    {
+      "word": "ocozías",
+      "freq": 40
+    },
+    {
+      "word": "siglos",
+      "freq": 40
+    },
+    {
+      "word": "bestias",
+      "freq": 39
+    },
+    {
+      "word": "cananeo",
+      "freq": 39
+    },
+    {
+      "word": "ve",
+      "freq": 39
+    },
+    {
+      "word": "cerca",
+      "freq": 39
+    },
+    {
+      "word": "haces",
+      "freq": 39
+    },
+    {
+      "word": "tener",
+      "freq": 39
+    },
+    {
+      "word": "sé",
+      "freq": 39
+    },
+    {
+      "word": "envió",
+      "freq": 39
+    },
+    {
+      "word": "vivo",
+      "freq": 39
+    },
+    {
+      "word": "fuerte",
+      "freq": 39
+    },
+    {
+      "word": "pie",
+      "freq": 39
+    },
+    {
+      "word": "grato",
+      "freq": 39
+    },
+    {
+      "word": "resto",
+      "freq": 39
+    }
+  ],
+  "top_missing_suggestions": [
+    {
+      "word": "de",
+      "freq": 38635,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "y",
+      "freq": 32386,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "a",
+      "freq": 17798,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "la",
+      "freq": 15358,
+      "classification": "articulo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "que",
+      "freq": 15032,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "el",
+      "freq": 14103,
+      "classification": "articulo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "los",
+      "freq": 13780,
+      "classification": "articulo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "en",
+      "freq": 11739,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "por",
+      "freq": 5043,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "para",
+      "freq": 4950,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "las",
+      "freq": 4899,
+      "classification": "articulo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "del",
+      "freq": 4897,
+      "classification": "articulo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "con",
+      "freq": 4277,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "se",
+      "freq": 4044,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "lo",
+      "freq": 3709,
+      "classification": "articulo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "al",
+      "freq": 3129,
+      "classification": "articulo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "porque",
+      "freq": 2783,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "es",
+      "freq": 2611,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hijos",
+      "freq": 2571,
+      "classification": "sustantivo",
+      "possible_lemma": "hijo",
+      "alias_exists": true
+    },
+    {
+      "word": "su",
+      "freq": 2557,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "él",
+      "freq": 2436,
+      "classification": "articulo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "sobre",
+      "freq": 2424,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "como",
+      "freq": 2261,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "le",
+      "freq": 2079,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hijo",
+      "freq": 2008,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "un",
+      "freq": 1825,
+      "classification": "articulo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "me",
+      "freq": 1797,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "te",
+      "freq": 1772,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "sus",
+      "freq": 1754,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pero",
+      "freq": 1632,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pueblo",
+      "freq": 1560,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "casa",
+      "freq": 1519,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "cuando",
+      "freq": 1499,
+      "classification": "pronombre",
+      "possible_lemma": "cuar",
+      "alias_exists": false
+    },
+    {
+      "word": "ellos",
+      "freq": 1453,
+      "classification": "pronombre",
+      "possible_lemma": "ello",
+      "alias_exists": false
+    },
+    {
+      "word": "yo",
+      "freq": 1356,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pues",
+      "freq": 1342,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "entonces",
+      "freq": 1320,
+      "classification": "preposicion",
+      "possible_lemma": "entonz",
+      "alias_exists": false
+    },
+    {
+      "word": "contra",
+      "freq": 1228,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "tu",
+      "freq": 1148,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "si",
+      "freq": 1131,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "fue",
+      "freq": 1095,
+      "classification": "verbo",
+      "possible_lemma": "ser",
+      "alias_exists": true
+    },
+    {
+      "word": "no",
+      "freq": 1090,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mi",
+      "freq": 1075,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ha",
+      "freq": 1042,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "tú",
+      "freq": 1030,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mí",
+      "freq": 1016,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mas",
+      "freq": 1011,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "una",
+      "freq": 1010,
+      "classification": "articulo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "está",
+      "freq": 1006,
+      "classification": "pronombre",
+      "possible_lemma": "este",
+      "alias_exists": true
+    },
+    {
+      "word": "vosotros",
+      "freq": 921,
+      "classification": "pronombre",
+      "possible_lemma": "vosotro",
+      "alias_exists": false
+    },
+    {
+      "word": "os",
+      "freq": 914,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "he",
+      "freq": 893,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ti",
+      "freq": 889,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "les",
+      "freq": 846,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "así",
+      "freq": 828,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "cual",
+      "freq": 823,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ella",
+      "freq": 821,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "había",
+      "freq": 813,
+      "classification": "sustantivo",
+      "possible_lemma": "habir",
+      "alias_exists": false
+    },
+    {
+      "word": "jerusalén",
+      "freq": 811,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "aquí",
+      "freq": 785,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "dijo",
+      "freq": 774,
+      "classification": "verbo",
+      "possible_lemma": "decir",
+      "alias_exists": true
+    },
+    {
+      "word": "hizo",
+      "freq": 745,
+      "classification": "verbo",
+      "possible_lemma": "hacer",
+      "alias_exists": true
+    },
+    {
+      "word": "son",
+      "freq": 738,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "también",
+      "freq": 726,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ni",
+      "freq": 687,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "cosas",
+      "freq": 623,
+      "classification": "sustantivo",
+      "possible_lemma": "cosa",
+      "alias_exists": false
+    },
+    {
+      "word": "más",
+      "freq": 616,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "desde",
+      "freq": 592,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "e",
+      "freq": 584,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "después",
+      "freq": 580,
+      "classification": "sustantivo",
+      "possible_lemma": "despu",
+      "alias_exists": false
+    },
+    {
+      "word": "o",
+      "freq": 578,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "era",
+      "freq": 571,
+      "classification": "verbo",
+      "possible_lemma": "ser",
+      "alias_exists": true
+    },
+    {
+      "word": "entre",
+      "freq": 554,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "sino",
+      "freq": 545,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ciudad",
+      "freq": 542,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hecho",
+      "freq": 499,
+      "classification": "sustantivo",
+      "possible_lemma": "hacer",
+      "alias_exists": true
+    },
+    {
+      "word": "estaba",
+      "freq": 491,
+      "classification": "verbo",
+      "possible_lemma": "estar",
+      "alias_exists": false
+    },
+    {
+      "word": "aquel",
+      "freq": 488,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "han",
+      "freq": 479,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "tanto",
+      "freq": 479,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "todo",
+      "freq": 478,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "corazón",
+      "freq": 474,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "tus",
+      "freq": 471,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "sea",
+      "freq": 471,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "fueron",
+      "freq": 454,
+      "classification": "verbo",
+      "possible_lemma": "ser",
+      "alias_exists": true
+    },
+    {
+      "word": "nos",
+      "freq": 442,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "quien",
+      "freq": 440,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "este",
+      "freq": 425,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "dio",
+      "freq": 424,
+      "classification": "verbo",
+      "possible_lemma": "dar",
+      "alias_exists": true
+    },
+    {
+      "word": "esto",
+      "freq": 423,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "naciones",
+      "freq": 412,
+      "classification": "sustantivo",
+      "possible_lemma": "nacion",
+      "alias_exists": true
+    },
+    {
+      "word": "ojos",
+      "freq": 400,
+      "classification": "sustantivo",
+      "possible_lemma": "ojo",
+      "alias_exists": true
+    },
+    {
+      "word": "cuales",
+      "freq": 391,
+      "classification": "pronombre",
+      "possible_lemma": "cual",
+      "alias_exists": true
+    },
+    {
+      "word": "nosotros",
+      "freq": 386,
+      "classification": "pronombre",
+      "possible_lemma": "nosotro",
+      "alias_exists": false
+    },
+    {
+      "word": "cada",
+      "freq": 375,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "conforme",
+      "freq": 364,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "gran",
+      "freq": 364,
+      "classification": "sustantivo",
+      "possible_lemma": "grande",
+      "alias_exists": true
+    },
+    {
+      "word": "hay",
+      "freq": 361,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "cuanto",
+      "freq": 361,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hasta",
+      "freq": 360,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ciudades",
+      "freq": 353,
+      "classification": "sustantivo",
+      "possible_lemma": "ciudad",
+      "alias_exists": true
+    },
+    {
+      "word": "bien",
+      "freq": 351,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ser",
+      "freq": 349,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "están",
+      "freq": 347,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "has",
+      "freq": 345,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mal",
+      "freq": 341,
+      "classification": "preposicion",
+      "possible_lemma": "malo",
+      "alias_exists": true
+    },
+    {
+      "word": "luego",
+      "freq": 335,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "esta",
+      "freq": 334,
+      "classification": "pronombre",
+      "possible_lemma": "este",
+      "alias_exists": true
+    },
+    {
+      "word": "sin",
+      "freq": 322,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "causa",
+      "freq": 314,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "estaban",
+      "freq": 309,
+      "classification": "verbo",
+      "possible_lemma": "estar",
+      "alias_exists": false
+    },
+    {
+      "word": "sido",
+      "freq": 306,
+      "classification": "sustantivo",
+      "possible_lemma": "ser",
+      "alias_exists": true
+    },
+    {
+      "word": "soy",
+      "freq": 301,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "serán",
+      "freq": 289,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "según",
+      "freq": 287,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hacer",
+      "freq": 286,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "dios",
+      "freq": 276,
+      "classification": "sustantivo",
+      "possible_lemma": "dio",
+      "alias_exists": false
+    },
+    {
+      "word": "delante",
+      "freq": 272,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hombres",
+      "freq": 271,
+      "classification": "sustantivo",
+      "possible_lemma": "hombr",
+      "alias_exists": true
+    },
+    {
+      "word": "voz",
+      "freq": 266,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "qué",
+      "freq": 265,
+      "classification": "preposicion",
+      "possible_lemma": "quar",
+      "alias_exists": false
+    },
+    {
+      "word": "otro",
+      "freq": 265,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ya",
+      "freq": 264,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "donde",
+      "freq": 262,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "vino",
+      "freq": 259,
+      "classification": "verbo",
+      "possible_lemma": "venir",
+      "alias_exists": true
+    },
+    {
+      "word": "haré",
+      "freq": 257,
+      "classification": "sustantivo",
+      "possible_lemma": "harar",
+      "alias_exists": false
+    },
+    {
+      "word": "mis",
+      "freq": 257,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "grande",
+      "freq": 251,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "misericordia",
+      "freq": 251,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "sí",
+      "freq": 250,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ofrenda",
+      "freq": 249,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "puso",
+      "freq": 245,
+      "classification": "verbo",
+      "possible_lemma": "poner",
+      "alias_exists": true
+    },
+    {
+      "word": "todos",
+      "freq": 240,
+      "classification": "pronombre",
+      "possible_lemma": "todo",
+      "alias_exists": false
+    },
+    {
+      "word": "ante",
+      "freq": 238,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "rey",
+      "freq": 237,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "vida",
+      "freq": 237,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "habían",
+      "freq": 233,
+      "classification": "sustantivo",
+      "possible_lemma": "habir",
+      "alias_exists": false
+    },
+    {
+      "word": "cabeza",
+      "freq": 233,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hicieron",
+      "freq": 232,
+      "classification": "verbo",
+      "possible_lemma": "hicir",
+      "alias_exists": true
+    },
+    {
+      "word": "parte",
+      "freq": 229,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "día",
+      "freq": 228,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "habéis",
+      "freq": 227,
+      "classification": "verbo",
+      "possible_lemma": "habei",
+      "alias_exists": false
+    },
+    {
+      "word": "poder",
+      "freq": 223,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "junto",
+      "freq": 219,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "eres",
+      "freq": 211,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hace",
+      "freq": 210,
+      "classification": "verbo",
+      "possible_lemma": "hacer",
+      "alias_exists": true
+    },
+    {
+      "word": "luz",
+      "freq": 208,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "holocausto",
+      "freq": 204,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pueblos",
+      "freq": 202,
+      "classification": "sustantivo",
+      "possible_lemma": "pueblo",
+      "alias_exists": false
+    },
+    {
+      "word": "lado",
+      "freq": 201,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ellas",
+      "freq": 200,
+      "classification": "pronombre",
+      "possible_lemma": "ella",
+      "alias_exists": false
+    },
+    {
+      "word": "eran",
+      "freq": 198,
+      "classification": "verbo",
+      "possible_lemma": "ser",
+      "alias_exists": true
+    },
+    {
+      "word": "manera",
+      "freq": 197,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "cosa",
+      "freq": 195,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "haya",
+      "freq": 190,
+      "classification": "sustantivo",
+      "possible_lemma": "haber",
+      "alias_exists": true
+    },
+    {
+      "word": "éste",
+      "freq": 189,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "lugar",
+      "freq": 188,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "bet",
+      "freq": 187,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "estas",
+      "freq": 185,
+      "classification": "pronombre",
+      "possible_lemma": "esta",
+      "alias_exists": true
+    },
+    {
+      "word": "tierra",
+      "freq": 183,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "contigo",
+      "freq": 183,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "vez",
+      "freq": 183,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "tiene",
+      "freq": 181,
+      "classification": "verbo",
+      "possible_lemma": "tener",
+      "alias_exists": true
+    },
+    {
+      "word": "efraín",
+      "freq": 181,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "respondió",
+      "freq": 173,
+      "classification": "sustantivo",
+      "possible_lemma": "respondiar",
+      "alias_exists": false
+    },
+    {
+      "word": "hemos",
+      "freq": 170,
+      "classification": "verbo",
+      "possible_lemma": "hemo",
+      "alias_exists": false
+    },
+    {
+      "word": "campo",
+      "freq": 167,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "campamento",
+      "freq": 167,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "casas",
+      "freq": 167,
+      "classification": "sustantivo",
+      "possible_lemma": "casa",
+      "alias_exists": true
+    },
+    {
+      "word": "reposo",
+      "freq": 167,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "muchos",
+      "freq": 166,
+      "classification": "sustantivo",
+      "possible_lemma": "mucho",
+      "alias_exists": false
+    },
+    {
+      "word": "hacia",
+      "freq": 165,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "levantó",
+      "freq": 163,
+      "classification": "sustantivo",
+      "possible_lemma": "levantar",
+      "alias_exists": false
+    },
+    {
+      "word": "cómo",
+      "freq": 163,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "gente",
+      "freq": 162,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "descendencia",
+      "freq": 161,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "aun",
+      "freq": 158,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "vio",
+      "freq": 157,
+      "classification": "verbo",
+      "possible_lemma": "ver",
+      "alias_exists": true
+    },
+    {
+      "word": "reinó",
+      "freq": 156,
+      "classification": "sustantivo",
+      "possible_lemma": "reinar",
+      "alias_exists": false
+    },
+    {
+      "word": "expiación",
+      "freq": 156,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mismo",
+      "freq": 155,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pecado",
+      "freq": 154,
+      "classification": "sustantivo",
+      "possible_lemma": "pecar",
+      "alias_exists": false
+    },
+    {
+      "word": "codos",
+      "freq": 153,
+      "classification": "sustantivo",
+      "possible_lemma": "codo",
+      "alias_exists": false
+    },
+    {
+      "word": "reunión",
+      "freq": 152,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "toda",
+      "freq": 151,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "allí",
+      "freq": 149,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "desierto",
+      "freq": 149,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "tras",
+      "freq": 148,
+      "classification": "preposicion",
+      "possible_lemma": "tra",
+      "alias_exists": false
+    },
+    {
+      "word": "nuestro",
+      "freq": 146,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "aunque",
+      "freq": 145,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "dado",
+      "freq": 144,
+      "classification": "sustantivo",
+      "possible_lemma": "dar",
+      "alias_exists": true
+    },
+    {
+      "word": "bronce",
+      "freq": 144,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "jehová",
+      "freq": 143,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "además",
+      "freq": 142,
+      "classification": "preposicion",
+      "possible_lemma": "adema",
+      "alias_exists": false
+    },
+    {
+      "word": "éstos",
+      "freq": 141,
+      "classification": "pronombre",
+      "possible_lemma": "esto",
+      "alias_exists": true
+    },
+    {
+      "word": "antes",
+      "freq": 141,
+      "classification": "sustantivo",
+      "possible_lemma": "ant",
+      "alias_exists": false
+    },
+    {
+      "word": "aquella",
+      "freq": 140,
+      "classification": "pronombre",
+      "possible_lemma": "aquel",
+      "alias_exists": true
+    },
+    {
+      "word": "acerca",
+      "freq": 140,
+      "classification": "sustantivo",
+      "possible_lemma": "acerca",
+      "alias_exists": true
+    },
+    {
+      "word": "dijeron",
+      "freq": 138,
+      "classification": "verbo",
+      "possible_lemma": "decir",
+      "alias_exists": true
+    },
+    {
+      "word": "fin",
+      "freq": 137,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "vuestros",
+      "freq": 135,
+      "classification": "pronombre",
+      "possible_lemma": "vuestro",
+      "alias_exists": true
+    },
+    {
+      "word": "ejército",
+      "freq": 135,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mano",
+      "freq": 133,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "paz",
+      "freq": 133,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "dicho",
+      "freq": 131,
+      "classification": "sustantivo",
+      "possible_lemma": "decir",
+      "alias_exists": true
+    },
+    {
+      "word": "medio",
+      "freq": 129,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "será",
+      "freq": 129,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "sean",
+      "freq": 127,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "habiendo",
+      "freq": 125,
+      "classification": "verbo",
+      "possible_lemma": "habir",
+      "alias_exists": false
+    },
+    {
+      "word": "hubo",
+      "freq": 125,
+      "classification": "sustantivo",
+      "possible_lemma": "haber",
+      "alias_exists": true
+    },
+    {
+      "word": "uno",
+      "freq": 124,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "conmigo",
+      "freq": 123,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "otra",
+      "freq": 121,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "días",
+      "freq": 121,
+      "classification": "sustantivo",
+      "possible_lemma": "dia",
+      "alias_exists": false
+    },
+    {
+      "word": "grandes",
+      "freq": 120,
+      "classification": "sustantivo",
+      "possible_lemma": "grand",
+      "alias_exists": true
+    },
+    {
+      "word": "diciendo",
+      "freq": 120,
+      "classification": "verbo",
+      "possible_lemma": "dicir",
+      "alias_exists": true
+    },
+    {
+      "word": "enemigos",
+      "freq": 120,
+      "classification": "sustantivo",
+      "possible_lemma": "enemigo",
+      "alias_exists": false
+    },
+    {
+      "word": "padre",
+      "freq": 119,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "muchas",
+      "freq": 119,
+      "classification": "sustantivo",
+      "possible_lemma": "mucha",
+      "alias_exists": false
+    },
+    {
+      "word": "sur",
+      "freq": 119,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "multitud",
+      "freq": 119,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "aquellos",
+      "freq": 119,
+      "classification": "pronombre",
+      "possible_lemma": "aquello",
+      "alias_exists": true
+    },
+    {
+      "word": "jefes",
+      "freq": 119,
+      "classification": "sustantivo",
+      "possible_lemma": "jef",
+      "alias_exists": false
+    },
+    {
+      "word": "incienso",
+      "freq": 119,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "salvación",
+      "freq": 118,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mientras",
+      "freq": 117,
+      "classification": "sustantivo",
+      "possible_lemma": "mientra",
+      "alias_exists": false
+    },
+    {
+      "word": "todas",
+      "freq": 117,
+      "classification": "pronombre",
+      "possible_lemma": "toda",
+      "alias_exists": false
+    },
+    {
+      "word": "aún",
+      "freq": 116,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "malo",
+      "freq": 116,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "libro",
+      "freq": 116,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ira",
+      "freq": 115,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "unos",
+      "freq": 115,
+      "classification": "articulo",
+      "possible_lemma": "uno",
+      "alias_exists": false
+    },
+    {
+      "word": "puesto",
+      "freq": 114,
+      "classification": "sustantivo",
+      "possible_lemma": "poner",
+      "alias_exists": true
+    },
+    {
+      "word": "fuere",
+      "freq": 113,
+      "classification": "sustantivo",
+      "possible_lemma": "ser",
+      "alias_exists": true
+    },
+    {
+      "word": "oír",
+      "freq": 113,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "templo",
+      "freq": 113,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "bueno",
+      "freq": 111,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "volvió",
+      "freq": 110,
+      "classification": "sustantivo",
+      "possible_lemma": "volviar",
+      "alias_exists": false
+    },
+    {
+      "word": "estoy",
+      "freq": 110,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hombre",
+      "freq": 109,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "vestidos",
+      "freq": 109,
+      "classification": "sustantivo",
+      "possible_lemma": "vestido",
+      "alias_exists": true
+    },
+    {
+      "word": "haga",
+      "freq": 109,
+      "classification": "sustantivo",
+      "possible_lemma": "hacer",
+      "alias_exists": true
+    },
+    {
+      "word": "lugares",
+      "freq": 108,
+      "classification": "sustantivo",
+      "possible_lemma": "lugar",
+      "alias_exists": false
+    },
+    {
+      "word": "ahora",
+      "freq": 107,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "tiempo",
+      "freq": 107,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ruego",
+      "freq": 106,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "noche",
+      "freq": 106,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "eso",
+      "freq": 105,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "estos",
+      "freq": 104,
+      "classification": "pronombre",
+      "possible_lemma": "esto",
+      "alias_exists": true
+    },
+    {
+      "word": "ciertamente",
+      "freq": 103,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "heredad",
+      "freq": 101,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "verdad",
+      "freq": 100,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "utensilios",
+      "freq": 100,
+      "classification": "sustantivo",
+      "possible_lemma": "utensilio",
+      "alias_exists": false
+    },
+    {
+      "word": "príncipes",
+      "freq": 98,
+      "classification": "sustantivo",
+      "possible_lemma": "princip",
+      "alias_exists": false
+    },
+    {
+      "word": "habrá",
+      "freq": 98,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "obra",
+      "freq": 97,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "maldad",
+      "freq": 97,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "haber",
+      "freq": 97,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pos",
+      "freq": 96,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "principales",
+      "freq": 96,
+      "classification": "sustantivo",
+      "possible_lemma": "principal",
+      "alias_exists": false
+    },
+    {
+      "word": "hubiere",
+      "freq": 95,
+      "classification": "sustantivo",
+      "possible_lemma": "haber",
+      "alias_exists": true
+    },
+    {
+      "word": "nuestros",
+      "freq": 95,
+      "classification": "pronombre",
+      "possible_lemma": "nuestro",
+      "alias_exists": true
+    },
+    {
+      "word": "dos",
+      "freq": 94,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "nada",
+      "freq": 94,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "señor",
+      "freq": 94,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "da",
+      "freq": 93,
+      "classification": "verbo",
+      "possible_lemma": "dar",
+      "alias_exists": true
+    },
+    {
+      "word": "muy",
+      "freq": 93,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "límite",
+      "freq": 93,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "cuerpo",
+      "freq": 93,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "amón",
+      "freq": 93,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "presencia",
+      "freq": 92,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "carnero",
+      "freq": 91,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "fuera",
+      "freq": 91,
+      "classification": "sustantivo",
+      "possible_lemma": "ser",
+      "alias_exists": true
+    },
+    {
+      "word": "hacen",
+      "freq": 91,
+      "classification": "verbo",
+      "possible_lemma": "hacer",
+      "alias_exists": true
+    },
+    {
+      "word": "mucho",
+      "freq": 90,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "canaán",
+      "freq": 89,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pusieron",
+      "freq": 89,
+      "classification": "verbo",
+      "possible_lemma": "pusir",
+      "alias_exists": true
+    },
+    {
+      "word": "sois",
+      "freq": 88,
+      "classification": "verbo",
+      "possible_lemma": "soi",
+      "alias_exists": false
+    },
+    {
+      "word": "hice",
+      "freq": 87,
+      "classification": "verbo",
+      "possible_lemma": "hacer",
+      "alias_exists": true
+    },
+    {
+      "word": "muerte",
+      "freq": 87,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mejor",
+      "freq": 87,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "atrio",
+      "freq": 87,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "joven",
+      "freq": 86,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "josafat",
+      "freq": 86,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "caballos",
+      "freq": 84,
+      "classification": "sustantivo",
+      "possible_lemma": "caballo",
+      "alias_exists": true
+    },
+    {
+      "word": "tienen",
+      "freq": 83,
+      "classification": "verbo",
+      "possible_lemma": "tener",
+      "alias_exists": true
+    },
+    {
+      "word": "llevó",
+      "freq": 83,
+      "classification": "sustantivo",
+      "possible_lemma": "llevar",
+      "alias_exists": false
+    },
+    {
+      "word": "tuvo",
+      "freq": 83,
+      "classification": "verbo",
+      "possible_lemma": "tener",
+      "alias_exists": true
+    },
+    {
+      "word": "jefe",
+      "freq": 83,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ofrendas",
+      "freq": 83,
+      "classification": "sustantivo",
+      "possible_lemma": "ofrenda",
+      "alias_exists": false
+    },
+    {
+      "word": "sumo",
+      "freq": 83,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "quienes",
+      "freq": 82,
+      "classification": "pronombre",
+      "possible_lemma": "quien",
+      "alias_exists": true
+    },
+    {
+      "word": "vive",
+      "freq": 82,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "estará",
+      "freq": 82,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "salieron",
+      "freq": 81,
+      "classification": "verbo",
+      "possible_lemma": "salir",
+      "alias_exists": true
+    },
+    {
+      "word": "propia",
+      "freq": 81,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ésta",
+      "freq": 80,
+      "classification": "pronombre",
+      "possible_lemma": "este",
+      "alias_exists": true
+    },
+    {
+      "word": "contados",
+      "freq": 80,
+      "classification": "sustantivo",
+      "possible_lemma": "contado",
+      "alias_exists": false
+    },
+    {
+      "word": "otros",
+      "freq": 79,
+      "classification": "pronombre",
+      "possible_lemma": "otro",
+      "alias_exists": false
+    },
+    {
+      "word": "acamparon",
+      "freq": 79,
+      "classification": "verbo",
+      "possible_lemma": "acampar",
+      "alias_exists": false
+    },
+    {
+      "word": "nación",
+      "freq": 78,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pasar",
+      "freq": 77,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "león",
+      "freq": 77,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ello",
+      "freq": 77,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "llegó",
+      "freq": 76,
+      "classification": "sustantivo",
+      "possible_lemma": "llegar",
+      "alias_exists": false
+    },
+    {
+      "word": "territorio",
+      "freq": 76,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "siendo",
+      "freq": 76,
+      "classification": "sustantivo",
+      "possible_lemma": "ser",
+      "alias_exists": true
+    },
+    {
+      "word": "veces",
+      "freq": 76,
+      "classification": "sustantivo",
+      "possible_lemma": "vez",
+      "alias_exists": false
+    },
+    {
+      "word": "jóvenes",
+      "freq": 75,
+      "classification": "sustantivo",
+      "possible_lemma": "joven",
+      "alias_exists": false
+    },
+    {
+      "word": "dar",
+      "freq": 75,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "levántate",
+      "freq": 74,
+      "classification": "sustantivo",
+      "possible_lemma": "levantar",
+      "alias_exists": true
+    },
+    {
+      "word": "muertos",
+      "freq": 74,
+      "classification": "sustantivo",
+      "possible_lemma": "muerto",
+      "alias_exists": true
+    },
+    {
+      "word": "volver",
+      "freq": 74,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "alguno",
+      "freq": 74,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "alrededor",
+      "freq": 74,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mayor",
+      "freq": 73,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "norte",
+      "freq": 73,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "príncipe",
+      "freq": 73,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "fuerza",
+      "freq": 72,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pecados",
+      "freq": 72,
+      "classification": "sustantivo",
+      "possible_lemma": "pecado",
+      "alias_exists": true
+    },
+    {
+      "word": "solo",
+      "freq": 71,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "grosura",
+      "freq": 71,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ver",
+      "freq": 70,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "bajo",
+      "freq": 70,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "reino",
+      "freq": 69,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "siquem",
+      "freq": 69,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "demás",
+      "freq": 69,
+      "classification": "sustantivo",
+      "possible_lemma": "dema",
+      "alias_exists": false
+    },
+    {
+      "word": "holocaustos",
+      "freq": 69,
+      "classification": "sustantivo",
+      "possible_lemma": "holocausto",
+      "alias_exists": false
+    },
+    {
+      "word": "volvieron",
+      "freq": 69,
+      "classification": "verbo",
+      "possible_lemma": "volvir",
+      "alias_exists": true
+    },
+    {
+      "word": "haz",
+      "freq": 68,
+      "classification": "sustantivo",
+      "possible_lemma": "hacer",
+      "alias_exists": true
+    },
+    {
+      "word": "tengo",
+      "freq": 68,
+      "classification": "verbo",
+      "possible_lemma": "tener",
+      "alias_exists": true
+    },
+    {
+      "word": "tan",
+      "freq": 68,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ir",
+      "freq": 68,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "dentro",
+      "freq": 68,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "caballo",
+      "freq": 68,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "padres",
+      "freq": 68,
+      "classification": "sustantivo",
+      "possible_lemma": "padr",
+      "alias_exists": true
+    },
+    {
+      "word": "familia",
+      "freq": 67,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "orden",
+      "freq": 67,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "dieron",
+      "freq": 67,
+      "classification": "verbo",
+      "possible_lemma": "dar",
+      "alias_exists": true
+    },
+    {
+      "word": "carneros",
+      "freq": 67,
+      "classification": "sustantivo",
+      "possible_lemma": "carnero",
+      "alias_exists": false
+    },
+    {
+      "word": "acaso",
+      "freq": 66,
+      "classification": "sustantivo",
+      "possible_lemma": "acaso",
+      "alias_exists": true
+    },
+    {
+      "word": "somos",
+      "freq": 66,
+      "classification": "verbo",
+      "possible_lemma": "somo",
+      "alias_exists": false
+    },
+    {
+      "word": "buena",
+      "freq": 65,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pasó",
+      "freq": 65,
+      "classification": "sustantivo",
+      "possible_lemma": "pasar",
+      "alias_exists": false
+    },
+    {
+      "word": "abimelec",
+      "freq": 65,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "tomó",
+      "freq": 65,
+      "classification": "sustantivo",
+      "possible_lemma": "tomar",
+      "alias_exists": false
+    },
+    {
+      "word": "amor",
+      "freq": 64,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "enemigo",
+      "freq": 64,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pondré",
+      "freq": 63,
+      "classification": "sustantivo",
+      "possible_lemma": "pondrar",
+      "alias_exists": false
+    },
+    {
+      "word": "puertas",
+      "freq": 62,
+      "classification": "sustantivo",
+      "possible_lemma": "puerta",
+      "alias_exists": true
+    },
+    {
+      "word": "mujer",
+      "freq": 61,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "manos",
+      "freq": 61,
+      "classification": "sustantivo",
+      "possible_lemma": "mano",
+      "alias_exists": true
+    },
+    {
+      "word": "inmundo",
+      "freq": 61,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "decir",
+      "freq": 61,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "salió",
+      "freq": 60,
+      "classification": "verbo",
+      "possible_lemma": "saliar",
+      "alias_exists": false
+    },
+    {
+      "word": "hiciste",
+      "freq": 60,
+      "classification": "verbo",
+      "possible_lemma": "hicir",
+      "alias_exists": true
+    },
+    {
+      "word": "palabra",
+      "freq": 60,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mató",
+      "freq": 60,
+      "classification": "sustantivo",
+      "possible_lemma": "matar",
+      "alias_exists": false
+    },
+    {
+      "word": "vi",
+      "freq": 60,
+      "classification": "verbo",
+      "possible_lemma": "ver",
+      "alias_exists": true
+    },
+    {
+      "word": "oriente",
+      "freq": 59,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "extremo",
+      "freq": 59,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "haréis",
+      "freq": 59,
+      "classification": "verbo",
+      "possible_lemma": "harei",
+      "alias_exists": false
+    },
+    {
+      "word": "tienes",
+      "freq": 58,
+      "classification": "verbo",
+      "possible_lemma": "tien",
+      "alias_exists": true
+    },
+    {
+      "word": "suyo",
+      "freq": 58,
+      "classification": "pronombre",
+      "possible_lemma": "suyo",
+      "alias_exists": true
+    },
+    {
+      "word": "visto",
+      "freq": 58,
+      "classification": "sustantivo",
+      "possible_lemma": "ver",
+      "alias_exists": true
+    },
+    {
+      "word": "cabezas",
+      "freq": 58,
+      "classification": "sustantivo",
+      "possible_lemma": "cabeza",
+      "alias_exists": false
+    },
+    {
+      "word": "balaam",
+      "freq": 58,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "botín",
+      "freq": 58,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "varones",
+      "freq": 57,
+      "classification": "sustantivo",
+      "possible_lemma": "varon",
+      "alias_exists": true
+    },
+    {
+      "word": "tendrá",
+      "freq": 57,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "siempre",
+      "freq": 57,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "oro",
+      "freq": 57,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "vestiduras",
+      "freq": 57,
+      "classification": "sustantivo",
+      "possible_lemma": "vestidura",
+      "alias_exists": false
+    },
+    {
+      "word": "esté",
+      "freq": 56,
+      "classification": "pronombre",
+      "possible_lemma": "estar",
+      "alias_exists": false
+    },
+    {
+      "word": "tuyo",
+      "freq": 56,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "quién",
+      "freq": 56,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "menor",
+      "freq": 55,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "harán",
+      "freq": 55,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "vinieron",
+      "freq": 55,
+      "classification": "verbo",
+      "possible_lemma": "vinir",
+      "alias_exists": true
+    },
+    {
+      "word": "juventud",
+      "freq": 55,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "guerra",
+      "freq": 55,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mismos",
+      "freq": 55,
+      "classification": "sustantivo",
+      "possible_lemma": "mismo",
+      "alias_exists": false
+    },
+    {
+      "word": "di",
+      "freq": 54,
+      "classification": "verbo",
+      "possible_lemma": "dar",
+      "alias_exists": true
+    },
+    {
+      "word": "vuestro",
+      "freq": 54,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "nuestra",
+      "freq": 54,
+      "classification": "pronombre",
+      "possible_lemma": "nuestro",
+      "alias_exists": true
+    },
+    {
+      "word": "palabras",
+      "freq": 54,
+      "classification": "sustantivo",
+      "possible_lemma": "palabra",
+      "alias_exists": true
+    },
+    {
+      "word": "angustia",
+      "freq": 54,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "fuego",
+      "freq": 54,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "israel",
+      "freq": 53,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "castigo",
+      "freq": 53,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "fui",
+      "freq": 53,
+      "classification": "verbo",
+      "possible_lemma": "ser",
+      "alias_exists": true
+    },
+    {
+      "word": "algún",
+      "freq": 53,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "fuese",
+      "freq": 53,
+      "classification": "sustantivo",
+      "possible_lemma": "ser",
+      "alias_exists": true
+    },
+    {
+      "word": "viene",
+      "freq": 52,
+      "classification": "verbo",
+      "possible_lemma": "venir",
+      "alias_exists": true
+    },
+    {
+      "word": "alto",
+      "freq": 52,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "sólo",
+      "freq": 52,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hiciere",
+      "freq": 52,
+      "classification": "sustantivo",
+      "possible_lemma": "hacer",
+      "alias_exists": true
+    },
+    {
+      "word": "efod",
+      "freq": 52,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "cristo",
+      "freq": 52,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "bienes",
+      "freq": 51,
+      "classification": "sustantivo",
+      "possible_lemma": "bien",
+      "alias_exists": true
+    },
+    {
+      "word": "haciendo",
+      "freq": 51,
+      "classification": "verbo",
+      "possible_lemma": "hacir",
+      "alias_exists": true
+    },
+    {
+      "word": "puerta",
+      "freq": 51,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "buen",
+      "freq": 51,
+      "classification": "sustantivo",
+      "possible_lemma": "bueno",
+      "alias_exists": true
+    },
+    {
+      "word": "efa",
+      "freq": 51,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "habló",
+      "freq": 51,
+      "classification": "sustantivo",
+      "possible_lemma": "hablar",
+      "alias_exists": false
+    },
+    {
+      "word": "tenga",
+      "freq": 51,
+      "classification": "sustantivo",
+      "possible_lemma": "tener",
+      "alias_exists": true
+    },
+    {
+      "word": "furor",
+      "freq": 51,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "vuestras",
+      "freq": 51,
+      "classification": "pronombre",
+      "possible_lemma": "vuestra",
+      "alias_exists": true
+    },
+    {
+      "word": "prójimo",
+      "freq": 51,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "tuvieron",
+      "freq": 50,
+      "classification": "verbo",
+      "possible_lemma": "tuvir",
+      "alias_exists": true
+    },
+    {
+      "word": "camino",
+      "freq": 50,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "seré",
+      "freq": 50,
+      "classification": "sustantivo",
+      "possible_lemma": "serar",
+      "alias_exists": false
+    },
+    {
+      "word": "otras",
+      "freq": 50,
+      "classification": "pronombre",
+      "possible_lemma": "otra",
+      "alias_exists": false
+    },
+    {
+      "word": "comenzó",
+      "freq": 50,
+      "classification": "sustantivo",
+      "possible_lemma": "comenzar",
+      "alias_exists": false
+    },
+    {
+      "word": "santo",
+      "freq": 50,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "nunca",
+      "freq": 50,
+      "classification": "preposicion",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "puede",
+      "freq": 49,
+      "classification": "verbo",
+      "possible_lemma": "poder",
+      "alias_exists": true
+    },
+    {
+      "word": "estuvo",
+      "freq": 49,
+      "classification": "sustantivo",
+      "possible_lemma": "estar",
+      "alias_exists": true
+    },
+    {
+      "word": "haced",
+      "freq": 49,
+      "classification": "verbo",
+      "possible_lemma": "hacer",
+      "alias_exists": true
+    },
+    {
+      "word": "vuestra",
+      "freq": 49,
+      "classification": "pronombre",
+      "possible_lemma": "vuestro",
+      "alias_exists": true
+    },
+    {
+      "word": "hebrón",
+      "freq": 49,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hacía",
+      "freq": 49,
+      "classification": "preposicion",
+      "possible_lemma": "hacir",
+      "alias_exists": false
+    },
+    {
+      "word": "asunto",
+      "freq": 49,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "lino",
+      "freq": 49,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "frente",
+      "freq": 49,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "fiesta",
+      "freq": 49,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "preparado",
+      "freq": 48,
+      "classification": "sustantivo",
+      "possible_lemma": "preparar",
+      "alias_exists": false
+    },
+    {
+      "word": "levantaron",
+      "freq": 48,
+      "classification": "verbo",
+      "possible_lemma": "levantar",
+      "alias_exists": false
+    },
+    {
+      "word": "nombre",
+      "freq": 48,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ley",
+      "freq": 48,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "arroyo",
+      "freq": 48,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "porción",
+      "freq": 48,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "macho",
+      "freq": 48,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "iniquidad",
+      "freq": 48,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "remanente",
+      "freq": 48,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "necesario",
+      "freq": 48,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "edad",
+      "freq": 47,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pasaron",
+      "freq": 47,
+      "classification": "verbo",
+      "possible_lemma": "pasar",
+      "alias_exists": true
+    },
+    {
+      "word": "poner",
+      "freq": 47,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "venido",
+      "freq": 47,
+      "classification": "sustantivo",
+      "possible_lemma": "venir",
+      "alias_exists": false
+    },
+    {
+      "word": "juntamente",
+      "freq": 47,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "iba",
+      "freq": 46,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "trabajo",
+      "freq": 46,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "semejante",
+      "freq": 46,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "autoridad",
+      "freq": 46,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "arriba",
+      "freq": 45,
+      "classification": "sustantivo",
+      "possible_lemma": "arriba",
+      "alias_exists": true
+    },
+    {
+      "word": "echó",
+      "freq": 45,
+      "classification": "sustantivo",
+      "possible_lemma": "echar",
+      "alias_exists": false
+    },
+    {
+      "word": "sacrificios",
+      "freq": 45,
+      "classification": "sustantivo",
+      "possible_lemma": "sacrificio",
+      "alias_exists": false
+    },
+    {
+      "word": "ten",
+      "freq": 45,
+      "classification": "sustantivo",
+      "possible_lemma": "tener",
+      "alias_exists": true
+    },
+    {
+      "word": "vieron",
+      "freq": 44,
+      "classification": "verbo",
+      "possible_lemma": "ver",
+      "alias_exists": true
+    },
+    {
+      "word": "altísimo",
+      "freq": 44,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "cubrió",
+      "freq": 44,
+      "classification": "sustantivo",
+      "possible_lemma": "cubriar",
+      "alias_exists": false
+    },
+    {
+      "word": "dónde",
+      "freq": 44,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "consigo",
+      "freq": 44,
+      "classification": "pronombre",
+      "possible_lemma": "consigo",
+      "alias_exists": true
+    },
+    {
+      "word": "seréis",
+      "freq": 44,
+      "classification": "verbo",
+      "possible_lemma": "serei",
+      "alias_exists": false
+    },
+    {
+      "word": "justicia",
+      "freq": 44,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "podrá",
+      "freq": 43,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "adonde",
+      "freq": 43,
+      "classification": "sustantivo",
+      "possible_lemma": "adonde",
+      "alias_exists": true
+    },
+    {
+      "word": "fuerzas",
+      "freq": 43,
+      "classification": "sustantivo",
+      "possible_lemma": "fuerza",
+      "alias_exists": false
+    },
+    {
+      "word": "levantará",
+      "freq": 43,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pastores",
+      "freq": 43,
+      "classification": "sustantivo",
+      "possible_lemma": "pastor",
+      "alias_exists": false
+    },
+    {
+      "word": "venga",
+      "freq": 43,
+      "classification": "sustantivo",
+      "possible_lemma": "venir",
+      "alias_exists": true
+    },
+    {
+      "word": "cautivos",
+      "freq": 43,
+      "classification": "sustantivo",
+      "possible_lemma": "cautivo",
+      "alias_exists": false
+    },
+    {
+      "word": "teniendo",
+      "freq": 42,
+      "classification": "verbo",
+      "possible_lemma": "tenir",
+      "alias_exists": true
+    },
+    {
+      "word": "comer",
+      "freq": 42,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "mucha",
+      "freq": 42,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "va",
+      "freq": 42,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "cilicio",
+      "freq": 42,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "modo",
+      "freq": 42,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "decretos",
+      "freq": 42,
+      "classification": "sustantivo",
+      "possible_lemma": "decreto",
+      "alias_exists": false
+    },
+    {
+      "word": "dice",
+      "freq": 42,
+      "classification": "verbo",
+      "possible_lemma": "decir",
+      "alias_exists": true
+    },
+    {
+      "word": "mía",
+      "freq": 41,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "éstas",
+      "freq": 41,
+      "classification": "pronombre",
+      "possible_lemma": "esta",
+      "alias_exists": true
+    },
+    {
+      "word": "esperanza",
+      "freq": 41,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "trajo",
+      "freq": 40,
+      "classification": "sustantivo",
+      "possible_lemma": "traer",
+      "alias_exists": true
+    },
+    {
+      "word": "dejaron",
+      "freq": 40,
+      "classification": "verbo",
+      "possible_lemma": "dejar",
+      "alias_exists": false
+    },
+    {
+      "word": "dejó",
+      "freq": 40,
+      "classification": "sustantivo",
+      "possible_lemma": "dejar",
+      "alias_exists": false
+    },
+    {
+      "word": "abundancia",
+      "freq": 40,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "venir",
+      "freq": 40,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "hago",
+      "freq": 40,
+      "classification": "verbo",
+      "possible_lemma": "hacer",
+      "alias_exists": true
+    },
+    {
+      "word": "sacrificio",
+      "freq": 40,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "muerto",
+      "freq": 40,
+      "classification": "sustantivo",
+      "possible_lemma": "morir",
+      "alias_exists": true
+    },
+    {
+      "word": "asera",
+      "freq": 40,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "vendrá",
+      "freq": 40,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "gloria",
+      "freq": 40,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ocozías",
+      "freq": 40,
+      "classification": "sustantivo",
+      "possible_lemma": "ocozia",
+      "alias_exists": false
+    },
+    {
+      "word": "siglos",
+      "freq": 40,
+      "classification": "sustantivo",
+      "possible_lemma": "siglo",
+      "alias_exists": true
+    },
+    {
+      "word": "bestias",
+      "freq": 39,
+      "classification": "sustantivo",
+      "possible_lemma": "bestia",
+      "alias_exists": true
+    },
+    {
+      "word": "cananeo",
+      "freq": 39,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "ve",
+      "freq": 39,
+      "classification": "verbo",
+      "possible_lemma": "ver",
+      "alias_exists": true
+    },
+    {
+      "word": "cerca",
+      "freq": 39,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "haces",
+      "freq": 39,
+      "classification": "verbo",
+      "possible_lemma": "haz",
+      "alias_exists": true
+    },
+    {
+      "word": "tener",
+      "freq": 39,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "sé",
+      "freq": 39,
+      "classification": "pronombre",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "envió",
+      "freq": 39,
+      "classification": "sustantivo",
+      "possible_lemma": "enviar",
+      "alias_exists": false
+    },
+    {
+      "word": "vivo",
+      "freq": 39,
+      "classification": "verbo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "fuerte",
+      "freq": 39,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "pie",
+      "freq": 39,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "grato",
+      "freq": 39,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    },
+    {
+      "word": "resto",
+      "freq": 39,
+      "classification": "sustantivo",
+      "possible_lemma": null,
+      "alias_exists": false
+    }
+  ],
+  "top_strong": [
+    {
+      "strong": "G3588",
+      "freq": 12270
+    },
+    {
+      "strong": "G2532",
+      "freq": 6752
+    },
+    {
+      "strong": "H3068",
+      "freq": 6453
+    },
+    {
+      "strong": "H559",
+      "freq": 5508
+    },
+    {
+      "strong": "H3605",
+      "freq": 5202
+    },
+    {
+      "strong": "H3808",
+      "freq": 4725
+    },
+    {
+      "strong": "G0846",
+      "freq": 4008
+    },
+    {
+      "strong": "H430",
+      "freq": 3371
+    },
+    {
+      "strong": "H413",
+      "freq": 3038
+    },
+    {
+      "strong": "H776",
+      "freq": 2632
+    },
+    {
+      "strong": "H1961",
+      "freq": 2591
+    },
+    {
+      "strong": "H4428",
+      "freq": 2529
+    },
+    {
+      "strong": "H3478",
+      "freq": 2459
+    },
+    {
+      "strong": "G4771",
+      "freq": 2430
+    },
+    {
+      "strong": "H935",
+      "freq": 2363
+    },
+    {
+      "strong": "H6440",
+      "freq": 2290
+    },
+    {
+      "strong": "H376",
+      "freq": 2280
+    },
+    {
+      "strong": "G1722",
+      "freq": 2268
+    },
+    {
+      "strong": "H3117",
+      "freq": 2212
+    },
+    {
+      "strong": "H3027",
+      "freq": 2084
+    },
+    {
+      "strong": "H5414",
+      "freq": 2003
+    },
+    {
+      "strong": "G1510",
+      "freq": 1846
+    },
+    {
+      "strong": "H1",
+      "freq": 1816
+    },
+    {
+      "strong": "G1161",
+      "freq": 1521
+    },
+    {
+      "strong": "G3165",
+      "freq": 1480
+    },
+    {
+      "strong": "G3756",
+      "freq": 1466
+    },
+    {
+      "strong": "H1697",
+      "freq": 1419
+    },
+    {
+      "strong": "H7200",
+      "freq": 1324
+    },
+    {
+      "strong": "G1519",
+      "freq": 1315
+    },
+    {
+      "strong": "H5650",
+      "freq": 1258
+    },
+    {
+      "strong": "H1696",
+      "freq": 1256
+    },
+    {
+      "strong": "H8085",
+      "freq": 1156
+    },
+    {
+      "strong": "G2316",
+      "freq": 1156
+    },
+    {
+      "strong": "H1931",
+      "freq": 1138
+    },
+    {
+      "strong": "H8034",
+      "freq": 1133
+    },
+    {
+      "strong": "G3778",
+      "freq": 1125
+    },
+    {
+      "strong": "H5704",
+      "freq": 1087
+    },
+    {
+      "strong": "G3739",
+      "freq": 1062
+    },
+    {
+      "strong": "H3318",
+      "freq": 1060
+    },
+    {
+      "strong": "H3427",
+      "freq": 1051
+    },
+    {
+      "strong": "G3956",
+      "freq": 1045
+    },
+    {
+      "strong": "H251",
+      "freq": 1026
+    },
+    {
+      "strong": "G3754",
+      "freq": 1024
+    },
+    {
+      "strong": "H1732",
+      "freq": 1009
+    },
+    {
+      "strong": "H2009",
+      "freq": 984
+    },
+    {
+      "strong": "G2424",
+      "freq": 965
+    },
+    {
+      "strong": "H3212",
+      "freq": 961
+    },
+    {
+      "strong": "H5315",
+      "freq": 958
+    },
+    {
+      "strong": "G3004",
+      "freq": 958
+    },
+    {
+      "strong": "H7725",
+      "freq": 940
+    },
+    {
+      "strong": "H589",
+      "freq": 934
+    },
+    {
+      "strong": "H3947",
+      "freq": 928
+    },
+    {
+      "strong": "H802",
+      "freq": 925
+    },
+    {
+      "strong": "H3045",
+      "freq": 925
+    },
+    {
+      "strong": "H259",
+      "freq": 922
+    },
+    {
+      "strong": "H5927",
+      "freq": 881
+    },
+    {
+      "strong": "H7971",
+      "freq": 874
+    },
+    {
+      "strong": "H1870",
+      "freq": 870
+    },
+    {
+      "strong": "H853",
+      "freq": 836
+    },
+    {
+      "strong": "G1063",
+      "freq": 826
+    },
+    {
+      "strong": "H8141",
+      "freq": 806
+    },
+    {
+      "strong": "H369",
+      "freq": 806
+    },
+    {
+      "strong": "H3063",
+      "freq": 805
+    },
+    {
+      "strong": "H8294",
+      "freq": 804
+    },
+    {
+      "strong": "G3361",
+      "freq": 788
+    },
+    {
+      "strong": "H398",
+      "freq": 787
+    },
+    {
+      "strong": "H4191",
+      "freq": 780
+    },
+    {
+      "strong": "H4100",
+      "freq": 775
+    },
+    {
+      "strong": "H1323",
+      "freq": 774
+    },
+    {
+      "strong": "H7121",
+      "freq": 760
+    },
+    {
+      "strong": "H3548",
+      "freq": 753
+    },
+    {
+      "strong": "G2036",
+      "freq": 753
+    },
+    {
+      "strong": "H4872",
+      "freq": 749
+    },
+    {
+      "strong": "H8147",
+      "freq": 747
+    },
+    {
+      "strong": "G1537",
+      "freq": 730
+    },
+    {
+      "strong": "G2962",
+      "freq": 666
+    },
+    {
+      "strong": "H8033",
+      "freq": 664
+    },
+    {
+      "strong": "H408",
+      "freq": 662
+    },
+    {
+      "strong": "H577",
+      "freq": 662
+    },
+    {
+      "strong": "H4714",
+      "freq": 655
+    },
+    {
+      "strong": "H6310",
+      "freq": 650
+    },
+    {
+      "strong": "G1909",
+      "freq": 650
+    },
+    {
+      "strong": "H6680",
+      "freq": 639
+    },
+    {
+      "strong": "H854",
+      "freq": 637
+    },
+    {
+      "strong": "H5375",
+      "freq": 631
+    },
+    {
+      "strong": "H8478",
+      "freq": 617
+    },
+    {
+      "strong": "G1473",
+      "freq": 601
+    },
+    {
+      "strong": "H2719",
+      "freq": 598
+    },
+    {
+      "strong": "H1571",
+      "freq": 589
+    },
+    {
+      "strong": "H113",
+      "freq": 584
+    },
+    {
+      "strong": "H4325",
+      "freq": 574
+    },
+    {
+      "strong": "H3541",
+      "freq": 570
+    },
+    {
+      "strong": "G2192",
+      "freq": 550
+    },
+    {
+      "strong": "G2443",
+      "freq": 541
+    },
+    {
+      "strong": "G4314",
+      "freq": 539
+    },
+    {
+      "strong": "G5207",
+      "freq": 533
+    },
+    {
+      "strong": "H1980",
+      "freq": 526
+    },
+    {
+      "strong": "H2022",
+      "freq": 524
+    },
+    {
+      "strong": "H120",
+      "freq": 514
+    },
+    {
+      "strong": "H2088",
+      "freq": 514
+    },
+    {
+      "strong": "G0575",
+      "freq": 505
+    },
+    {
+      "strong": "H4672",
+      "freq": 501
+    },
+    {
+      "strong": "H505",
+      "freq": 497
+    },
+    {
+      "strong": "G5101",
+      "freq": 492
+    },
+    {
+      "strong": "G1223",
+      "freq": 491
+    },
+    {
+      "strong": "H168",
+      "freq": 490
+    },
+    {
+      "strong": "G2064",
+      "freq": 485
+    },
+    {
+      "strong": "H4310",
+      "freq": 481
+    },
+    {
+      "strong": "H5975",
+      "freq": 480
+    },
+    {
+      "strong": "H6944",
+      "freq": 475
+    },
+    {
+      "strong": "H428",
+      "freq": 463
+    },
+    {
+      "strong": "H8432",
+      "freq": 452
+    },
+    {
+      "strong": "H3205",
+      "freq": 452
+    },
+    {
+      "strong": "H8104",
+      "freq": 452
+    },
+    {
+      "strong": "G4160",
+      "freq": 442
+    },
+    {
+      "strong": "H4725",
+      "freq": 441
+    },
+    {
+      "strong": "H3701",
+      "freq": 441
+    },
+    {
+      "strong": "H5307",
+      "freq": 430
+    },
+    {
+      "strong": "H136",
+      "freq": 429
+    },
+    {
+      "strong": "G1487",
+      "freq": 425
+    },
+    {
+      "strong": "H4196",
+      "freq": 420
+    },
+    {
+      "strong": "G0444",
+      "freq": 420
+    },
+    {
+      "strong": "H7307",
+      "freq": 418
+    },
+    {
+      "strong": "G5100",
+      "freq": 415
+    },
+    {
+      "strong": "H3220",
+      "freq": 412
+    },
+    {
+      "strong": "H8269",
+      "freq": 410
+    },
+    {
+      "strong": "H4941",
+      "freq": 410
+    },
+    {
+      "strong": "G3326",
+      "freq": 409
+    },
+    {
+      "strong": "H8064",
+      "freq": 408
+    },
+    {
+      "strong": "G1096",
+      "freq": 408
+    },
+    {
+      "strong": "H2024",
+      "freq": 402
+    },
+    {
+      "strong": "H7969",
+      "freq": 402
+    },
+    {
+      "strong": "H1129",
+      "freq": 400
+    },
+    {
+      "strong": "G3767",
+      "freq": 400
+    },
+    {
+      "strong": "H8179",
+      "freq": 397
+    },
+    {
+      "strong": "H517",
+      "freq": 395
+    },
+    {
+      "strong": "H7586",
+      "freq": 395
+    },
+    {
+      "strong": "H6258",
+      "freq": 389
+    },
+    {
+      "strong": "H4940",
+      "freq": 387
+    },
+    {
+      "strong": "H2091",
+      "freq": 386
+    },
+    {
+      "strong": "H341",
+      "freq": 386
+    },
+    {
+      "strong": "H1818",
+      "freq": 386
+    },
+    {
+      "strong": "G5613",
+      "freq": 386
+    },
+    {
+      "strong": "H5750",
+      "freq": 385
+    },
+    {
+      "strong": "H3824",
+      "freq": 385
+    },
+    {
+      "strong": "H5046",
+      "freq": 381
+    },
+    {
+      "strong": "H1285",
+      "freq": 381
+    },
+    {
+      "strong": "G5547",
+      "freq": 381
+    },
+    {
+      "strong": "H3381",
+      "freq": 378
+    },
+    {
+      "strong": "H7272",
+      "freq": 377
+    },
+    {
+      "strong": "H2063",
+      "freq": 376
+    },
+    {
+      "strong": "G3962",
+      "freq": 375
+    },
+    {
+      "strong": "G2596",
+      "freq": 374
+    },
+    {
+      "strong": "H7651",
+      "freq": 373
+    },
+    {
+      "strong": "G4151",
+      "freq": 372
+    },
+    {
+      "strong": "H5002",
+      "freq": 370
+    },
+    {
+      "strong": "H5221",
+      "freq": 368
+    },
+    {
+      "strong": "H784",
+      "freq": 362
+    },
+    {
+      "strong": "G0235",
+      "freq": 361
+    },
+    {
+      "strong": "H5769",
+      "freq": 360
+    },
+    {
+      "strong": "H1288",
+      "freq": 355
+    },
+    {
+      "strong": "H5869",
+      "freq": 355
+    },
+    {
+      "strong": "G2250",
+      "freq": 353
+    },
+    {
+      "strong": "H1768",
+      "freq": 350
+    },
+    {
+      "strong": "H1992",
+      "freq": 349
+    },
+    {
+      "strong": "H3290",
+      "freq": 348
+    },
+    {
+      "strong": "H175",
+      "freq": 346
+    },
+    {
+      "strong": "G0191",
+      "freq": 342
+    },
+    {
+      "strong": "H5493",
+      "freq": 336
+    },
+    {
+      "strong": "H5030",
+      "freq": 335
+    },
+    {
+      "strong": "H2005",
+      "freq": 331
+    },
+    {
+      "strong": "G1325",
+      "freq": 331
+    },
+    {
+      "strong": "H6629",
+      "freq": 328
+    },
+    {
+      "strong": "H3372",
+      "freq": 328
+    },
+    {
+      "strong": "H2568",
+      "freq": 325
+    },
+    {
+      "strong": "H3966",
+      "freq": 324
+    },
+    {
+      "strong": "G0080",
+      "freq": 321
+    },
+    {
+      "strong": "H4994",
+      "freq": 313
+    },
+    {
+      "strong": "H627",
+      "freq": 312
+    },
+    {
+      "strong": "H2388",
+      "freq": 311
+    },
+    {
+      "strong": "H5647",
+      "freq": 309
+    },
+    {
+      "strong": "H3899",
+      "freq": 308
+    },
+    {
+      "strong": "H7130",
+      "freq": 306
+    },
+    {
+      "strong": "H3069",
+      "freq": 305
+    },
+    {
+      "strong": "H5439",
+      "freq": 305
+    },
+    {
+      "strong": "H595",
+      "freq": 304
+    },
+    {
+      "strong": "H6086",
+      "freq": 302
+    },
+    {
+      "strong": "H996",
+      "freq": 300
+    },
+    {
+      "strong": "G4183",
+      "freq": 300
+    },
+    {
+      "strong": "H6430",
+      "freq": 296
+    },
+    {
+      "strong": "H702",
+      "freq": 296
+    },
+    {
+      "strong": "H8010",
+      "freq": 296
+    },
+    {
+      "strong": "G2228",
+      "freq": 296
+    },
+    {
+      "strong": "G3056",
+      "freq": 296
+    },
+    {
+      "strong": "H3967",
+      "freq": 295
+    },
+    {
+      "strong": "H2320",
+      "freq": 295
+    },
+    {
+      "strong": "H1320",
+      "freq": 290
+    },
+    {
+      "strong": "H2881",
+      "freq": 285
+    },
+    {
+      "strong": "H3627",
+      "freq": 285
+    },
+    {
+      "strong": "H1004",
+      "freq": 285
+    },
+    {
+      "strong": "H3881",
+      "freq": 283
+    },
+    {
+      "strong": "H2421",
+      "freq": 278
+    },
+    {
+      "strong": "G1520",
+      "freq": 278
+    },
+    {
+      "strong": "H6256",
+      "freq": 277
+    },
+    {
+      "strong": "H5771",
+      "freq": 276
+    },
+    {
+      "strong": "H3772",
+      "freq": 274
+    },
+    {
+      "strong": "H4421",
+      "freq": 273
+    },
+    {
+      "strong": "H2398",
+      "freq": 273
+    },
+    {
+      "strong": "H6547",
+      "freq": 270
+    },
+    {
+      "strong": "H8451",
+      "freq": 270
+    },
+    {
+      "strong": "G1437",
+      "freq": 267
+    },
+    {
+      "strong": "H127",
+      "freq": 266
+    },
+    {
+      "strong": "H68",
+      "freq": 266
+    },
+    {
+      "strong": "H4294",
+      "freq": 259
+    },
+    {
+      "strong": "H157",
+      "freq": 258
+    },
+    {
+      "strong": "H2142",
+      "freq": 258
+    },
+    {
+      "strong": "H894",
+      "freq": 257
+    },
+    {
+      "strong": "H5159",
+      "freq": 257
+    },
+    {
+      "strong": "H410",
+      "freq": 256
+    },
+    {
+      "strong": "H4687",
+      "freq": 254
+    },
+    {
+      "strong": "H4639",
+      "freq": 252
+    },
+    {
+      "strong": "H7563",
+      "freq": 250
+    },
+    {
+      "strong": "H3519",
+      "freq": 250
+    },
+    {
+      "strong": "G3101",
+      "freq": 248
+    },
+    {
+      "strong": "H241",
+      "freq": 246
+    },
+    {
+      "strong": "G3772",
+      "freq": 245
+    },
+    {
+      "strong": "G6063",
+      "freq": 242
+    },
+    {
+      "strong": "G2980",
+      "freq": 241
+    },
+    {
+      "strong": "H6242",
+      "freq": 240
+    },
+    {
+      "strong": "H7126",
+      "freq": 239
+    },
+    {
+      "strong": "G1438",
+      "freq": 239
+    },
+    {
+      "strong": "G4102",
+      "freq": 237
+    },
+    {
+      "strong": "H3709",
+      "freq": 235
+    },
+    {
+      "strong": "G4100",
+      "freq": 233
+    },
+    {
+      "strong": "H1245",
+      "freq": 230
+    },
+    {
+      "strong": "G1093",
+      "freq": 225
+    },
+    {
+      "strong": "H7965",
+      "freq": 224
+    },
+    {
+      "strong": "H4397",
+      "freq": 223
+    },
+    {
+      "strong": "H3789",
+      "freq": 223
+    },
+    {
+      "strong": "G4012",
+      "freq": 222
+    },
+    {
+      "strong": "H8199",
+      "freq": 221
+    },
+    {
+      "strong": "H5288",
+      "freq": 220
+    },
+    {
+      "strong": "H8337",
+      "freq": 220
+    },
+    {
+      "strong": "H4390",
+      "freq": 219
+    },
+    {
+      "strong": "H3651",
+      "freq": 217
+    },
+    {
+      "strong": "H2428",
+      "freq": 217
+    },
+    {
+      "strong": "H3915",
+      "freq": 215
+    },
+    {
+      "strong": "H639",
+      "freq": 214
+    },
+    {
+      "strong": "H8354",
+      "freq": 214
+    },
+    {
+      "strong": "H5337",
+      "freq": 214
+    },
+    {
+      "strong": "H3091",
+      "freq": 214
+    },
+    {
+      "strong": "H8193",
+      "freq": 210
+    },
+    {
+      "strong": "H3130",
+      "freq": 210
+    },
+    {
+      "strong": "H2077",
+      "freq": 209
+    },
+    {
+      "strong": "H5186",
+      "freq": 207
+    },
+    {
+      "strong": "H4054",
+      "freq": 207
+    },
+    {
+      "strong": "H977",
+      "freq": 206
+    },
+    {
+      "strong": "H7901",
+      "freq": 205
+    },
+    {
+      "strong": "H3467",
+      "freq": 205
+    },
+    {
+      "strong": "H1242",
+      "freq": 204
+    },
+    {
+      "strong": "H7626",
+      "freq": 204
+    },
+    {
+      "strong": "G0040",
+      "freq": 204
+    },
+    {
+      "strong": "H2351",
+      "freq": 203
+    },
+    {
+      "strong": "H3423",
+      "freq": 201
+    },
+    {
+      "strong": "G1565",
+      "freq": 201
+    },
+    {
+      "strong": "H727",
+      "freq": 200
+    },
+    {
+      "strong": "G3686",
+      "freq": 200
+    },
+    {
+      "strong": "H3615",
+      "freq": 199
+    },
+    {
+      "strong": "G2983",
+      "freq": 199
+    },
+    {
+      "strong": "H1797",
+      "freq": 197
+    },
+    {
+      "strong": "H1755",
+      "freq": 197
+    },
+    {
+      "strong": "G1135",
+      "freq": 197
+    },
+    {
+      "strong": "G0611",
+      "freq": 197
+    },
+    {
+      "strong": "H6666",
+      "freq": 196
+    },
+    {
+      "strong": "H7650",
+      "freq": 196
+    },
+    {
+      "strong": "G0435",
+      "freq": 196
+    },
+    {
+      "strong": "H7453",
+      "freq": 195
+    },
+    {
+      "strong": "H5892",
+      "freq": 195
+    },
+    {
+      "strong": "H6662",
+      "freq": 195
+    },
+    {
+      "strong": "G3173",
+      "freq": 193
+    },
+    {
+      "strong": "H929",
+      "freq": 192
+    },
+    {
+      "strong": "H2233",
+      "freq": 191
+    },
+    {
+      "strong": "H8081",
+      "freq": 189
+    },
+    {
+      "strong": "G3762",
+      "freq": 189
+    },
+    {
+      "strong": "H758",
+      "freq": 187
+    },
+    {
+      "strong": "H4124",
+      "freq": 187
+    },
+    {
+      "strong": "H6",
+      "freq": 186
+    },
+    {
+      "strong": "G1410",
+      "freq": 186
+    },
+    {
+      "strong": "G3551",
+      "freq": 186
+    },
+    {
+      "strong": "H1540",
+      "freq": 185
+    },
+    {
+      "strong": "H1368",
+      "freq": 183
+    },
+    {
+      "strong": "H3383",
+      "freq": 183
+    },
+    {
+      "strong": "H622",
+      "freq": 180
+    },
+    {
+      "strong": "H6942",
+      "freq": 179
+    },
+    {
+      "strong": "H6963",
+      "freq": 179
+    },
+    {
+      "strong": "G0032",
+      "freq": 178
+    },
+    {
+      "strong": "G1831",
+      "freq": 178
+    },
+    {
+      "strong": "H7223",
+      "freq": 177
+    },
+    {
+      "strong": "G1125",
+      "freq": 174
+    },
+    {
+      "strong": "G2453",
+      "freq": 174
+    },
+    {
+      "strong": "H6235",
+      "freq": 173
+    },
+    {
+      "strong": "H5712",
+      "freq": 173
+    },
+    {
+      "strong": "H8055",
+      "freq": 173
+    },
+    {
+      "strong": "H85",
+      "freq": 172
+    },
+    {
+      "strong": "H2205",
+      "freq": 172
+    },
+    {
+      "strong": "H7812",
+      "freq": 172
+    },
+    {
+      "strong": "G2041",
+      "freq": 172
+    },
+    {
+      "strong": "G3779",
+      "freq": 171
+    },
+    {
+      "strong": "H3201",
+      "freq": 170
+    },
+    {
+      "strong": "G2889",
+      "freq": 170
+    },
+    {
+      "strong": "H6607",
+      "freq": 169
+    },
+    {
+      "strong": "H3254",
+      "freq": 169
+    },
+    {
+      "strong": "G2309",
+      "freq": 169
+    },
+    {
+      "strong": "H7970",
+      "freq": 168
+    },
+    {
+      "strong": "H1144",
+      "freq": 168
+    },
+    {
+      "strong": "G1525",
+      "freq": 168
+    },
+    {
+      "strong": "H4438",
+      "freq": 167
+    },
+    {
+      "strong": "H3225",
+      "freq": 165
+    },
+    {
+      "strong": "H2572",
+      "freq": 165
+    },
+    {
+      "strong": "H3678",
+      "freq": 165
+    },
+    {
+      "strong": "H2451",
+      "freq": 165
+    },
+    {
+      "strong": "G3972",
+      "freq": 165
+    },
+    {
+      "strong": "H3956",
+      "freq": 164
+    },
+    {
+      "strong": "H8130",
+      "freq": 164
+    },
+    {
+      "strong": "G5495",
+      "freq": 163
+    },
+    {
+      "strong": "G1097",
+      "freq": 162
+    },
+    {
+      "strong": "H2534",
+      "freq": 161
+    },
+    {
+      "strong": "H2706",
+      "freq": 160
+    },
+    {
+      "strong": "G2400",
+      "freq": 160
+    },
+    {
+      "strong": "H804",
+      "freq": 158
+    },
+    {
+      "strong": "H1875",
+      "freq": 158
+    },
+    {
+      "strong": "H7110",
+      "freq": 157
+    },
+    {
+      "strong": "H6106",
+      "freq": 157
+    },
+    {
+      "strong": "H7592",
+      "freq": 157
+    },
+    {
+      "strong": "G4172",
+      "freq": 157
+    },
+    {
+      "strong": "H1431",
+      "freq": 156
+    },
+    {
+      "strong": "H312",
+      "freq": 156
+    },
+    {
+      "strong": "G2531",
+      "freq": 156
+    },
+    {
+      "strong": "H4503",
+      "freq": 154
+    },
+    {
+      "strong": "G0266",
+      "freq": 154
+    },
+    {
+      "strong": "G4074",
+      "freq": 154
+    },
+    {
+      "strong": "G5212",
+      "freq": 154
+    },
+    {
+      "strong": "H5048",
+      "freq": 153
+    },
+    {
+      "strong": "H1241",
+      "freq": 152
+    },
+    {
+      "strong": "H5656",
+      "freq": 152
+    },
+    {
+      "strong": "H4430",
+      "freq": 152
+    },
+    {
+      "strong": "H4264",
+      "freq": 151
+    },
+    {
+      "strong": "H6435",
+      "freq": 150
+    },
+    {
+      "strong": "H2026",
+      "freq": 150
+    },
+    {
+      "strong": "H269",
+      "freq": 149
+    },
+    {
+      "strong": "H4605",
+      "freq": 149
+    },
+    {
+      "strong": "H4519",
+      "freq": 149
+    },
+    {
+      "strong": "H4616",
+      "freq": 149
+    },
+    {
+      "strong": "H1366",
+      "freq": 148
+    },
+    {
+      "strong": "H5560",
+      "freq": 148
+    },
+    {
+      "strong": "G1484",
+      "freq": 148
+    },
+    {
+      "strong": "G3844",
+      "freq": 148
+    },
+    {
+      "strong": "H3414",
+      "freq": 147
+    },
+    {
+      "strong": "H8145",
+      "freq": 146
+    },
+    {
+      "strong": "H2145",
+      "freq": 146
+    },
+    {
+      "strong": "H995",
+      "freq": 146
+    },
+    {
+      "strong": "G2147",
+      "freq": 146
+    },
+    {
+      "strong": "H3680",
+      "freq": 145
+    },
+    {
+      "strong": "H2708",
+      "freq": 145
+    },
+    {
+      "strong": "G5119",
+      "freq": 145
+    },
+    {
+      "strong": "H7291",
+      "freq": 144
+    },
+    {
+      "strong": "H7665",
+      "freq": 144
+    },
+    {
+      "strong": "H3097",
+      "freq": 144
+    },
+    {
+      "strong": "H1060",
+      "freq": 143
+    },
+    {
+      "strong": "H7604",
+      "freq": 143
+    },
+    {
+      "strong": "H3196",
+      "freq": 143
+    },
+    {
+      "strong": "H5060",
+      "freq": 142
+    },
+    {
+      "strong": "H6529",
+      "freq": 139
+    },
+    {
+      "strong": "H8050",
+      "freq": 139
+    },
+    {
+      "strong": "G1391",
+      "freq": 139
+    },
+    {
+      "strong": "H4057",
+      "freq": 138
+    },
+    {
+      "strong": "H2346",
+      "freq": 138
+    },
+    {
+      "strong": "H2396",
+      "freq": 137
+    },
+    {
+      "strong": "H7843",
+      "freq": 136
+    },
+    {
+      "strong": "H6912",
+      "freq": 136
+    },
+    {
+      "strong": "H5437",
+      "freq": 136
+    },
+    {
+      "strong": "G4396",
+      "freq": 136
+    },
+    {
+      "strong": "G2198",
+      "freq": 136
+    },
+    {
+      "strong": "H6918",
+      "freq": 135
+    },
+    {
+      "strong": "H801",
+      "freq": 135
+    },
+    {
+      "strong": "H6726",
+      "freq": 135
+    },
+    {
+      "strong": "G0932",
+      "freq": 135
+    },
+    {
+      "strong": "H6828",
+      "freq": 134
+    },
+    {
+      "strong": "G2588",
+      "freq": 134
+    },
+    {
+      "strong": "H705",
+      "freq": 133
+    },
+    {
+      "strong": "H7911",
+      "freq": 133
+    },
+    {
+      "strong": "H8441",
+      "freq": 133
+    },
+    {
+      "strong": "H4908",
+      "freq": 133
+    },
+    {
+      "strong": "G1401",
+      "freq": 133
+    },
+    {
+      "strong": "G0243",
+      "freq": 133
+    },
+    {
+      "strong": "H3498",
+      "freq": 132
+    },
+    {
+      "strong": "H6499",
+      "freq": 132
+    },
+    {
+      "strong": "H2450",
+      "freq": 132
+    },
+    {
+      "strong": "H4399",
+      "freq": 131
+    },
+    {
+      "strong": "G2992",
+      "freq": 131
+    },
+    {
+      "strong": "G2491",
+      "freq": 131
+    },
+    {
+      "strong": "G3568",
+      "freq": 131
+    },
+    {
+      "strong": "H637",
+      "freq": 130
+    },
+    {
+      "strong": "H4194",
+      "freq": 130
+    },
+    {
+      "strong": "H7393",
+      "freq": 130
+    },
+    {
+      "strong": "G4413",
+      "freq": 130
+    },
+    {
+      "strong": "G4983",
+      "freq": 130
+    },
+    {
+      "strong": "G5485",
+      "freq": 130
+    },
+    {
+      "strong": "H216",
+      "freq": 129
+    },
+    {
+      "strong": "H8121",
+      "freq": 129
+    },
+    {
+      "strong": "H8255",
+      "freq": 129
+    },
+    {
+      "strong": "H5162",
+      "freq": 129
+    },
+    {
+      "strong": "G5456",
+      "freq": 129
+    },
+    {
+      "strong": "H1168",
+      "freq": 128
+    },
+    {
+      "strong": "G5259",
+      "freq": 128
+    },
+    {
+      "strong": "H7230",
+      "freq": 127
+    },
+    {
+      "strong": "H123",
+      "freq": 127
+    },
+    {
+      "strong": "H5265",
+      "freq": 126
+    },
+    {
+      "strong": "G2193",
+      "freq": 126
+    },
+    {
+      "strong": "G4561",
+      "freq": 126
+    },
+    {
+      "strong": "H8549",
+      "freq": 125
+    },
+    {
+      "strong": "H5982",
+      "freq": 125
+    },
+    {
+      "strong": "H6664",
+      "freq": 125
+    },
+    {
+      "strong": "H6437",
+      "freq": 124
+    },
+    {
+      "strong": "H2734",
+      "freq": 124
+    },
+    {
+      "strong": "H6471",
+      "freq": 124
+    },
+    {
+      "strong": "H4557",
+      "freq": 124
+    },
+    {
+      "strong": "H6588",
+      "freq": 124
+    },
+    {
+      "strong": "H3129",
+      "freq": 124
+    },
+    {
+      "strong": "G1417",
+      "freq": 124
+    },
+    {
+      "strong": "H753",
+      "freq": 123
+    },
+    {
+      "strong": "H1568",
+      "freq": 123
+    },
+    {
+      "strong": "H2677",
+      "freq": 122
+    },
+    {
+      "strong": "G1453",
+      "freq": 122
+    },
+    {
+      "strong": "G2222",
+      "freq": 122
+    },
+    {
+      "strong": "G0025",
+      "freq": 122
+    },
+    {
+      "strong": "H6153",
+      "freq": 121
+    },
+    {
+      "strong": "H3426",
+      "freq": 121
+    },
+    {
+      "strong": "H2220",
+      "freq": 120
+    },
+    {
+      "strong": "H567",
+      "freq": 119
+    },
+    {
+      "strong": "H7993",
+      "freq": 119
+    },
+    {
+      "strong": "H3754",
+      "freq": 119
+    },
+    {
+      "strong": "H4467",
+      "freq": 118
+    },
+    {
+      "strong": "H7931",
+      "freq": 118
+    },
+    {
+      "strong": "H954",
+      "freq": 118
+    },
+    {
+      "strong": "H2891",
+      "freq": 118
+    },
+    {
+      "strong": "G4198",
+      "freq": 118
+    },
+    {
+      "strong": "G5228",
+      "freq": 118
+    },
+    {
+      "strong": "G3748",
+      "freq": 118
+    },
+    {
+      "strong": "G3825",
+      "freq": 118
+    },
+    {
+      "strong": "G0281",
+      "freq": 117
+    },
+    {
+      "strong": "H2543",
+      "freq": 116
+    },
+    {
+      "strong": "H389",
+      "freq": 116
+    },
+    {
+      "strong": "G2564",
+      "freq": 116
+    },
+    {
+      "strong": "G3498",
+      "freq": 116
+    },
+    {
+      "strong": "H3671",
+      "freq": 115
+    },
+    {
+      "strong": "H2803",
+      "freq": 115
+    },
+    {
+      "strong": "H4720",
+      "freq": 115
+    },
+    {
+      "strong": "H53",
+      "freq": 115
+    },
+    {
+      "strong": "G3761",
+      "freq": 114
+    },
+    {
+      "strong": "H1167",
+      "freq": 113
+    },
+    {
+      "strong": "H6951",
+      "freq": 113
+    },
+    {
+      "strong": "H3920",
+      "freq": 113
+    },
+    {
+      "strong": "H982",
+      "freq": 113
+    },
+    {
+      "strong": "H8210",
+      "freq": 112
+    },
+    {
+      "strong": "G0863",
+      "freq": 112
+    },
+    {
+      "strong": "H6083",
+      "freq": 111
+    },
+    {
+      "strong": "H3513",
+      "freq": 111
+    },
+    {
+      "strong": "H5012",
+      "freq": 111
+    },
+    {
+      "strong": "G2476",
+      "freq": 111
+    },
+    {
+      "strong": "H3606",
+      "freq": 110
+    },
+    {
+      "strong": "H1058",
+      "freq": 109
+    },
+    {
+      "strong": "H3477",
+      "freq": 109
+    },
+    {
+      "strong": "G3752",
+      "freq": 108
+    },
+    {
+      "strong": "G0991",
+      "freq": 108
+    },
+    {
+      "strong": "G1577",
+      "freq": 108
+    },
+    {
+      "strong": "G4862",
+      "freq": 108
+    },
+    {
+      "strong": "H8313",
+      "freq": 107
+    },
+    {
+      "strong": "H3327",
+      "freq": 107
+    },
+    {
+      "strong": "H2076",
+      "freq": 107
+    },
+    {
+      "strong": "H6908",
+      "freq": 107
+    },
+    {
+      "strong": "H3847",
+      "freq": 106
+    },
+    {
+      "strong": "H8111",
+      "freq": 106
+    },
+    {
+      "strong": "G3391",
+      "freq": 106
+    },
+    {
+      "strong": "H539",
+      "freq": 105
+    },
+    {
+      "strong": "H571",
+      "freq": 105
+    },
+    {
+      "strong": "H7585",
+      "freq": 105
+    },
+    {
+      "strong": "G0935",
+      "freq": 105
+    },
+    {
+      "strong": "H7350",
+      "freq": 104
+    },
+    {
+      "strong": "H4376",
+      "freq": 104
+    },
+    {
+      "strong": "H256",
+      "freq": 104
+    },
+    {
+      "strong": "G0649",
+      "freq": 104
+    },
+    {
+      "strong": "H5045",
+      "freq": 103
+    },
+    {
+      "strong": "H6697",
+      "freq": 103
+    },
+    {
+      "strong": "H7458",
+      "freq": 102
+    },
+    {
+      "strong": "H7341",
+      "freq": 102
+    },
+    {
+      "strong": "H8548",
+      "freq": 102
+    },
+    {
+      "strong": "H3820",
+      "freq": 102
+    },
+    {
+      "strong": "H5462",
+      "freq": 102
+    },
+    {
+      "strong": "G5610",
+      "freq": 102
+    }
+  ],
+  "top_recognized": [
+    {
+      "word": "y",
+      "freq": 10820
+    },
+    {
+      "word": "no",
+      "freq": 7136
+    },
+    {
+      "word": "jehová",
+      "freq": 6693
+    },
+    {
+      "word": "su",
+      "freq": 5127
+    },
+    {
+      "word": "de",
+      "freq": 5068
+    },
+    {
+      "word": "que",
+      "freq": 4440
+    },
+    {
+      "word": "dios",
+      "freq": 3872
+    },
+    {
+      "word": "en",
+      "freq": 3736
+    },
+    {
+      "word": "sus",
+      "freq": 3403
+    },
+    {
+      "word": "el",
+      "freq": 3379
+    },
+    {
+      "word": "la",
+      "freq": 3237
+    },
+    {
+      "word": "los",
+      "freq": 3123
+    },
+    {
+      "word": "tierra",
+      "freq": 2736
+    },
+    {
+      "word": "israel",
+      "freq": 2506
+    },
+    {
+      "word": "se",
+      "freq": 2489
+    },
+    {
+      "word": "tu",
+      "freq": 2428
+    },
+    {
+      "word": "a",
+      "freq": 2351
+    },
+    {
+      "word": "rey",
+      "freq": 2253
+    },
+    {
+      "word": "mi",
+      "freq": 2218
+    },
+    {
+      "word": "dijo",
+      "freq": 2182
+    },
+    {
+      "word": "todos",
+      "freq": 2015
+    },
+    {
+      "word": "todo",
+      "freq": 1805
+    },
+    {
+      "word": "por",
+      "freq": 1798
+    },
+    {
+      "word": "yo",
+      "freq": 1641
+    },
+    {
+      "word": "él",
+      "freq": 1517
+    },
+    {
+      "word": "he",
+      "freq": 1365
+    },
+    {
+      "word": "señor",
+      "freq": 1358
+    },
+    {
+      "word": "con",
+      "freq": 1339
+    },
+    {
+      "word": "delante",
+      "freq": 1311
+    },
+    {
+      "word": "al",
+      "freq": 1292
+    },
+    {
+      "word": "será",
+      "freq": 1279
+    },
+    {
+      "word": "porque",
+      "freq": 1230
+    },
+    {
+      "word": "del",
+      "freq": 1229
+    },
+    {
+      "word": "día",
+      "freq": 1217
+    },
+    {
+      "word": "ni",
+      "freq": 1199
+    },
+    {
+      "word": "le",
+      "freq": 1161
+    },
+    {
+      "word": "diciendo",
+      "freq": 1133
+    },
+    {
+      "word": "hombre",
+      "freq": 1126
+    },
+    {
+      "word": "tus",
+      "freq": 1106
+    },
+    {
+      "word": "ha",
+      "freq": 1089
+    },
+    {
+      "word": "hasta",
+      "freq": 1057
+    },
+    {
+      "word": "david",
+      "freq": 1057
+    },
+    {
+      "word": "mano",
+      "freq": 1029
+    },
+    {
+      "word": "ellos",
+      "freq": 1015
+    },
+    {
+      "word": "toda",
+      "freq": 1001
+    },
+    {
+      "word": "todas",
+      "freq": 970
+    },
+    {
+      "word": "padre",
+      "freq": 970
+    },
+    {
+      "word": "para",
+      "freq": 951
+    },
+    {
+      "word": "también",
+      "freq": 919
+    },
+    {
+      "word": "como",
+      "freq": 895
+    },
+    {
+      "word": "qué",
+      "freq": 873
+    },
+    {
+      "word": "jesús",
+      "freq": 842
+    },
+    {
+      "word": "así",
+      "freq": 839
+    },
+    {
+      "word": "días",
+      "freq": 829
+    },
+    {
+      "word": "moisés",
+      "freq": 829
+    },
+    {
+      "word": "vosotros",
+      "freq": 825
+    },
+    {
+      "word": "las",
+      "freq": 824
+    },
+    {
+      "word": "nombre",
+      "freq": 815
+    },
+    {
+      "word": "judá",
+      "freq": 807
+    },
+    {
+      "word": "mis",
+      "freq": 778
+    },
+    {
+      "word": "había",
+      "freq": 769
+    },
+    {
+      "word": "ahora",
+      "freq": 757
+    },
+    {
+      "word": "os",
+      "freq": 754
+    },
+    {
+      "word": "es",
+      "freq": 751
+    },
+    {
+      "word": "uno",
+      "freq": 711
+    },
+    {
+      "word": "me",
+      "freq": 709
+    },
+    {
+      "word": "oh",
+      "freq": 708
+    },
+    {
+      "word": "hombres",
+      "freq": 707
+    },
+    {
+      "word": "dos",
+      "freq": 680
+    },
+    {
+      "word": "palabra",
+      "freq": 675
+    },
+    {
+      "word": "te",
+      "freq": 673
+    },
+    {
+      "word": "mujer",
+      "freq": 667
+    },
+    {
+      "word": "dicho",
+      "freq": 651
+    },
+    {
+      "word": "si",
+      "freq": 638
+    },
+    {
+      "word": "egipto",
+      "freq": 623
+    },
+    {
+      "word": "esto",
+      "freq": 611
+    },
+    {
+      "word": "aquí",
+      "freq": 601
+    },
+    {
+      "word": "allí",
+      "freq": 597
+    },
+    {
+      "word": "lugar",
+      "freq": 594
+    },
+    {
+      "word": "espíritu",
+      "freq": 590
+    },
+    {
+      "word": "dice",
+      "freq": 581
+    },
+    {
+      "word": "entre",
+      "freq": 568
+    },
+    {
+      "word": "vino",
+      "freq": 567
+    },
+    {
+      "word": "lo",
+      "freq": 559
+    },
+    {
+      "word": "entonces",
+      "freq": 557
+    },
+    {
+      "word": "les",
+      "freq": 548
+    },
+    {
+      "word": "hermanos",
+      "freq": 546
+    },
+    {
+      "word": "camino",
+      "freq": 544
+    },
+    {
+      "word": "medio",
+      "freq": 535
+    },
+    {
+      "word": "años",
+      "freq": 518
+    },
+    {
+      "word": "palabras",
+      "freq": 499
+    },
+    {
+      "word": "sacerdote",
+      "freq": 489
+    },
+    {
+      "word": "un",
+      "freq": 483
+    },
+    {
+      "word": "más",
+      "freq": 483
+    },
+    {
+      "word": "sobre",
+      "freq": 482
+    },
+    {
+      "word": "tiempo",
+      "freq": 482
+    },
+    {
+      "word": "mil",
+      "freq": 479
+    },
+    {
+      "word": "manos",
+      "freq": 466
+    },
+    {
+      "word": "quién",
+      "freq": 465
+    },
+    {
+      "word": "nosotros",
+      "freq": 451
+    },
+    {
+      "word": "siervo",
+      "freq": 448
+    },
+    {
+      "word": "siervos",
+      "freq": 446
+    },
+    {
+      "word": "padres",
+      "freq": 442
+    },
+    {
+      "word": "vuestro",
+      "freq": 440
+    },
+    {
+      "word": "casa",
+      "freq": 440
+    },
+    {
+      "word": "sangre",
+      "freq": 436
+    },
+    {
+      "word": "fuego",
+      "freq": 429
+    },
+    {
+      "word": "oro",
+      "freq": 429
+    },
+    {
+      "word": "ti",
+      "freq": 424
+    },
+    {
+      "word": "hijo",
+      "freq": 422
+    },
+    {
+      "word": "ley",
+      "freq": 421
+    },
+    {
+      "word": "vuestros",
+      "freq": 420
+    },
+    {
+      "word": "mas",
+      "freq": 409
+    },
+    {
+      "word": "espada",
+      "freq": 409
+    },
+    {
+      "word": "monte",
+      "freq": 402
+    },
+    {
+      "word": "saúl",
+      "freq": 398
+    },
+    {
+      "word": "sacerdotes",
+      "freq": 398
+    },
+    {
+      "word": "siete",
+      "freq": 396
+    },
+    {
+      "word": "corazón",
+      "freq": 396
+    },
+    {
+      "word": "mar",
+      "freq": 394
+    },
+    {
+      "word": "respondió",
+      "freq": 392
+    },
+    {
+      "word": "tres",
+      "freq": 387
+    },
+    {
+      "word": "nuestro",
+      "freq": 384
+    },
+    {
+      "word": "jacob",
+      "freq": 382
+    },
+    {
+      "word": "una",
+      "freq": 381
+    },
+    {
+      "word": "hermano",
+      "freq": 379
+    },
+    {
+      "word": "varón",
+      "freq": 375
+    },
+    {
+      "word": "contra",
+      "freq": 373
+    },
+    {
+      "word": "puerta",
+      "freq": 372
+    },
+    {
+      "word": "cuando",
+      "freq": 371
+    },
+    {
+      "word": "boca",
+      "freq": 371
+    },
+    {
+      "word": "aguas",
+      "freq": 365
+    },
+    {
+      "word": "altar",
+      "freq": 364
+    },
+    {
+      "word": "siempre",
+      "freq": 361
+    },
+    {
+      "word": "cielo",
+      "freq": 354
+    },
+    {
+      "word": "cielos",
+      "freq": 353
+    },
+    {
+      "word": "pues",
+      "freq": 352
+    },
+    {
+      "word": "este",
+      "freq": 352
+    },
+    {
+      "word": "aarón",
+      "freq": 352
+    },
+    {
+      "word": "alma",
+      "freq": 351
+    },
+    {
+      "word": "gloria",
+      "freq": 345
+    },
+    {
+      "word": "otro",
+      "freq": 344
+    },
+    {
+      "word": "cada",
+      "freq": 342
+    },
+    {
+      "word": "cual",
+      "freq": 338
+    },
+    {
+      "word": "sino",
+      "freq": 337
+    },
+    {
+      "word": "ejércitos",
+      "freq": 333
+    },
+    {
+      "word": "hoy",
+      "freq": 330
+    },
+    {
+      "word": "ella",
+      "freq": 329
+    },
+    {
+      "word": "tenía",
+      "freq": 325
+    },
+    {
+      "word": "mí",
+      "freq": 325
+    },
+    {
+      "word": "año",
+      "freq": 323
+    },
+    {
+      "word": "cristo",
+      "freq": 322
+    },
+    {
+      "word": "justicia",
+      "freq": 321
+    },
+    {
+      "word": "tabernáculo",
+      "freq": 321
+    },
+    {
+      "word": "mismo",
+      "freq": 318
+    },
+    {
+      "word": "carne",
+      "freq": 318
+    },
+    {
+      "word": "sin",
+      "freq": 311
+    },
+    {
+      "word": "tú",
+      "freq": 309
+    },
+    {
+      "word": "envió",
+      "freq": 309
+    },
+    {
+      "word": "vida",
+      "freq": 307
+    },
+    {
+      "word": "tomó",
+      "freq": 307
+    },
+    {
+      "word": "asimismo",
+      "freq": 306
+    },
+    {
+      "word": "hija",
+      "freq": 305
+    },
+    {
+      "word": "pan",
+      "freq": 305
+    },
+    {
+      "word": "has",
+      "freq": 305
+    },
+    {
+      "word": "pacto",
+      "freq": 305
+    },
+    {
+      "word": "reyes",
+      "freq": 304
+    },
+    {
+      "word": "madre",
+      "freq": 304
+    },
+    {
+      "word": "salomón",
+      "freq": 303
+    },
+    {
+      "word": "dijeron",
+      "freq": 302
+    },
+    {
+      "word": "ojos",
+      "freq": 302
+    },
+    {
+      "word": "ciudad",
+      "freq": 302
+    },
+    {
+      "word": "mío",
+      "freq": 298
+    },
+    {
+      "word": "esta",
+      "freq": 295
+    },
+    {
+      "word": "plata",
+      "freq": 292
+    },
+    {
+      "word": "fueron",
+      "freq": 291
+    },
+    {
+      "word": "estas",
+      "freq": 290
+    },
+    {
+      "word": "habló",
+      "freq": 289
+    },
+    {
+      "word": "babilonia",
+      "freq": 289
+    },
+    {
+      "word": "reino",
+      "freq": 287
+    },
+    {
+      "word": "obra",
+      "freq": 285
+    },
+    {
+      "word": "santo",
+      "freq": 284
+    },
+    {
+      "word": "hará",
+      "freq": 280
+    },
+    {
+      "word": "paz",
+      "freq": 279
+    },
+    {
+      "word": "éste",
+      "freq": 277
+    },
+    {
+      "word": "faraón",
+      "freq": 277
+    },
+    {
+      "word": "vuestras",
+      "freq": 271
+    },
+    {
+      "word": "mañana",
+      "freq": 269
+    },
+    {
+      "word": "o",
+      "freq": 266
+    },
+    {
+      "word": "levitas",
+      "freq": 262
+    },
+    {
+      "word": "mujeres",
+      "freq": 261
+    },
+    {
+      "word": "muerte",
+      "freq": 261
+    },
+    {
+      "word": "cinco",
+      "freq": 258
+    },
+    {
+      "word": "rostro",
+      "freq": 258
+    },
+    {
+      "word": "era",
+      "freq": 257
+    },
+    {
+      "word": "hijos",
+      "freq": 256
+    },
+    {
+      "word": "noche",
+      "freq": 252
+    },
+    {
+      "word": "filisteos",
+      "freq": 252
+    },
+    {
+      "word": "ovejas",
+      "freq": 252
+    },
+    {
+      "word": "oído",
+      "freq": 252
+    },
+    {
+      "word": "habían",
+      "freq": 251
+    },
+    {
+      "word": "fe",
+      "freq": 251
+    },
+    {
+      "word": "antes",
+      "freq": 250
+    },
+    {
+      "word": "agua",
+      "freq": 246
+    },
+    {
+      "word": "abraham",
+      "freq": 246
+    },
+    {
+      "word": "nos",
+      "freq": 245
+    },
+    {
+      "word": "josé",
+      "freq": 245
+    },
+    {
+      "word": "estaba",
+      "freq": 239
+    },
+    {
+      "word": "vuestra",
+      "freq": 239
+    },
+    {
+      "word": "pies",
+      "freq": 239
+    },
+    {
+      "word": "aquel",
+      "freq": 238
+    },
+    {
+      "word": "tribu",
+      "freq": 237
+    },
+    {
+      "word": "verdad",
+      "freq": 235
+    },
+    {
+      "word": "judíos",
+      "freq": 235
+    },
+    {
+      "word": "serán",
+      "freq": 234
+    },
+    {
+      "word": "arca",
+      "freq": 234
+    },
+    {
+      "word": "hijas",
+      "freq": 232
+    },
+    {
+      "word": "pecado",
+      "freq": 232
+    },
+    {
+      "word": "otra",
+      "freq": 232
+    },
+    {
+      "word": "discípulos",
+      "freq": 232
+    },
+    {
+      "word": "voz",
+      "freq": 231
+    },
+    {
+      "word": "hay",
+      "freq": 229
+    },
+    {
+      "word": "pueblo",
+      "freq": 228
+    },
+    {
+      "word": "mundo",
+      "freq": 228
+    },
+    {
+      "word": "profeta",
+      "freq": 227
+    },
+    {
+      "word": "mes",
+      "freq": 227
+    },
+    {
+      "word": "profetas",
+      "freq": 227
+    },
+    {
+      "word": "vinieron",
+      "freq": 225
+    },
+    {
+      "word": "diez",
+      "freq": 224
+    },
+    {
+      "word": "dioses",
+      "freq": 224
+    },
+    {
+      "word": "obras",
+      "freq": 223
+    },
+    {
+      "word": "mandó",
+      "freq": 222
+    },
+    {
+      "word": "fue",
+      "freq": 221
+    },
+    {
+      "word": "ira",
+      "freq": 221
+    },
+    {
+      "word": "cuatro",
+      "freq": 220
+    },
+    {
+      "word": "nuestros",
+      "freq": 220
+    },
+    {
+      "word": "josué",
+      "freq": 220
+    },
+    {
+      "word": "otros",
+      "freq": 218
+    },
+    {
+      "word": "sabiduría",
+      "freq": 218
+    },
+    {
+      "word": "príncipes",
+      "freq": 217
+    },
+    {
+      "word": "guerra",
+      "freq": 217
+    },
+    {
+      "word": "aconteció",
+      "freq": 215
+    },
+    {
+      "word": "dado",
+      "freq": 213
+    },
+    {
+      "word": "alguno",
+      "freq": 211
+    },
+    {
+      "word": "hecho",
+      "freq": 209
+    },
+    {
+      "word": "debajo",
+      "freq": 208
+    },
+    {
+      "word": "desde",
+      "freq": 206
+    },
+    {
+      "word": "justo",
+      "freq": 206
+    },
+    {
+      "word": "está",
+      "freq": 206
+    },
+    {
+      "word": "fuera",
+      "freq": 205
+    },
+    {
+      "word": "nunca",
+      "freq": 204
+    },
+    {
+      "word": "digo",
+      "freq": 204
+    },
+    {
+      "word": "éstos",
+      "freq": 203
+    },
+    {
+      "word": "gracia",
+      "freq": 200
+    },
+    {
+      "word": "juicio",
+      "freq": 199
+    },
+    {
+      "word": "jordán",
+      "freq": 198
+    },
+    {
+      "word": "engendró",
+      "freq": 197
+    },
+    {
+      "word": "varones",
+      "freq": 195
+    },
+    {
+      "word": "harás",
+      "freq": 194
+    },
+    {
+      "word": "desierto",
+      "freq": 193
+    },
+    {
+      "word": "jesucristo",
+      "freq": 193
+    },
+    {
+      "word": "gran",
+      "freq": 191
+    },
+    {
+      "word": "aceite",
+      "freq": 191
+    },
+    {
+      "word": "cierto",
+      "freq": 190
+    },
+    {
+      "word": "ángel",
+      "freq": 190
+    },
+    {
+      "word": "congregación",
+      "freq": 190
+    },
+    {
+      "word": "ninguno",
+      "freq": 187
+    },
+    {
+      "word": "doce",
+      "freq": 187
+    },
+    {
+      "word": "son",
+      "freq": 187
+    },
+    {
+      "word": "causa",
+      "freq": 186
+    },
+    {
+      "word": "santuario",
+      "freq": 186
+    },
+    {
+      "word": "bien",
+      "freq": 183
+    },
+    {
+      "word": "ancianos",
+      "freq": 183
+    },
+    {
+      "word": "caminos",
+      "freq": 183
+    },
+    {
+      "word": "fruto",
+      "freq": 182
+    },
+    {
+      "word": "conforme",
+      "freq": 182
+    },
+    {
+      "word": "mandamientos",
+      "freq": 181
+    },
+    {
+      "word": "muchos",
+      "freq": 181
+    },
+    {
+      "word": "sea",
+      "freq": 180
+    },
+    {
+      "word": "venido",
+      "freq": 180
+    },
+    {
+      "word": "luz",
+      "freq": 178
+    },
+    {
+      "word": "familias",
+      "freq": 178
+    },
+    {
+      "word": "benjamín",
+      "freq": 178
+    },
+    {
+      "word": "llamó",
+      "freq": 177
+    },
+    {
+      "word": "treinta",
+      "freq": 177
+    },
+    {
+      "word": "salió",
+      "freq": 175
+    },
+    {
+      "word": "enemigos",
+      "freq": 175
+    },
+    {
+      "word": "muertos",
+      "freq": 175
+    },
+    {
+      "word": "moab",
+      "freq": 174
+    },
+    {
+      "word": "escrito",
+      "freq": 173
+    },
+    {
+      "word": "nada",
+      "freq": 172
+    },
+    {
+      "word": "testimonio",
+      "freq": 172
+    },
+    {
+      "word": "nadie",
+      "freq": 171
+    },
+    {
+      "word": "alrededor",
+      "freq": 171
+    },
+    {
+      "word": "cincuenta",
+      "freq": 170
+    },
+    {
+      "word": "hizo",
+      "freq": 168
+    },
+    {
+      "word": "heredad",
+      "freq": 167
+    },
+    {
+      "word": "sol",
+      "freq": 166
+    },
+    {
+      "word": "visto",
+      "freq": 166
+    },
+    {
+      "word": "montes",
+      "freq": 166
+    },
+    {
+      "word": "piedra",
+      "freq": 165
+    },
+    {
+      "word": "soy",
+      "freq": 165
+    },
+    {
+      "word": "pablo",
+      "freq": 165
+    },
+    {
+      "word": "tiene",
+      "freq": 164
+    },
+    {
+      "word": "pedro",
+      "freq": 163
+    },
+    {
+      "word": "ve",
+      "freq": 162
+    },
+    {
+      "word": "han",
+      "freq": 161
+    },
+    {
+      "word": "tal",
+      "freq": 161
+    },
+    {
+      "word": "amor",
+      "freq": 161
+    },
+    {
+      "word": "después",
+      "freq": 161
+    },
+    {
+      "word": "cuarenta",
+      "freq": 159
+    },
+    {
+      "word": "mandado",
+      "freq": 158
+    },
+    {
+      "word": "pie",
+      "freq": 157
+    },
+    {
+      "word": "estaban",
+      "freq": 155
+    },
+    {
+      "word": "temor",
+      "freq": 154
+    },
+    {
+      "word": "cosas",
+      "freq": 153
+    },
+    {
+      "word": "aun",
+      "freq": 153
+    },
+    {
+      "word": "trono",
+      "freq": 153
+    },
+    {
+      "word": "manasés",
+      "freq": 153
+    },
+    {
+      "word": "manera",
+      "freq": 151
+    },
+    {
+      "word": "moradores",
+      "freq": 151
+    },
+    {
+      "word": "muerto",
+      "freq": 151
+    },
+    {
+      "word": "primero",
+      "freq": 151
+    },
+    {
+      "word": "cuerpo",
+      "freq": 151
+    },
+    {
+      "word": "murió",
+      "freq": 150
+    },
+    {
+      "word": "hablado",
+      "freq": 149
+    },
+    {
+      "word": "jeremías",
+      "freq": 149
+    },
+    {
+      "word": "veinte",
+      "freq": 148
+    },
+    {
+      "word": "hambre",
+      "freq": 147
+    },
+    {
+      "word": "cualquiera",
+      "freq": 147
+    },
+    {
+      "word": "sí",
+      "freq": 147
+    },
+    {
+      "word": "dónde",
+      "freq": 146
+    },
+    {
+      "word": "habéis",
+      "freq": 145
+    },
+    {
+      "word": "dará",
+      "freq": 144
+    },
+    {
+      "word": "aún",
+      "freq": 144
+    },
+    {
+      "word": "ofrenda",
+      "freq": 144
+    },
+    {
+      "word": "templo",
+      "freq": 144
+    },
+    {
+      "word": "lado",
+      "freq": 143
+    },
+    {
+      "word": "joab",
+      "freq": 143
+    },
+    {
+      "word": "ésta",
+      "freq": 142
+    },
+    {
+      "word": "ninguna",
+      "freq": 142
+    },
+    {
+      "word": "samuel",
+      "freq": 142
+    },
+    {
+      "word": "algunos",
+      "freq": 139
+    },
+    {
+      "word": "piedras",
+      "freq": 139
+    },
+    {
+      "word": "sion",
+      "freq": 138
+    },
+    {
+      "word": "juan",
+      "freq": 137
+    },
+    {
+      "word": "donde",
+      "freq": 136
+    },
+    {
+      "word": "comer",
+      "freq": 135
+    },
+    {
+      "word": "daré",
+      "freq": 135
+    },
+    {
+      "word": "allá",
+      "freq": 135
+    },
+    {
+      "word": "subió",
+      "freq": 135
+    },
+    {
+      "word": "venir",
+      "freq": 135
+    },
+    {
+      "word": "cómo",
+      "freq": 135
+    },
+    {
+      "word": "dije",
+      "freq": 135
+    },
+    {
+      "word": "ezequías",
+      "freq": 134
+    },
+    {
+      "word": "lengua",
+      "freq": 133
+    },
+    {
+      "word": "serás",
+      "freq": 133
+    },
+    {
+      "word": "volvió",
+      "freq": 131
+    },
+    {
+      "word": "isaac",
+      "freq": 131
+    },
+    {
+      "word": "lejos",
+      "freq": 131
+    },
+    {
+      "word": "río",
+      "freq": 129
+    },
+    {
+      "word": "nuestra",
+      "freq": 128
+    },
+    {
+      "word": "galaad",
+      "freq": 128
+    },
+    {
+      "word": "ay",
+      "freq": 128
+    },
+    {
+      "word": "puertas",
+      "freq": 127
+    },
+    {
+      "word": "llamado",
+      "freq": 126
+    },
+    {
+      "word": "ser",
+      "freq": 125
+    },
+    {
+      "word": "mira",
+      "freq": 125
+    },
+    {
+      "word": "según",
+      "freq": 125
+    },
+    {
+      "word": "tinieblas",
+      "freq": 124
+    },
+    {
+      "word": "habla",
+      "freq": 124
+    },
+    {
+      "word": "conmigo",
+      "freq": 124
+    },
+    {
+      "word": "ya",
+      "freq": 124
+    },
+    {
+      "word": "jonatán",
+      "freq": 122
+    },
+    {
+      "word": "dinero",
+      "freq": 121
+    },
+    {
+      "word": "misma",
+      "freq": 121
+    },
+    {
+      "word": "carros",
+      "freq": 121
+    },
+    {
+      "word": "consejo",
+      "freq": 121
+    },
+    {
+      "word": "estos",
+      "freq": 120
+    },
+    {
+      "word": "samaria",
+      "freq": 120
+    },
+    {
+      "word": "da",
+      "freq": 119
+    },
+    {
+      "word": "ciudades",
+      "freq": 119
+    },
+    {
+      "word": "vendrá",
+      "freq": 119
+    },
+    {
+      "word": "dio",
+      "freq": 119
+    },
+    {
+      "word": "edom",
+      "freq": 119
+    },
+    {
+      "word": "seis",
+      "freq": 118
+    },
+    {
+      "word": "iniquidad",
+      "freq": 118
+    },
+    {
+      "word": "ciento",
+      "freq": 117
+    },
+    {
+      "word": "asiria",
+      "freq": 116
+    },
+    {
+      "word": "presencia",
+      "freq": 116
+    },
+    {
+      "word": "mucho",
+      "freq": 116
+    },
+    {
+      "word": "misericordia",
+      "freq": 116
+    },
+    {
+      "word": "decía",
+      "freq": 116
+    },
+    {
+      "word": "campo",
+      "freq": 116
+    },
+    {
+      "word": "oyó",
+      "freq": 115
+    },
+    {
+      "word": "puesto",
+      "freq": 115
+    },
+    {
+      "word": "marido",
+      "freq": 115
+    },
+    {
+      "word": "baal",
+      "freq": 115
+    },
+    {
+      "word": "junto",
+      "freq": 115
+    },
+    {
+      "word": "madera",
+      "freq": 115
+    },
+    {
+      "word": "impíos",
+      "freq": 115
+    },
+    {
+      "word": "cuales",
+      "freq": 114
+    },
+    {
+      "word": "alguna",
+      "freq": 114
+    },
+    {
+      "word": "multitud",
+      "freq": 114
+    },
+    {
+      "word": "tenían",
+      "freq": 114
+    },
+    {
+      "word": "valle",
+      "freq": 113
+    },
+    {
+      "word": "puso",
+      "freq": 113
+    },
+    {
+      "word": "tribus",
+      "freq": 113
+    },
+    {
+      "word": "santos",
+      "freq": 113
+    },
+    {
+      "word": "tanto",
+      "freq": 113
+    },
+    {
+      "word": "primogénito",
+      "freq": 111
+    },
+    {
+      "word": "hora",
+      "freq": 111
+    },
+    {
+      "word": "viene",
+      "freq": 111
+    },
+    {
+      "word": "viento",
+      "freq": 111
+    },
+    {
+      "word": "pecados",
+      "freq": 111
+    },
+    {
+      "word": "evangelio",
+      "freq": 111
+    },
+    {
+      "word": "hacia",
+      "freq": 110
+    },
+    {
+      "word": "hermana",
+      "freq": 110
+    },
+    {
+      "word": "solamente",
+      "freq": 110
+    },
+    {
+      "word": "familia",
+      "freq": 110
+    },
+    {
+      "word": "aldeas",
+      "freq": 110
+    },
+    {
+      "word": "generación",
+      "freq": 109
+    },
+    {
+      "word": "séptimo",
+      "freq": 109
+    },
+    {
+      "word": "muy",
+      "freq": 109
+    },
+    {
+      "word": "hubo",
+      "freq": 108
+    },
+    {
+      "word": "beber",
+      "freq": 108
+    },
+    {
+      "word": "ejidos",
+      "freq": 108
+    },
+    {
+      "word": "polvo",
+      "freq": 107
+    },
+    {
+      "word": "ciertamente",
+      "freq": 107
+    },
+    {
+      "word": "poco",
+      "freq": 107
+    },
+    {
+      "word": "absalón",
+      "freq": 107
+    },
+    {
+      "word": "hallado",
+      "freq": 106
+    },
+    {
+      "word": "fuerte",
+      "freq": 106
+    },
+    {
+      "word": "oye",
+      "freq": 106
+    },
+    {
+      "word": "gozo",
+      "freq": 106
+    },
+    {
+      "word": "voluntad",
+      "freq": 105
+    },
+    {
+      "word": "ejército",
+      "freq": 105
+    },
+    {
+      "word": "tomaron",
+      "freq": 104
+    },
+    {
+      "word": "decir",
+      "freq": 104
+    },
+    {
+      "word": "enviado",
+      "freq": 104
+    },
+    {
+      "word": "oídos",
+      "freq": 104
+    },
+    {
+      "word": "nuestras",
+      "freq": 104
+    },
+    {
+      "word": "sacrificio",
+      "freq": 104
+    },
+    {
+      "word": "segundo",
+      "freq": 103
+    },
+    {
+      "word": "entró",
+      "freq": 103
+    },
+    {
+      "word": "impío",
+      "freq": 103
+    },
+    {
+      "word": "fin",
+      "freq": 103
+    },
+    {
+      "word": "esaú",
+      "freq": 102
+    },
+    {
+      "word": "guarda",
+      "freq": 102
+    },
+    {
+      "word": "labios",
+      "freq": 102
+    },
+    {
+      "word": "toma",
+      "freq": 101
+    },
+    {
+      "word": "cabeza",
+      "freq": 100
+    },
+    {
+      "word": "becerro",
+      "freq": 100
+    },
+    {
+      "word": "elías",
+      "freq": 100
+    },
+    {
+      "word": "saber",
+      "freq": 99
+    },
+    {
+      "word": "estatutos",
+      "freq": 99
+    },
+    {
+      "word": "ningún",
+      "freq": 99
+    },
+    {
+      "word": "muro",
+      "freq": 99
+    },
+    {
+      "word": "jeroboam",
+      "freq": 99
+    },
+    {
+      "word": "mesa",
+      "freq": 98
+    },
+    {
+      "word": "maldad",
+      "freq": 98
+    },
+    {
+      "word": "ven",
+      "freq": 98
+    },
+    {
+      "word": "amado",
+      "freq": 98
+    },
+    {
+      "word": "oración",
+      "freq": 98
+    },
+    {
+      "word": "setenta",
+      "freq": 97
+    },
+    {
+      "word": "sabio",
+      "freq": 97
+    },
+    {
+      "word": "ir",
+      "freq": 96
+    },
+    {
+      "word": "di",
+      "freq": 96
+    },
+    {
+      "word": "cosa",
+      "freq": 96
+    },
+    {
+      "word": "ídolos",
+      "freq": 96
+    },
+    {
+      "word": "oíd",
+      "freq": 96
+    },
+    {
+      "word": "mandamiento",
+      "freq": 96
+    },
+    {
+      "word": "sacó",
+      "freq": 95
+    },
+    {
+      "word": "señal",
+      "freq": 95
+    },
+    {
+      "word": "niño",
+      "freq": 95
+    },
+    {
+      "word": "estando",
+      "freq": 94
+    },
+    {
+      "word": "número",
+      "freq": 94
+    },
+    {
+      "word": "limpio",
+      "freq": 94
+    },
+    {
+      "word": "riquezas",
+      "freq": 94
+    },
+    {
+      "word": "acab",
+      "freq": 94
+    },
+    {
+      "word": "gentiles",
+      "freq": 94
+    },
+    {
+      "word": "quedó",
+      "freq": 93
+    },
+    {
+      "word": "decían",
+      "freq": 93
+    },
+    {
+      "word": "sido",
+      "freq": 93
+    },
+    {
+      "word": "quien",
+      "freq": 93
+    },
+    {
+      "word": "nube",
+      "freq": 93
+    },
+    {
+      "word": "batalla",
+      "freq": 92
+    },
+    {
+      "word": "luego",
+      "freq": 92
+    },
+    {
+      "word": "cordero",
+      "freq": 92
+    },
+    {
+      "word": "siclos",
+      "freq": 92
+    },
+    {
+      "word": "eres",
+      "freq": 92
+    },
+    {
+      "word": "oriente",
+      "freq": 91
+    },
+    {
+      "word": "mal",
+      "freq": 91
+    },
+    {
+      "word": "árbol",
+      "freq": 90
+    },
+    {
+      "word": "ángeles",
+      "freq": 90
+    },
+    {
+      "word": "huesos",
+      "freq": 90
+    },
+    {
+      "word": "morirá",
+      "freq": 90
+    },
+    {
+      "word": "viendo",
+      "freq": 90
+    },
+    {
+      "word": "edificó",
+      "freq": 89
+    },
+    {
+      "word": "salieron",
+      "freq": 89
+    }
+  ],
+  "book_coverage": [
+    {
+      "book": "Génesis",
+      "total": 35041,
+      "strong": 16375,
+      "missing": 18666,
+      "pct": 46.7
+    },
+    {
+      "book": "Éxodo",
+      "total": 28410,
+      "strong": 12376,
+      "missing": 16034,
+      "pct": 43.6
+    },
+    {
+      "book": "Levítico",
+      "total": 20473,
+      "strong": 8702,
+      "missing": 11771,
+      "pct": 42.5
+    },
+    {
+      "book": "Números",
+      "total": 28460,
+      "strong": 11983,
+      "missing": 16477,
+      "pct": 42.1
+    },
+    {
+      "book": "Deuteronomio",
+      "total": 24396,
+      "strong": 10897,
+      "missing": 13499,
+      "pct": 44.7
+    },
+    {
+      "book": "Josué",
+      "total": 17119,
+      "strong": 7371,
+      "missing": 9748,
+      "pct": 43.1
+    },
+    {
+      "book": "Jueces",
+      "total": 17220,
+      "strong": 7169,
+      "missing": 10051,
+      "pct": 41.6
+    },
+    {
+      "book": "Rut",
+      "total": 2296,
+      "strong": 964,
+      "missing": 1332,
+      "pct": 42.0
+    },
+    {
+      "book": "1 Samuel",
+      "total": 22902,
+      "strong": 9954,
+      "missing": 12948,
+      "pct": 43.5
+    },
+    {
+      "book": "2 Samuel",
+      "total": 18942,
+      "strong": 8208,
+      "missing": 10734,
+      "pct": 43.3
+    },
+    {
+      "book": "1 Reyes",
+      "total": 22631,
+      "strong": 9916,
+      "missing": 12715,
+      "pct": 43.8
+    },
+    {
+      "book": "2 Reyes",
+      "total": 21443,
+      "strong": 9135,
+      "missing": 12308,
+      "pct": 42.6
+    },
+    {
+      "book": "1 Crónicas",
+      "total": 18392,
+      "strong": 7890,
+      "missing": 10502,
+      "pct": 42.9
+    },
+    {
+      "book": "2 Crónicas",
+      "total": 23977,
+      "strong": 9781,
+      "missing": 14196,
+      "pct": 40.8
+    },
+    {
+      "book": "Esdras",
+      "total": 6714,
+      "strong": 2782,
+      "missing": 3932,
+      "pct": 41.4
+    },
+    {
+      "book": "Nehemías",
+      "total": 9490,
+      "strong": 3937,
+      "missing": 5553,
+      "pct": 41.5
+    },
+    {
+      "book": "Ester",
+      "total": 5333,
+      "strong": 2206,
+      "missing": 3127,
+      "pct": 41.4
+    },
+    {
+      "book": "Job",
+      "total": 16118,
+      "strong": 6270,
+      "missing": 9848,
+      "pct": 38.9
+    },
+    {
+      "book": "Salmos",
+      "total": 37131,
+      "strong": 15722,
+      "missing": 21409,
+      "pct": 42.3
+    },
+    {
+      "book": "Proverbios",
+      "total": 13826,
+      "strong": 5615,
+      "missing": 8211,
+      "pct": 40.6
+    },
+    {
+      "book": "Eclesiastés",
+      "total": 5238,
+      "strong": 2148,
+      "missing": 3090,
+      "pct": 41.0
+    },
+    {
+      "book": "Cantares",
+      "total": 2390,
+      "strong": 1103,
+      "missing": 1287,
+      "pct": 46.2
+    },
+    {
+      "book": "Isaías",
+      "total": 31876,
+      "strong": 13689,
+      "missing": 18187,
+      "pct": 42.9
+    },
+    {
+      "book": "Jeremías",
+      "total": 37288,
+      "strong": 16461,
+      "missing": 20827,
+      "pct": 44.1
+    },
+    {
+      "book": "Lamentaciones",
+      "total": 2943,
+      "strong": 1296,
+      "missing": 1647,
+      "pct": 44.0
+    },
+    {
+      "book": "Ezequiel",
+      "total": 34339,
+      "strong": 14319,
+      "missing": 20020,
+      "pct": 41.7
+    },
+    {
+      "book": "Daniel",
+      "total": 10599,
+      "strong": 3948,
+      "missing": 6651,
+      "pct": 37.2
+    },
+    {
+      "book": "Oseas",
+      "total": 4367,
+      "strong": 1719,
+      "missing": 2648,
+      "pct": 39.4
+    },
+    {
+      "book": "Joel",
+      "total": 1703,
+      "strong": 745,
+      "missing": 958,
+      "pct": 43.7
+    },
+    {
+      "book": "Amós",
+      "total": 3607,
+      "strong": 1605,
+      "missing": 2002,
+      "pct": 44.5
+    },
+    {
+      "book": "Abdías",
+      "total": 566,
+      "strong": 242,
+      "missing": 324,
+      "pct": 42.8
+    },
+    {
+      "book": "Jonás",
+      "total": 1172,
+      "strong": 432,
+      "missing": 740,
+      "pct": 36.9
+    },
+    {
+      "book": "Miqueas",
+      "total": 2595,
+      "strong": 1062,
+      "missing": 1533,
+      "pct": 40.9
+    },
+    {
+      "book": "Nahúm",
+      "total": 1061,
+      "strong": 458,
+      "missing": 603,
+      "pct": 43.2
+    },
+    {
+      "book": "Habacuc",
+      "total": 1306,
+      "strong": 502,
+      "missing": 804,
+      "pct": 38.4
+    },
+    {
+      "book": "Sofonías",
+      "total": 1382,
+      "strong": 597,
+      "missing": 785,
+      "pct": 43.2
+    },
+    {
+      "book": "Hageo",
+      "total": 1000,
+      "strong": 472,
+      "missing": 528,
+      "pct": 47.2
+    },
+    {
+      "book": "Zacarías",
+      "total": 5560,
+      "strong": 2445,
+      "missing": 3115,
+      "pct": 44.0
+    },
+    {
+      "book": "Malaquías",
+      "total": 1605,
+      "strong": 738,
+      "missing": 867,
+      "pct": 46.0
+    },
+    {
+      "book": "S. Mateo",
+      "total": 21160,
+      "strong": 14729,
+      "missing": 6431,
+      "pct": 69.6
+    },
+    {
+      "book": "S. Marcos",
+      "total": 13305,
+      "strong": 8711,
+      "missing": 4594,
+      "pct": 65.5
+    },
+    {
+      "book": "S. Lucas",
+      "total": 22828,
+      "strong": 14977,
+      "missing": 7851,
+      "pct": 65.6
+    },
+    {
+      "book": "S.Juan",
+      "total": 17379,
+      "strong": 12207,
+      "missing": 5172,
+      "pct": 70.2
+    },
+    {
+      "book": "Hechos",
+      "total": 21872,
+      "strong": 14088,
+      "missing": 7784,
+      "pct": 64.4
+    },
+    {
+      "book": "Romanos",
+      "total": 9088,
+      "strong": 5662,
+      "missing": 3426,
+      "pct": 62.3
+    },
+    {
+      "book": "1 Corintios",
+      "total": 8674,
+      "strong": 5554,
+      "missing": 3120,
+      "pct": 64.0
+    },
+    {
+      "book": "2 Corintios",
+      "total": 5640,
+      "strong": 3519,
+      "missing": 2121,
+      "pct": 62.4
+    },
+    {
+      "book": "Gálatas",
+      "total": 2936,
+      "strong": 1816,
+      "missing": 1120,
+      "pct": 61.9
+    },
+    {
+      "book": "Efesios",
+      "total": 2942,
+      "strong": 1978,
+      "missing": 964,
+      "pct": 67.2
+    },
+    {
+      "book": "Filipenses",
+      "total": 2080,
+      "strong": 206,
+      "missing": 1874,
+      "pct": 9.9
+    },
+    {
+      "book": "Colosenses",
+      "total": 1944,
+      "strong": 1258,
+      "missing": 686,
+      "pct": 64.7
+    },
+    {
+      "book": "1 Tesalonicenses",
+      "total": 1769,
+      "strong": 1158,
+      "missing": 611,
+      "pct": 65.5
+    },
+    {
+      "book": "2 Tesalonicenses",
+      "total": 986,
+      "strong": 630,
+      "missing": 356,
+      "pct": 63.9
+    },
+    {
+      "book": "1 Timoteo",
+      "total": 2182,
+      "strong": 1331,
+      "missing": 851,
+      "pct": 61.0
+    },
+    {
+      "book": "2 Timoteo",
+      "total": 1545,
+      "strong": 1027,
+      "missing": 518,
+      "pct": 66.5
+    },
+    {
+      "book": "Tito",
+      "total": 884,
+      "strong": 542,
+      "missing": 342,
+      "pct": 61.3
+    },
+    {
+      "book": "Filemón",
+      "total": 400,
+      "strong": 266,
+      "missing": 134,
+      "pct": 66.5
+    },
+    {
+      "book": "Hebreos",
+      "total": 6527,
+      "strong": 4010,
+      "missing": 2517,
+      "pct": 61.4
+    },
+    {
+      "book": "Santiago",
+      "total": 2185,
+      "strong": 1450,
+      "missing": 735,
+      "pct": 66.4
+    },
+    {
+      "book": "1 Pedro",
+      "total": 2302,
+      "strong": 1328,
+      "missing": 974,
+      "pct": 57.7
+    },
+    {
+      "book": "2 Pedro",
+      "total": 1474,
+      "strong": 893,
+      "missing": 581,
+      "pct": 60.6
+    },
+    {
+      "book": "1 Juan",
+      "total": 2398,
+      "strong": 1731,
+      "missing": 667,
+      "pct": 72.2
+    },
+    {
+      "book": "2 Juan",
+      "total": 287,
+      "strong": 207,
+      "missing": 80,
+      "pct": 72.1
+    },
+    {
+      "book": "3 Juan",
+      "total": 296,
+      "strong": 167,
+      "missing": 129,
+      "pct": 56.4
+    },
+    {
+      "book": "Judas",
+      "total": 575,
+      "strong": 345,
+      "missing": 230,
+      "pct": 60.0
+    },
+    {
+      "book": "Apocalipsis",
+      "total": 11258,
+      "strong": 7657,
+      "missing": 3601,
+      "pct": 68.0
+    }
+  ],
+  "aliases": {
+    "abierto": "abrir",
+    "abrieron": "abrir",
+    "abrió": "abrir",
+    "acaso": "acaso",
+    "acerca": "acerca",
+    "adonde": "adonde",
+    "altares": "altar",
+    "amada": "amado",
+    "amadas": "amado",
+    "amado": "amado",
+    "amados": "amado",
+    "ancianos": "anciano",
+    "anduve": "andar",
+    "anduviera": "andar",
+    "anduvieran": "andar",
+    "anduvieron": "andar",
+    "anduviese": "andar",
+    "anduviesen": "andar",
+    "anduvimos": "andar",
+    "anduviste": "andar",
+    "anduvo": "andar",
+    "animales": "animal",
+    "apóstoles": "apóstol",
+    "aquella": "aquel",
+    "aquellas": "aquel",
+    "aquellos": "aquel",
+    "arriba": "arriba",
+    "aves": "ave",
+    "años": "año",
+    "bestias": "bestia",
+    "bienes": "bien",
+    "buen": "bueno",
+    "buenas": "buena",
+    "buenos": "bueno",
+    "buscaron": "buscar",
+    "buscó": "buscar",
+    "caballos": "caballo",
+    "calles": "calle",
+    "camellos": "camello",
+    "caminos": "camino",
+    "campos": "campo",
+    "carros": "carro",
+    "casas": "casa",
+    "ciudades": "ciudad",
+    "collados": "collado",
+    "colocaron": "colocar",
+    "colocó": "colocar",
+    "comunicaron": "comunicar",
+    "comunicó": "comunicar",
+    "condujeron": "conducir",
+    "condujo": "conducir",
+    "consigo": "consigo",
+    "corazones": "corazón",
+    "cuales": "cual",
+    "cubierto": "cubrir",
+    "cubre": "cubrir",
+    "cubren": "cubrir",
+    "cubres": "cubrir",
+    "cubriendo": "cubrir",
+    "cubriera": "cubrir",
+    "cubrieran": "cubrir",
+    "cubrieron": "cubrir",
+    "cubriese": "cubrir",
+    "cubriesen": "cubrir",
+    "cubrimos": "cubrir",
+    "cubriste": "cubrir",
+    "cubrió": "cubrir",
+    "cubro": "cubrir",
+    "cubrí": "cubrir",
+    "cubrís": "cubrir",
+    "cuya": "cuyo",
+    "cuyas": "cuyo",
+    "cuyos": "cuyo",
+    "da": "dar",
+    "daba": "dar",
+    "daban": "dar",
+    "dad": "dar",
+    "dado": "dar",
+    "dan": "dar",
+    "daremos": "dar",
+    "dará": "dar",
+    "darán": "dar",
+    "darás": "dar",
+    "daré": "dar",
+    "daréis": "dar",
+    "daría": "dar",
+    "darían": "dar",
+    "dase": "dar",
+    "decid": "decir",
+    "dedicaron": "dedicar",
+    "dedicó": "dedicar",
+    "deme": "dar",
+    "desiertos": "desierto",
+    "di": "dar",
+    "dice": "decir",
+    "dicen": "decir",
+    "dices": "decir",
+    "dicho": "decir",
+    "diciendo": "decir",
+    "dieron": "dar",
+    "diga": "decir",
+    "digamos": "decir",
+    "digan": "decir",
+    "digas": "decir",
+    "digáis": "decir",
+    "dijera": "decir",
+    "dijeran": "decir",
+    "dijeras": "decir",
+    "dijeren": "decir",
+    "dijeron": "decir",
+    "dijese": "decir",
+    "dijesen": "decir",
+    "dijimos": "decir",
+    "dijiste": "decir",
+    "dijo": "decir",
+    "dimos": "dar",
+    "dio": "dar",
+    "dioses": "dios",
+    "dirá": "decir",
+    "dirán": "decir",
+    "dirás": "decir",
+    "diré": "decir",
+    "diría": "decir",
+    "dirían": "decir",
+    "discípulos": "discípulo",
+    "diste": "dar",
+    "durmieron": "dormir",
+    "durmió": "dormir",
+    "dí": "decir",
+    "días": "día",
+    "ejércitos": "ejército",
+    "entra": "entrar",
+    "entraba": "entrar",
+    "entraban": "entrar",
+    "entramos": "entrar",
+    "entran": "entrar",
+    "entraron": "entrar",
+    "entraste": "entrar",
+    "entré": "entrar",
+    "entró": "entrar",
+    "era": "ser",
+    "eran": "ser",
+    "eras": "ser",
+    "esa": "ese",
+    "esas": "ese",
+    "escogida": "escogido",
+    "escogidas": "escogido",
+    "escogido": "escogido",
+    "escogidos": "escogido",
+    "escribas": "escriba",
+    "escritas": "escribir",
+    "escrito": "escribir",
+    "escritos": "escribir",
+    "esos": "ese",
+    "espinas": "espina",
+    "esta": "este",
+    "estado": "estar",
+    "estando": "estar",
+    "estas": "este",
+    "estemos": "estar",
+    "estos": "este",
+    "estuve": "estar",
+    "estuviera": "estar",
+    "estuvieran": "estar",
+    "estuvieras": "estar",
+    "estuviere": "estar",
+    "estuvieren": "estar",
+    "estuvieres": "estar",
+    "estuvieron": "estar",
+    "estuviese": "estar",
+    "estuviesen": "estar",
+    "estuvieses": "estar",
+    "estuvimos": "estar",
+    "estuviste": "estar",
+    "estuvisteis": "estar",
+    "estuviéramos": "estar",
+    "estuviéremos": "estar",
+    "estuviésemos": "estar",
+    "estuvo": "estar",
+    "esté": "estar",
+    "estéis": "estar",
+    "estén": "estar",
+    "estés": "estar",
+    "explicaron": "explicar",
+    "explicó": "explicar",
+    "fariseos": "fariseo",
+    "fieles": "fiel",
+    "flores": "flor",
+    "fortificadas": "fortificado",
+    "fortificados": "fortificado",
+    "frutos": "fruto",
+    "fue": "ser",
+    "fuentes": "fuente",
+    "fuera": "ser",
+    "fueran": "ser",
+    "fueras": "ser",
+    "fuere": "ser",
+    "fueren": "ser",
+    "fueres": "ser",
+    "fueron": "ser",
+    "fuese": "ser",
+    "fuesen": "ser",
+    "fueses": "ser",
+    "fui": "ser",
+    "fuimos": "ser",
+    "fuiste": "ser",
+    "fuisteis": "ser",
+    "fuéramos": "ser",
+    "fuéremos": "ser",
+    "fuésemos": "ser",
+    "generaciones": "generación",
+    "gentiles": "gentil",
+    "gran": "grande",
+    "grandes": "grande",
+    "habido": "haber",
+    "habremos": "haber",
+    "habrá": "haber",
+    "habrán": "haber",
+    "habrás": "haber",
+    "habré": "haber",
+    "habréis": "haber",
+    "habría": "haber",
+    "habríamos": "haber",
+    "habrían": "haber",
+    "habrías": "haber",
+    "hace": "hacer",
+    "haced": "hacer",
+    "hacen": "hacer",
+    "haces": "hacer",
+    "haciendo": "hacer",
+    "haga": "hacer",
+    "hagamos": "hacer",
+    "hagan": "hacer",
+    "hagas": "hacer",
+    "hago": "hacer",
+    "hagáis": "hacer",
+    "haremos": "hacer",
+    "hará": "hacer",
+    "harán": "hacer",
+    "harás": "hacer",
+    "haré": "hacer",
+    "haréis": "hacer",
+    "haría": "hacer",
+    "harían": "hacer",
+    "harías": "hacer",
+    "haya": "haber",
+    "hayamos": "haber",
+    "hayan": "haber",
+    "hayas": "haber",
+    "hayáis": "haber",
+    "haz": "hacer",
+    "hecho": "hacer",
+    "hermanas": "hermana",
+    "hermanos": "hermano",
+    "hermosas": "hermosa",
+    "hermosos": "hermoso",
+    "hice": "hacer",
+    "hiciera": "hacer",
+    "hicieran": "hacer",
+    "hicieras": "hacer",
+    "hiciere": "hacer",
+    "hicieren": "hacer",
+    "hicieron": "hacer",
+    "hiciese": "hacer",
+    "hiciesen": "hacer",
+    "hicimos": "hacer",
+    "hiciste": "hacer",
+    "hijas": "hija",
+    "hijos": "hijo",
+    "hizo": "hacer",
+    "hombres": "hombre",
+    "hube": "haber",
+    "hubiera": "haber",
+    "hubieran": "haber",
+    "hubieras": "haber",
+    "hubiere": "haber",
+    "hubieren": "haber",
+    "hubieres": "haber",
+    "hubieron": "haber",
+    "hubiese": "haber",
+    "hubiesen": "haber",
+    "hubieses": "haber",
+    "hubimos": "haber",
+    "hubiste": "haber",
+    "hubiéramos": "haber",
+    "hubiéremos": "haber",
+    "hubiésemos": "haber",
+    "hubo": "haber",
+    "indicaron": "indicar",
+    "indicó": "indicar",
+    "introdujeron": "introducir",
+    "introdujo": "introducir",
+    "judíos": "judío",
+    "jueces": "juez",
+    "justas": "justa",
+    "justos": "justo",
+    "jóvenes": "joven",
+    "labios": "labio",
+    "levantad": "levantar",
+    "levantate": "levantar",
+    "levitas": "levita",
+    "llamada": "llamado",
+    "llamadas": "llamado",
+    "llamado": "llamado",
+    "llamados": "llamado",
+    "llanuras": "llanura",
+    "llegaron": "llegar",
+    "llegó": "llegar",
+    "madres": "madre",
+    "mal": "malo",
+    "malas": "mala",
+    "males": "mal",
+    "malos": "malo",
+    "mandamientos": "mandamiento",
+    "manos": "mano",
+    "meses": "mes",
+    "montes": "monte",
+    "muertas": "morir",
+    "muerto": "morir",
+    "muertos": "morir",
+    "mujeres": "mujer",
+    "murallas": "muralla",
+    "murieron": "morir",
+    "murió": "morir",
+    "mía": "mío",
+    "mías": "mío",
+    "mío": "mío",
+    "míos": "mío",
+    "naciones": "nación",
+    "ningun": "ninguno",
+    "niñas": "niña",
+    "niños": "niño",
+    "noches": "noche",
+    "nuestra": "nuestro",
+    "nuestras": "nuestro",
+    "nuestros": "nuestro",
+    "oiga": "oír",
+    "oigan": "oír",
+    "oigas": "oír",
+    "oigo": "oír",
+    "ojos": "ojo",
+    "oye": "oír",
+    "oyen": "oír",
+    "oyendo": "oír",
+    "oyeron": "oír",
+    "oyes": "oír",
+    "oyó": "oír",
+    "oído": "oír",
+    "oídos": "oído",
+    "oímos": "oír",
+    "oís": "oír",
+    "padres": "padre",
+    "palabras": "palabra",
+    "panes": "pan",
+    "pasaron": "pasar",
+    "pasó": "pasar",
+    "pecados": "pecado",
+    "pecaron": "pecar",
+    "peces": "pez",
+    "pecó": "pecar",
+    "pequeñas": "pequeña",
+    "pequeños": "pequeño",
+    "pidieron": "pedir",
+    "pidió": "pedir",
+    "piedras": "piedra",
+    "pies": "pie",
+    "pisos": "piso",
+    "podamos": "poder",
+    "podemos": "poder",
+    "podremos": "poder",
+    "podrá": "poder",
+    "podrán": "poder",
+    "podrás": "poder",
+    "podré": "poder",
+    "podréis": "poder",
+    "podría": "poder",
+    "podríamos": "poder",
+    "podrían": "poder",
+    "podrías": "poder",
+    "podáis": "poder",
+    "podéis": "poder",
+    "pon": "poner",
+    "pondremos": "poner",
+    "pondrá": "poner",
+    "pondrán": "poner",
+    "pondrás": "poner",
+    "pondré": "poner",
+    "pondréis": "poner",
+    "pondría": "poner",
+    "pondrían": "poner",
+    "pone": "poner",
+    "poned": "poner",
+    "ponen": "poner",
+    "pones": "poner",
+    "ponga": "poner",
+    "pongamos": "poner",
+    "pongan": "poner",
+    "pongas": "poner",
+    "pongo": "poner",
+    "pongáis": "poner",
+    "poniendo": "poner",
+    "primer": "primero",
+    "produjeron": "producir",
+    "produjo": "producir",
+    "profetas": "profeta",
+    "príncipes": "príncipe",
+    "pude": "poder",
+    "pudiendo": "poder",
+    "pudiera": "poder",
+    "pudieran": "poder",
+    "pudiere": "poder",
+    "pudieren": "poder",
+    "pudieron": "poder",
+    "pudiese": "poder",
+    "pudiesen": "poder",
+    "pudimos": "poder",
+    "pudiste": "poder",
+    "pudo": "poder",
+    "pueda": "poder",
+    "puedan": "poder",
+    "puedas": "poder",
+    "puede": "poder",
+    "pueden": "poder",
+    "puedes": "poder",
+    "puedo": "poder",
+    "puertas": "puerta",
+    "puesto": "poner",
+    "puse": "poner",
+    "pusiera": "poner",
+    "pusieran": "poner",
+    "pusiere": "poner",
+    "pusieren": "poner",
+    "pusieron": "poner",
+    "pusiese": "poner",
+    "pusiesen": "poner",
+    "pusimos": "poner",
+    "pusiste": "poner",
+    "puso": "poner",
+    "queramos": "querer",
+    "queremos": "querer",
+    "queriendo": "querer",
+    "querremos": "querer",
+    "querrá": "querer",
+    "querrán": "querer",
+    "querrás": "querer",
+    "querré": "querer",
+    "querréis": "querer",
+    "querría": "querer",
+    "querrían": "querer",
+    "querrías": "querer",
+    "queráis": "querer",
+    "queréis": "querer",
+    "quienes": "quien",
+    "quiera": "querer",
+    "quieran": "querer",
+    "quieras": "querer",
+    "quiere": "querer",
+    "quieren": "querer",
+    "quieres": "querer",
+    "quiero": "querer",
+    "quise": "querer",
+    "quisiera": "querer",
+    "quisieran": "querer",
+    "quisiere": "querer",
+    "quisieren": "querer",
+    "quisieron": "querer",
+    "quisiese": "querer",
+    "quisiesen": "querer",
+    "quisimos": "querer",
+    "quisiste": "querer",
+    "quiso": "querer",
+    "redujeron": "reducir",
+    "redujo": "reducir",
+    "respecto": "respecto",
+    "responde": "responder",
+    "respondemos": "responder",
+    "responden": "responder",
+    "respondes": "responder",
+    "respondiendo": "responder",
+    "respondiera": "responder",
+    "respondieran": "responder",
+    "respondieron": "responder",
+    "respondiese": "responder",
+    "respondiesen": "responder",
+    "respondimos": "responder",
+    "respondiste": "responder",
+    "respondió": "responder",
+    "respondo": "responder",
+    "respondéis": "responder",
+    "respondí": "responder",
+    "reunieron": "reunir",
+    "reunió": "reunir",
+    "reyes": "rey",
+    "ríos": "río",
+    "sabe": "saber",
+    "sabemos": "saber",
+    "saben": "saber",
+    "sabes": "saber",
+    "sabiendo": "saber",
+    "sabremos": "saber",
+    "sabrá": "saber",
+    "sabrán": "saber",
+    "sabrás": "saber",
+    "sabré": "saber",
+    "sabréis": "saber",
+    "sabría": "saber",
+    "sabríais": "saber",
+    "sabrían": "saber",
+    "sabéis": "saber",
+    "sacaron": "sacar",
+    "sacerdotes": "sacerdote",
+    "sacó": "sacar",
+    "sal": "salir",
+    "saldremos": "salir",
+    "saldrá": "salir",
+    "saldrán": "salir",
+    "saldrás": "salir",
+    "saldré": "salir",
+    "saldréis": "salir",
+    "sale": "salir",
+    "salen": "salir",
+    "sales": "salir",
+    "salga": "salir",
+    "salgamos": "salir",
+    "salgan": "salir",
+    "salgas": "salir",
+    "salgo": "salir",
+    "salgáis": "salir",
+    "salid": "salir",
+    "salieron": "salir",
+    "salimos": "salir",
+    "saliste": "salir",
+    "salió": "salir",
+    "salí": "salir",
+    "salís": "salir",
+    "santas": "santo",
+    "santos": "santo",
+    "sed": "ser",
+    "semillas": "semilla",
+    "sendas": "senda",
+    "sepa": "saber",
+    "sepamos": "saber",
+    "sepan": "saber",
+    "sepas": "saber",
+    "sepáis": "saber",
+    "seremos": "ser",
+    "será": "ser",
+    "serán": "ser",
+    "serás": "ser",
+    "seré": "ser",
+    "seréis": "ser",
+    "sería": "ser",
+    "seríamos": "ser",
+    "serían": "ser",
+    "serías": "ser",
+    "sido": "ser",
+    "siendo": "ser",
+    "siervas": "sierva",
+    "siervos": "siervo",
+    "siglos": "siglo",
+    "sirvieron": "servir",
+    "sirvió": "servir",
+    "supe": "saber",
+    "supiera": "saber",
+    "supieran": "saber",
+    "supiere": "saber",
+    "supieren": "saber",
+    "supieron": "saber",
+    "supiese": "saber",
+    "supiesen": "saber",
+    "supimos": "saber",
+    "supiste": "saber",
+    "supo": "saber",
+    "suya": "suyo",
+    "suyas": "suyo",
+    "suyo": "suyo",
+    "suyos": "suyo",
+    "sé": "saber",
+    "ten": "tener",
+    "tendremos": "tener",
+    "tendrá": "tener",
+    "tendrán": "tener",
+    "tendrás": "tener",
+    "tendré": "tener",
+    "tendréis": "tener",
+    "tendría": "tener",
+    "tendrían": "tener",
+    "tendrías": "tener",
+    "tened": "tener",
+    "tenga": "tener",
+    "tengamos": "tener",
+    "tengan": "tener",
+    "tengas": "tener",
+    "tengo": "tener",
+    "tengáis": "tener",
+    "teniendo": "tener",
+    "tercer": "tercero",
+    "tiempos": "tiempo",
+    "tiene": "tener",
+    "tienen": "tener",
+    "tienes": "tener",
+    "tocaron": "tocar",
+    "tocó": "tocar",
+    "torres": "torre",
+    "tradujeron": "traducir",
+    "tradujo": "traducir",
+    "trae": "traer",
+    "traemos": "traer",
+    "traen": "traer",
+    "traes": "traer",
+    "traiga": "traer",
+    "traigamos": "traer",
+    "traigan": "traer",
+    "traigas": "traer",
+    "traigo": "traer",
+    "traigáis": "traer",
+    "traje": "traer",
+    "trajera": "traer",
+    "trajeran": "traer",
+    "trajere": "traer",
+    "trajeren": "traer",
+    "trajeron": "traer",
+    "trajese": "traer",
+    "trajesen": "traer",
+    "trajimos": "traer",
+    "trajiste": "traer",
+    "trajo": "traer",
+    "trayendo": "traer",
+    "traéis": "traer",
+    "tribus": "tribu",
+    "tuve": "tener",
+    "tuviera": "tener",
+    "tuvieran": "tener",
+    "tuviere": "tener",
+    "tuvieren": "tener",
+    "tuvieron": "tener",
+    "tuviese": "tener",
+    "tuviesen": "tener",
+    "tuvimos": "tener",
+    "tuviste": "tener",
+    "tuvo": "tener",
+    "tuya": "tuyo",
+    "tuyas": "tuyo",
+    "tuyos": "tuyo",
+    "valles": "valle",
+    "varones": "varón",
+    "ve": "ver",
+    "vea": "ver",
+    "veamos": "ver",
+    "vean": "ver",
+    "veas": "ver",
+    "ved": "ver",
+    "ven": "ver",
+    "vendremos": "venir",
+    "vendrá": "venir",
+    "vendrán": "venir",
+    "vendrás": "venir",
+    "vendré": "venir",
+    "vendréis": "venir",
+    "vendría": "venir",
+    "vendríais": "venir",
+    "vendrían": "venir",
+    "venga": "venir",
+    "vengamos": "venir",
+    "vengan": "venir",
+    "vengas": "venir",
+    "vengo": "venir",
+    "vengáis": "venir",
+    "venid": "venir",
+    "veo": "ver",
+    "veredas": "vereda",
+    "veremos": "ver",
+    "verá": "ver",
+    "verán": "ver",
+    "verás": "ver",
+    "veré": "ver",
+    "vería": "ver",
+    "verían": "ver",
+    "verías": "ver",
+    "ves": "ver",
+    "vestidos": "vestido",
+    "veáis": "ver",
+    "vi": "ver",
+    "viendo": "ver",
+    "viene": "venir",
+    "vienen": "venir",
+    "vienes": "venir",
+    "viera": "ver",
+    "vieran": "ver",
+    "viere": "ver",
+    "vieren": "ver",
+    "vieron": "ver",
+    "viese": "ver",
+    "viesen": "ver",
+    "vimos": "ver",
+    "vine": "venir",
+    "viniendo": "venir",
+    "viniera": "venir",
+    "vinieran": "venir",
+    "viniere": "venir",
+    "vinieren": "venir",
+    "vinieron": "venir",
+    "viniese": "venir",
+    "viniesen": "venir",
+    "vinimos": "venir",
+    "viniste": "venir",
+    "vino": "venir",
+    "vio": "ver",
+    "viste": "ver",
+    "visto": "ver",
+    "volvamos": "volver",
+    "volvemos": "volver",
+    "volviendo": "volver",
+    "volviera": "volver",
+    "volvieran": "volver",
+    "volviere": "volver",
+    "volvieren": "volver",
+    "volvieron": "volver",
+    "volviese": "volver",
+    "volviesen": "volver",
+    "volvimos": "volver",
+    "volviste": "volver",
+    "volvió": "volver",
+    "volváis": "volver",
+    "volvéis": "volver",
+    "volví": "volver",
+    "vuelva": "volver",
+    "vuelvan": "volver",
+    "vuelvas": "volver",
+    "vuelve": "volver",
+    "vuelven": "volver",
+    "vuelves": "volver",
+    "vuelvo": "volver",
+    "vuestra": "vuestro",
+    "vuestras": "vuestro",
+    "vuestros": "vuestro",
+    "árboles": "árbol",
+    "éramos": "ser"
+  }
+}
