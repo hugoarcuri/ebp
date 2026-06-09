@@ -33,6 +33,8 @@
     --border-color: #1A2A3A;
     --shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
+::selection { background: #B3D4FC; color: #000; }
+.dark ::selection { background: #2A5C7A; color: #fff; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: "Inter", sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; transition: background 0.2s; }
 
@@ -112,52 +114,62 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 #bible-view { padding: 20px; max-width: 900px; margin: 0 auto; }
 .chapter-card { background: var(--card-bg); border-radius: 12px; padding: 30px; box-shadow: var(--shadow); }
 .chapter-title { font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 20px; text-align: center; border-bottom: 3px solid var(--accent); padding-bottom: 10px; }
-.verse { padding: 4px 0; font-size: 16px; line-height: 2.4; color: var(--text); }
-.verse .v-num { font-size: 11px; font-weight: 700; color: var(--accent); vertical-align: super; margin-right: 6px; cursor: pointer; }
+.verse { padding: 4px 0; font-size: var(--verse-font-size, 16px); line-height: 1.8; color: var(--text); display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; }
+.verse .v-num { font-size: 11px; font-weight: 700; color: var(--accent); margin-right: 4px; cursor: pointer; align-self: center; }
 
-.word-group {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    vertical-align: bottom;
-    margin-right: 2px;
-}
-.strong-badges-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 2px;
-    margin-bottom: 1px;
-}
-.strong-badge {
-    background: var(--accent);
-    color: #fff;
-    font-size: 8px;
-    font-weight: 700;
-    padding: 0 2px;
-    border-radius: 2px;
-    cursor: pointer;
-    line-height: 1;
-}
-.strong-badge:hover { background: var(--accent-dark); }
+.word-block { display: inline-flex; flex-direction: column; align-items: center; margin: 0; vertical-align: top; }
+.word-block .strongs { font-size: 0.55em; font-weight: 600; color: #4a90e2; line-height: 1.15; text-align: center; white-space: nowrap; margin-bottom: 1px; }
+.word-block .strongs .strong-badge { cursor: pointer; margin: 0 1px; transition: color 0.2s; }
+.word-block .strongs .strong-badge:hover { color: #2a6cb8; text-decoration: underline; }
+.word-block .word { font-size: 1em; line-height: 1.4; }
 
 .strong-tooltip {
     position: absolute;
-    z-index: 1000;
-    background: #333;
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    line-height: 1.4;
-    max-width: 250px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    pointer-events: none;
+    z-index: 2000;
+    background: #fff;
+    color: #333;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 280px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border: 1px solid #ddd;
+    pointer-events: auto;
     display: none;
     opacity: 0;
     transition: opacity 0.2s;
 }
-.strong-tooltip b { color: var(--accent-light); }
+.dark .strong-tooltip { background: #222; color: #eee; border-color: #444; }
+.strong-tooltip b { color: #4a90e2; font-size: 14px; display: block; margin-bottom: 4px; }
+.strong-tooltip .orig { font-size: 16px; font-weight: 700; color: #333; }
+.dark .strong-tooltip .orig { color: #fff; }
+.strong-tooltip .trans { font-style: italic; color: #666; margin-left: 6px; }
+.dark .strong-tooltip .trans { color: #aaa; }
+.strong-tooltip .def { margin-top: 6px; font-size: 12px; color: #444; display: block; }
+.dark .strong-tooltip .def { color: #ccc; }
+.selection-menu {
+    position: absolute;
+    z-index: 2100;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px;
+    display: none;
+    box-shadow: var(--shadow);
+    gap: 6px;
+}
+.selection-color {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.1s;
+}
+.selection-color:hover { transform: scale(1.2); }
+.dark .selection-menu { background: var(--header-bg); border-color: var(--border-color); }
+.bible-highlight { border-radius: 2px; }
 
 .welcome { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
 .welcome h2 { font-size: 28px; color: var(--accent); margin-bottom: 10px; }
@@ -205,6 +217,9 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
     </div>
 </header>
 
+<div id="strongTooltip" class="strong-tooltip"></div>
+<div id="highlightMenu" class="highlight-menu"></div>
+
 <div class="nav-overlay" id="navOverlay"></div>
 <div class="nav-panel" id="navPanel">
     <div class="nav-header">
@@ -230,6 +245,12 @@ let currentChapter = null;
 let searchResults = [];
 let searchFilter = 'ALL';
 let strongEnabled = false;
+let highlights = JSON.parse(localStorage.getItem('bibliaHighlights') || '{}');
+
+const STRONG_MAP = {};
+if (typeof STRONG_DATA !== 'undefined') {
+    STRONG_DATA.forEach(e => { STRONG_MAP[e.n] = e; });
+}
 
 const BOOK_NAMES = Object.keys(BIBLE_DATA);
 
@@ -317,22 +338,108 @@ function stripAccents(s) {
     return s.normalize('NFD').replace(/[\u0300-\u036F]/g, '');
 }
 
+const HIGHLIGHT_COLORS = {
+    'yellow': '#ffff00',
+    'green': '#ccffcc',
+    'blue': '#cceeff',
+    'pink': '#ffcccc',
+    'none': 'transparent'
+};
+
+function applyHighlights() {
+    document.querySelectorAll('.verse').forEach(el => {
+        const vNum = el.querySelector('.v-num')?.textContent;
+        if (!vNum) return;
+        const ref = `${currentBook} ${currentChapter}:${vNum}`;
+        if (highlights[ref]) {
+            el.style.backgroundColor = highlights[ref];
+        } else {
+            el.style.backgroundColor = '';
+        }
+    });
+}
+
+function saveHighlights() {
+    localStorage.setItem('bibliaHighlights', JSON.stringify(highlights));
+}
+
+function showHighlightMenu(e, ref) {
+    const menu = document.getElementById('highlightMenu');
+    menu.innerHTML = '';
+    
+    Object.entries(HIGHLIGHT_COLORS).forEach(([name, color]) => {
+        const btn = document.createElement('div');
+        btn.className = 'highlight-color';
+        btn.style.backgroundColor = color;
+        if (highlights[ref] === color) btn.classList.add('active');
+        btn.title = name;
+        btn.onclick = () => {
+            if (color === 'transparent') {
+                delete highlights[ref];
+            } else {
+                highlights[ref] = color;
+            }
+            saveHighlights();
+            applyHighlights();
+            menu.style.display = 'none';
+        };
+        menu.appendChild(btn);
+    });
+    
+    menu.style.display = 'flex';
+    menu.style.left = e.pageX + 'px';
+    menu.style.top = e.pageY + 'px';
+}
+
 function markStrongWords(text) {
     if (!strongEnabled || !STRONG_INDEX || !STRONG_INDEX.single) return text;
     
-    return text.replace(/\b([a-záéíóúüñ]+)\b/gi, (match) => {
-        const stripped = stripAccents(match.toLowerCase());
-        const entry = STRONG_INDEX.single[stripped];
-        if (entry) {
-            const strongNumsStr = entry.split('||')[0];
-            const strongNums = strongNumsStr.split(';');
-            const badges = strongNums.map(num => 
-                `<span class="strong-badge" data-strong="${num}">${num}</span>`
-            ).join('');
-            return `<span class="word-group"><span class="strong-badges-row">${badges}</span><span class="word-text">${match}</span></span>`;
+    const isAT = AT_BOOKS.includes(currentBook);
+    const isNT = NT_BOOKS.includes(currentBook);
+    
+    // Tokenize: HTML tags, words, or other (spaces/punctuation)
+    const tokens = text.match(/(<[^>]+>)|([a-záéíóúüñ]+)|([^a-záéíóúüñ<]+)/gi) || [text];
+    
+    return tokens.map(function(token) {
+        // HTML tag — pass through
+        if (token.charAt(0) === '<' && token.charAt(token.length - 1) === '>') return token;
+        
+        // Word — wrap in word-block with optional Strong numbers above
+        if (/^[a-záéíóúüñ]+$/i.test(token)) {
+            const stripped = stripAccents(token.toLowerCase());
+            const entry = STRONG_INDEX.single[stripped];
+            
+            var strongsHtml = '';
+            if (entry) {
+                var strongNumsStr = entry.split('||')[0];
+                var allNums = strongNumsStr.split(';');
+                
+                var filteredNums = allNums.filter(function(num) {
+                    if (isAT) return num.startsWith('H');
+                    if (isNT) return num.startsWith('G');
+                    return true;
+                });
+
+                if (filteredNums.length > 0) {
+                    strongsHtml = '<div class="strongs">' + 
+                        filteredNums.map(function(num) {
+                            var nVal = parseInt(num.replace(/\D/g, ''));
+                            var detail = STRONG_MAP[nVal];
+                            if (detail) {
+                                return '<span class="strong-badge" data-strong="' + num + '" data-lemma="' + escHtml(detail.w) + '" data-translit="' + escHtml(detail.t) + '" data-def="' + escHtml(detail.d.slice(0, 120).replace(/\n/g, ' ')) + '">' + num + '</span>';
+                            }
+                            return '<span class="strong-badge" data-strong="' + num + '">' + num + '</span>';
+                        }).join(' ') + 
+                        '</div>';
+                }
+            }
+            
+            return '<span class="word-block">' + strongsHtml + '<span class="word">' + token + '</span></span>';
         }
-        return match;
-    });
+        
+        // Non-word (spaces, punctuation) — pass through
+        return token;
+    }).join('');
 }
 
 function showWelcome() {
@@ -389,16 +496,34 @@ function showChapter() {
     }
     html += '</div>';
     view.innerHTML = html;
+    applyHighlights();
 
     document.getElementById('prevCh').disabled = currentChapter <= 1;
     document.getElementById('nextCh').disabled = currentChapter >= maxCh;
 
     view.querySelectorAll('.v-num').forEach(el => {
-        el.addEventListener('click', function() {
+        el.addEventListener('click', function(e) {
+            e.stopPropagation();
             const v = this.textContent;
             document.getElementById('search').value = `${currentBook} ${currentChapter}:${v}`;
             this.parentElement.style.background = 'rgba(42, 92, 122, 0.1)';
-            setTimeout(() => { this.parentElement.style.background = ''; }, 1500);
+            setTimeout(() => { 
+                if (!highlights[`${currentBook} ${currentChapter}:${v}`]) {
+                    this.parentElement.style.background = ''; 
+                } else {
+                    this.parentElement.style.backgroundColor = highlights[`${currentBook} ${currentChapter}:${v}`];
+                }
+            }, 1500);
+        });
+    });
+
+    view.querySelectorAll('.verse').forEach(el => {
+        el.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            const vNum = this.querySelector('.v-num')?.textContent;
+            if (vNum) {
+                showHighlightMenu(e, `${currentBook} ${currentChapter}:${vNum}`);
+            }
         });
     });
 }
@@ -440,12 +565,13 @@ function parseReference(ref) {
 }
 
 function searchBible(query) {
+    console.log('Búsqueda:', query);
     const q = stripAccents(query.toLowerCase().trim());
     if (!q) {
         showWelcome();
         return;
     }
-
+    
     // Check for reference pattern: "Book C:V", "Book C.V", "Book C V", or "Book C"
     let refMatch = q.match(/^([a-záéíóúüñ\s]+?)\s*(\d+)(?:[:.](\d+))?$/i);
     if (!refMatch) {
@@ -457,7 +583,6 @@ function searchBible(query) {
         const bkey = stripAccents(bk.toLowerCase());
         const balias = BOOK_ALIASES[bkey];
         let book = balias ? balias : BOOK_NAMES.find(b => stripAccents(b.toLowerCase()) === bkey);
-        // Try partial match if exact not found
         if (!book) {
             book = BOOK_NAMES.find(b => stripAccents(b.toLowerCase()).startsWith(bkey) || bkey.startsWith(stripAccents(b.toLowerCase().split(' ').pop())));
         }
@@ -468,7 +593,7 @@ function searchBible(query) {
             return;
         }
     }
-
+    
     // Full-text search across Bible
     const results = [];
     const scope = searchFilter === 'AT' ? AT_BOOKS : searchFilter === 'NT' ? NT_BOOKS : ALL_BOOKS;
@@ -482,42 +607,66 @@ function searchBible(query) {
             }
         }
     }
-
+    console.log('Resultados encontrados:', results.length);
+    
     const view = document.getElementById('bible-view');
     if (results.length === 0) {
         view.innerHTML = `<div class="welcome"><h2>Sin resultados</h2><p class="sub">No se encontraron versículos para "${query}"</p></div>`;
         searchResults = [];
         return;
     }
-
+    
     searchResults = results;
     let html = `<div class="chapter-card"><div class="chapter-title">Resultados: ${results.length} versículos</div>`;
     const maxShow = Math.min(100, results.length);
     for (let i = 0; i < maxShow; i++) {
         const r = results[i];
         const ref = `${r.book} ${r.chapter}:${r.verse}`;
+        
+        // Highlight search term
+        const regex = new RegExp(`(${q})`, 'gi');
         let text = r.text.length > 120 ? r.text.slice(0, 120) + '…' : r.text;
-        text = markStrongWords(text);
-        html += `<div class="verse" style="cursor:pointer;padding:4px 0;" data-ref="${ref}"><span class="v-num">${ref}</span> ${text}</div>`;
+        const highlightedText = text.replace(regex, '<mark style="background: #ffd700; color: #000;">$1</mark>');
+        const finalText = markStrongWords(highlightedText);
+        
+        html += `<div class="verse" style="cursor:pointer;padding:4px 0;" data-ref="${ref}"><span class="v-num">${ref}</span> ${finalText}</div>`;
     }
     if (results.length > 100) {
         html += `<div class="verse" style="color:var(--text-muted);text-align:center;padding:8px;">… y ${results.length - 100} resultados más</div>`;
     }
     html += '</div>';
     view.innerHTML = html;
-
+    applyHighlights();
+    
     view.querySelectorAll('.verse[data-ref]').forEach(el => {
         el.addEventListener('click', function() {
             const ref = this.dataset.ref;
-            const [book, rest] = [ref.slice(0, ref.lastIndexOf(' ')), ref.slice(ref.lastIndexOf(' ') + 1)];
+            console.log('Versículo seleccionado:', ref);
+            const lastSpace = ref.lastIndexOf(' ');
+            const book = ref.slice(0, lastSpace);
+            const rest = ref.slice(lastSpace + 1);
             const [ch, v] = rest.split(':').map(Number);
+            
             currentBook = book;
             currentChapter = ch;
             showChapter();
+            
             setTimeout(() => {
-                const target = document.querySelector(`.v-num`);
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const allVNums = document.querySelectorAll('.v-num');
+                allVNums.forEach(el => {
+                    if (el.textContent === String(v)) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
             }, 200);
+        });
+        
+        el.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            const ref = this.dataset.ref;
+            if (ref) {
+                showHighlightMenu(e, ref);
+            }
         });
     });
 }
@@ -574,6 +723,32 @@ document.getElementById('strongToggle').addEventListener('click', function() {
 document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft' && !e.ctrlKey && !e.metaKey) { goToPrevChapter(); }
     if (e.key === 'ArrowRight' && !e.ctrlKey && !e.metaKey) { goToNextChapter(); }
+});
+
+document.getElementById('content').addEventListener('mouseover', function(e) {
+    if (e.target.classList.contains('strong-badge')) {
+        const badge = e.target;
+        const tooltip = document.getElementById('strongTooltip');
+        const { lemma, translit, def } = badge.dataset;
+        const strongNum = badge.dataset.strong;
+
+        tooltip.innerHTML = `<b>${strongNum}</b> <span class="orig">${lemma}</span> <span class="trans">${translit}</span><span class="def">${def}</span>`;
+        tooltip.style.display = 'block';
+        
+        const rect = badge.getBoundingClientRect();
+        tooltip.style.left = (rect.left + window.scrollX) + 'px';
+        tooltip.style.top = (rect.top + window.scrollY - tooltip.offsetHeight - 8) + 'px';
+        
+        setTimeout(() => { tooltip.style.opacity = '1'; }, 10);
+    }
+});
+
+document.getElementById('content').addEventListener('mouseout', function(e) {
+    if (e.target.classList.contains('strong-badge')) {
+        const tooltip = document.getElementById('strongTooltip');
+        tooltip.style.opacity = '0';
+        setTimeout(() => { tooltip.style.display = 'none'; }, 200);
+    }
 });
 
 document.getElementById('content').addEventListener('click', function(e) {
@@ -676,6 +851,12 @@ function initNav() {
 initNav();
 
 // Messages from parent
+window.addEventListener('click', function(e) {
+    if (!e.target.closest('.highlight-menu')) {
+        document.getElementById('highlightMenu').style.display = 'none';
+    }
+});
+
 window.addEventListener('message', function(e) {
     if (!e.data) return;
     if (e.data.type === 'toggleDark') {
@@ -691,6 +872,33 @@ window.addEventListener('message', function(e) {
         document.querySelectorAll('.verse').forEach(function(el) { el.style.fontSize = e.data.size + 'px'; });
     }
 });
+
+// Font Size Control
+let currentFontSize = parseInt(localStorage.getItem('bibliaFontSize')) || 16;
+const fontLabel = document.getElementById('fontSizeLabel');
+
+function applyFontSize(size) {
+    currentFontSize = size;
+    // Update CSS variable
+    document.documentElement.style.setProperty('--verse-font-size', size + 'px');
+    // Fallback: update all verses directly to ensure it works
+    document.querySelectorAll('.verse').forEach(el => {
+        el.style.fontSize = size + 'px';
+    });
+    if (fontLabel) fontLabel.textContent = size;
+    localStorage.setItem('bibliaFontSize', size);
+}
+
+document.getElementById('fontDecr').addEventListener('click', () => {
+    if (currentFontSize > 8) applyFontSize(currentFontSize - 1);
+});
+
+document.getElementById('fontIncr').addEventListener('click', () => {
+    if (currentFontSize < 40) applyFontSize(currentFontSize + 1);
+});
+
+// Initial application of font size
+applyFontSize(currentFontSize);
 
 // Init
 document.getElementById('search').value = '';
