@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Reina Valera 1960</title>
+<script src="rv1960.js"></script>
+<script src="strong_index.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+<style>
+:root {
+    --accent: #2A5C7A;
+    --accent-light: #4A8CB2;
+    --accent-dark: #1A3D52;
+    --header-bg: #0A1628;
+    --bg: #F5F2EB;
+    --card-bg: #FFFFFF;
+    --text: #1C1814;
+    --text-muted: #5A7A8A;
+    --border-color: #C8D8E8;
+    --shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.dark {
+    --accent: #4A8CB2;
+    --accent-light: #6A9CBB;
+    --accent-dark: #2A5C7A;
+    --header-bg: #060E18;
+    --bg: #14100C;
+    --card-bg: #1A222A;
+    --text: #E0D8C8;
+    --text-muted: #6A8A9A;
+    --border-color: #1A2A3A;
+    --shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "Inter", sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; transition: background 0.2s; }
+
+header { 
+    background: var(--header-bg); 
+    color: #fff; 
+    padding: 4px 12px; 
+    display: grid; 
+    grid-template-rows: auto auto auto; 
+    gap: 6px; 
+    flex-shrink: 0;
+}
+.header-row-1, .header-row-3 { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand .logo { height: 24px; width: auto; border-radius: 3px; }
+.brand h1 { font-size: 15px; font-weight: 700; }
+.menu-btn { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 2px; opacity: 0.8; }
+
+.header-row-2 { display: flex; width: 100%; }
+.search-container { width: 100%; }
+.search-container input { 
+    width: 100%; 
+    padding: 6px 12px; 
+    border: none; 
+    border-radius: 6px; 
+    font-size: 14px; 
+    outline: none; 
+    background: #fff; 
+    color: #333;
+}
+
+.toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 4px; }
+.btn-tool { 
+    background: rgba(255,255,255,0.1); 
+    border: 1px solid rgba(255,255,255,0.2); 
+    color: rgba(255,255,255,0.8); 
+    font-size: 10px; 
+    font-weight: 700; 
+    padding: 3px 8px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+}
+.btn-tool:hover, .btn-tool.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.font-ctrl { display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 6px; }
+#fontSizeLabel { font-size: 10px; font-weight: 700; min-width: 18px; text-align: center; }
+
+.nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.nav-overlay.open { opacity: 1; pointer-events: auto; }
+.nav-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 300px; max-width: 80vw; background: var(--header-bg); color: #fff; z-index: 201; transform: translateX(100%); transition: transform 0.3s ease; display: flex; flex-direction: column; }
+.nav-panel.open { transform: translateX(0); }
+.nav-header { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between; }
+.nav-header h2 { font-size: 16px; font-weight: 700; }
+.nav-close { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; opacity: 0.7; }
+.nav-content { flex: 1; overflow-y: auto; padding: 10px 0; }
+.nav-item { padding: 10px 16px; cursor: pointer; font-size: 14px; transition: background 0.2s; display: flex; justify-content: space-between; align-items: center; }
+.nav-item:hover { background: rgba(255,255,255,0.1); }
+.nav-item.active { background: var(--accent); color: #fff; }
+.nav-back { padding: 10px 16px; background: rgba(255,255,255,0.05); cursor: pointer; font-size: 13px; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 8px; }
+.nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(45px, 1fr)); gap: 8px; padding: 16px; }
+.nav-grid-item { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 700; transition: background 0.2s; }
+.nav-grid-item:hover { background: var(--accent); }
+
+.nav-chapter-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 44px; height: 80px; background: transparent; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+.nav-chapter-btn:hover { background: var(--hover-bg); color: var(--accent); }
+.nav-chapter-btn:disabled { opacity: 0.2; cursor: default; }
+.nav-chapter-btn.prev { left: 5px; }
+.nav-chapter-btn.next { right: 5px; }
+
+main { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+#content { flex: 1; overflow-y: auto; position: relative; }
+#bible-view { padding: 20px; max-width: 900px; margin: 0 auto; }
+.chapter-card { background: var(--card-bg); border-radius: 12px; padding: 30px; box-shadow: var(--shadow); }
+.chapter-title { font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 20px; text-align: center; border-bottom: 3px solid var(--accent); padding-bottom: 10px; }
+.verse { padding: 4px 0; font-size: 16px; line-height: 1.8; color: var(--text); }
+.verse .v-num { font-size: 11px; font-weight: 700; color: var(--accent); vertical-align: super; margin-right: 6px; cursor: pointer; }
+.strong-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 0 4px;
+    border-radius: 4px;
+    margin: 0 2px;
+    cursor: pointer;
+    vertical-align: baseline;
+    position: relative;
+}
+.strong-badge:hover { background: var(--accent-dark); }
+.strong-badge::after {
+    content: attr(data-strong);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 10;
+}
+.strong-badge:hover::after { opacity: 1; }
+
+.welcome { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
+.welcome h2 { font-size: 28px; color: var(--accent); margin-bottom: 10px; }
+.welcome .sub { font-size: 16px; color: var(--text-muted); margin-bottom: 24px; }
+.welcome .quick-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 600px; }
+.welcome .quick-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 20px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--accent); transition: all 0.2s; box-shadow: var(--shadow); }
+.welcome .quick-card:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+@media (max-width: 600px) {
+    .brand h1 { font-size: 14px; }
+    .nav-chapter-btn { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="header-row-1">
+        <div class="brand">
+            <img class="logo" src="https://cautivoestrella.org/wp-content/uploads/IMG/reina-velera-1960.jpg" alt="Biblia">
+            <h1>Reina Valera 1960</h1>
+        </div>
+        <button class="menu-btn" id="menuBtn" title="Menú">☰</button>
+    </div>
+    <div class="header-row-2">
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar versículo o palabra..." autocomplete="off" autofocus>
+        </div>
+    </div>
+    <div class="header-row-3">
+        <div class="toolbar-left" id="searchFilter">
+            <button class="btn-tool active" data-filter="ALL">Biblia</button>
+            <button class="btn-tool" data-filter="AT">AT</button>
+            <button class="btn-tool" data-filter="NT">NT</button>
+            <button class="btn-tool" id="strongToggle">Strong: Off</button>
+        </div>
+        <div class="toolbar-right">
+            <div class="font-ctrl">
+                <button class="btn-tool" id="fontDecr">A−</button>
+                <span id="fontSizeLabel">16</span>
+                <button class="btn-tool" id="fontIncr">A+</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-panel" id="navPanel">
+    <div class="nav-header">
+        <h2 id="navTitle">Libros</h2>
+        <button class="nav-close" id="navClose">✕</button>
+    </div>
+    <div class="nav-content" id="navContent"></div>
+</div>
+
+<main>
+
+    <div id="content">
+        <div id="bible-view"></div>
+        <button id="prevCh" class="nav-chapter-btn prev" title="Capítulo anterior">◀</button>
+        <button id="nextCh" class="nav-chapter-btn next" title="Capítulo siguiente">▶</button>
+    </div>
+</main>
+
+<script>
+let isDark = localStorage.getItem('bibliaDark') === 'true';
+let currentBook = null;
+let currentChapter = null;
+let searchResults = [];
+let searchFilter = 'ALL';
+let strongEnabled = false;
+
+const BOOK_NAMES = Object.keys(BIBLE_DATA);
+
+// Map common book name aliases to canonical names
+const BOOK_ALIASES = {
+    'mateo': 'S. Mateo', 'san mateo': 'S. Mateo', 'mt': 'S. Mateo', 'mat': 'S. Mateo',
+    'marcos': 'S. Marcos', 'san marcos': 'S. Marcos', 'mr': 'S. Marcos', 'mc': 'S. Marcos',
+    'lucas': 'S. Lucas', 'san lucas': 'S. Lucas', 'lc': 'S. Lucas', 'luk': 'S. Lucas',
+    'juan': 'S.Juan', 'san juan': 'S.Juan', 'jn': 'S.Juan', 'jua': 'S.Juan',
+    'hechos': 'Hechos', 'hch': 'Hechos', 'h': 'Hechos',
+    'romanos': 'Romanos', 'ro': 'Romanos', 'rom': 'Romanos',
+    '1 corintios': '1 Corintios', '1 cor': '1 Corintios', '1co': '1 Corintios',
+    '2 corintios': '2 Corintios', '2 cor': '2 Corintios', '2co': '2 Corintios',
+    'galatas': 'Gálatas', 'galatas': 'Gálatas', 'ga': 'Gálatas', 'gal': 'Gálatas',
+    'efesios': 'Efesios', 'ef': 'Efesios', 'efe': 'Efesios',
+    'filipenses': 'Filipenses', 'fil': 'Filipenses', 'flp': 'Filipenses',
+    'colosenses': 'Colosenses', 'col': 'Colosenses',
+    '1 tesalonicenses': '1 Tesalonicenses', '1 tes': '1 Tesalonicenses', '1ts': '1 Tesalonicenses',
+    '2 tesalonicenses': '2 Tesalonicenses', '2 tes': '2 Tesalonicenses', '2ts': '2 Tesalonicenses',
+    '1 timoteo': '1 Timoteo', '1 tim': '1 Timoteo', '1ti': '1 Timoteo',
+    '2 timoteo': '2 Timoteo', '2 tim': '2 Timoteo', '2ti': '2 Timoteo',
+    'tito': 'Tito', 'tit': 'Tito',
+    'filemon': 'Filemón', 'filemon': 'Filemón', 'flm': 'Filemón',
+    'hebreos': 'Hebreos', 'heb': 'Hebreos',
+    'santiago': 'Santiago', 'stg': 'Santiago', 'sant': 'Santiago',
+    '1 pedro': '1 Pedro', '1 pe': '1 Pedro', '1p': '1 Pedro',
+    '2 pedro': '2 Pedro', '2 pe': '2 Pedro', '2p': '2 Pedro',
+    '1 juan': '1 S.Juan', '1 jn': '1 S.Juan', '1j': '1 S.Juan',
+    '2 juan': '2 S.Juan', '2 jn': '2 S.Juan', '2j': '2 S.Juan',
+    '3 juan': '3 S.Juan', '3 jn': '3 S.Juan', '3j': '3 S.Juan',
+    'judas': 'Judas', 'jud': 'Judas',
+    'apocalipsis': 'Apocalipsis', 'ap': 'Apocalipsis', 'apo': 'Apocalipsis',
+    'genesis': 'Génesis', 'genesis': 'Génesis', 'gn': 'Génesis', 'gen': 'Génesis',
+    'exodo': 'Éxodo', 'exodo': 'Éxodo', 'ex': 'Éxodo',
+    'levitico': 'Levítico', 'levitico': 'Levítico', 'lv': 'Levítico', 'lev': 'Levítico',
+    'numeros': 'Números', 'numeros': 'Números', 'nm': 'Números', 'num': 'Números',
+    'deuteronomio': 'Deuteronomio', 'dt': 'Deuteronomio', 'deut': 'Deuteronomio',
+    'josue': 'Josué', 'josue': 'Josué', 'jos': 'Josué',
+    'jueces': 'Jueces', 'jue': 'Jueces',
+    'rut': 'Rut',
+    '1 samuel': '1 Samuel', '1 sam': '1 Samuel', '1s': '1 Samuel',
+    '2 samuel': '2 Samuel', '2 sam': '2 Samuel', '2s': '2 Samuel',
+    '1 reyes': '1 Reyes', '1 re': '1 Reyes', '1r': '1 Reyes',
+    '2 reyes': '2 Reyes', '2 re': '2 Reyes', '2r': '2 Reyes',
+    '1 cronicas': '1 Crónicas', '1 cronicas': '1 Crónicas', '1 cr': '1 Crónicas',
+    '2 cronicas': '2 Crónicas', '2 cronicas': '2 Crónicas', '2 cr': '2 Crónicas',
+    'esdras': 'Esdras', 'esd': 'Esdras',
+    'nehemias': 'Nehemías', 'nehemias': 'Nehemías', 'neh': 'Nehemías',
+    'ester': 'Ester', 'est': 'Ester',
+    'job': 'Job',
+    'salmo': 'Salmos', 'sal': 'Salmos', 'sl': 'Salmos',
+    'proverbios': 'Proverbios', 'prov': 'Proverbios', 'pr': 'Proverbios',
+    'eclesiastes': 'Eclesiastés', 'eclesiastes': 'Eclesiastés', 'ecl': 'Eclesiastés',
+    'cantar': 'Cantares', 'cantares': 'Cantares', 'cnt': 'Cantares',
+    'isaias': 'Isaías', 'isaias': 'Isaías', 'is': 'Isaías', 'isa': 'Isaías',
+    'jeremias': 'Jeremías', 'jeremias': 'Jeremías', 'jer': 'Jeremías', 'jr': 'Jeremías',
+    'lamentaciones': 'Lamentaciones', 'lam': 'Lamentaciones', 'lm': 'Lamentaciones',
+    'ezequiel': 'Ezequiel', 'ez': 'Ezequiel', 'eze': 'Ezequiel',
+    'daniel': 'Daniel', 'dan': 'Daniel', 'dn': 'Daniel',
+    'oseas': 'Oseas', 'os': 'Oseas',
+    'joel': 'Joel', 'jl': 'Joel',
+    'amos': 'Amós', 'amos': 'Amós',
+    'abdias': 'Abdías', 'abdias': 'Abdías', 'abd': 'Abdías',
+    'jonas': 'Jonás', 'jonas': 'Jonás', 'jon': 'Jonás',
+    'miqueas': 'Miqueas', 'miq': 'Miqueas',
+    'nahum': 'Nahúm', 'nahum': 'Nahúm',
+    'habacuc': 'Habacuc', 'hab': 'Habacuc',
+    'sofonias': 'Sofonías', 'sofonias': 'Sofonías', 'sof': 'Sofonías',
+    'hageo': 'Hageo', 'hag': 'Hageo',
+    'zacarias': 'Zacarías', 'zacarias': 'Zacarías', 'zac': 'Zacarías',
+    'malaquias': 'Malaquías', 'malaquias': 'Malaquías', 'mal': 'Malaquías',
+};
+
+if (isDark) document.documentElement.classList.add('dark');
+
+const TESTAMENTS = {
+    AT: BOOK_NAMES.slice(0, 39),
+    NT: BOOK_NAMES.slice(39)
+};
+const AT_BOOKS = TESTAMENTS.AT;
+const NT_BOOKS = TESTAMENTS.NT;
+const ALL_BOOKS = BOOK_NAMES;
+
+function stripAccents(s) {
+    return s.normalize('NFD').replace(/[\u0300-\u036F]/g, '');
+}
+
+function markStrongWords(text) {
+    if (!strongEnabled || !STRONG_INDEX || !STRONG_INDEX.single) return text;
+    
+    // Regex to match words (sequences of letters)
+    return text.replace(/\b([a-záéíóúüñ]+)\b/gi, (match) => {
+        const stripped = stripAccents(match.toLowerCase());
+        if (STRONG_INDEX.single[stripped]) {
+            // Format is "H123;G456||word"
+            const strongNums = STRONG_INDEX.single[stripped].split('||')[0];
+            return `<span class="strong-badge" data-strong="${strongNums}">${match}</span>`;
+        }
+        return match;
+    });
+}
+
+function showWelcome() {
+    const shortcuts = [
+        { name: 'Génesis 1', ref: 'Génesis 1' },
+        { name: 'Salmos 23', ref: 'Salmos 23' },
+        { name: 'Isaías 40', ref: 'Isaías 40' },
+        { name: 'S. Mateo 5', ref: 'S. Mateo 5' },
+        { name: 'S. Juan 1', ref: 'S. Juan 1' },
+        { name: 'Romanos 8', ref: 'Romanos 8' },
+        { name: 'Apocalipsis 21', ref: 'Apocalipsis 21' }
+    ];
+    const view = document.getElementById('bible-view');
+    view.innerHTML = `
+        <div class="welcome">
+            <h2>Reina Valera 1960</h2>
+            <p class="sub">Selecciona un pasaje para comenzar o usa el buscador</p>
+            <div class="quick-grid">
+                ${shortcuts.map(s => `<div class="quick-card" data-ref="${s.ref}">${s.name}</div>`).join('')}
+            </div>
+        </div>`;
+    
+    view.querySelectorAll('.quick-card').forEach(el => {
+        el.addEventListener('click', function() {
+            const ref = this.dataset.ref;
+            document.getElementById('search').value = ref;
+            searchBible(ref);
+        });
+    });
+}
+
+function showChapter() {
+    if (!currentBook || !currentChapter) return;
+    const view = document.getElementById('bible-view');
+    const chapters = BIBLE_DATA[currentBook];
+    if (!chapters) return;
+
+    const chapterData = chapters[String(currentChapter)];
+    if (!chapterData) {
+        view.innerHTML = `<div class="welcome"><h2>Capítulo no encontrado</h2></div>`;
+        return;
+    }
+
+    const maxCh = Object.keys(chapters).length;
+    document.getElementById('refLabel').textContent = `${currentBook} ${currentChapter}`;
+
+    let html = `<div class="chapter-card"><div class="chapter-title">${currentBook} ${currentChapter}</div>`;
+    for (const [vNum, vText] of Object.entries(chapterData)) {
+        const processedText = markStrongWords(vText);
+        html += `<div class="verse"><span class="v-num">${vNum}</span>${processedText}</div>`;
+    }
+    html += '</div>';
+    view.innerHTML = html;
+
+    document.getElementById('prevCh').disabled = currentChapter <= 1;
+    document.getElementById('nextCh').disabled = currentChapter >= maxCh;
+
+    view.querySelectorAll('.v-num').forEach(el => {
+        el.addEventListener('click', function() {
+            const v = this.textContent;
+            document.getElementById('search').value = `${currentBook} ${currentChapter}:${v}`;
+            this.parentElement.style.background = 'rgba(42, 92, 122, 0.1)';
+            setTimeout(() => { this.parentElement.style.background = ''; }, 1500);
+        });
+    });
+}
+
+function parseReference(ref) {
+    const parts = ref.trim().split(/\s+/);
+    if (parts.length < 2) return;
+
+    const chPart = parts.pop(); // e.g., "3:16" or "1"
+    const bookName = parts.join(' ');
+
+    let ch = parseInt(chPart);
+    let v = null;
+
+    if (chPart.includes(':')) {
+        const [c, ...vp] = chPart.split(':');
+        ch = parseInt(c);
+        v = vp.join(':');
+    }
+
+    // Find the book
+    const key = bookName.toLowerCase().trim();
+    const alias = BOOK_ALIASES[key];
+    let match = alias ? alias : BOOK_NAMES.find(b => b.toLowerCase() === key);
+    if (match) {
+        currentBook = match;
+        currentChapter = ch;
+        showChapter();
+        document.getElementById('search').value = ref;
+        if (v) {
+            setTimeout(() => {
+                const target = document.querySelector(`.v-num`);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
+        }
+        return true;
+    }
+    return false;
+}
+
+function searchBible(query) {
+    const q = stripAccents(query.toLowerCase().trim());
+    if (!q) {
+        showWelcome();
+        return;
+    }
+
+    // Check for reference pattern: "Book C:V", "Book C.V", "Book C V", or "Book C"
+    let refMatch = q.match(/^([a-záéíóúüñ\s]+?)\s*(\d+)(?:[:.](\d+))?$/i);
+    if (!refMatch) {
+        refMatch = q.match(/^([a-záéíóúüñ\s]+?)\s+(\d+)\s+(\d+)$/i);
+    }
+    if (refMatch) {
+        const bk = refMatch[1].trim();
+        const ch = parseInt(refMatch[2]);
+        const bkey = stripAccents(bk.toLowerCase());
+        const balias = BOOK_ALIASES[bkey];
+        let book = balias ? balias : BOOK_NAMES.find(b => stripAccents(b.toLowerCase()) === bkey);
+        // Try partial match if exact not found
+        if (!book) {
+            book = BOOK_NAMES.find(b => stripAccents(b.toLowerCase()).startsWith(bkey) || bkey.startsWith(stripAccents(b.toLowerCase().split(' ').pop())));
+        }
+        if (book && BIBLE_DATA[book] && BIBLE_DATA[book][String(ch)]) {
+            currentBook = book;
+            currentChapter = ch;
+            showChapter();
+            return;
+        }
+    }
+
+    // Full-text search across Bible
+    const results = [];
+    const scope = searchFilter === 'AT' ? AT_BOOKS : searchFilter === 'NT' ? NT_BOOKS : ALL_BOOKS;
+    for (const book of scope) {
+        for (const [chNum, verses] of Object.entries(BIBLE_DATA[book])) {
+            for (const [vNum, vText] of Object.entries(verses)) {
+                const testText = stripAccents(vText.toLowerCase());
+                if (testText.includes(q)) {
+                    results.push({ book, chapter: parseInt(chNum), verse: parseInt(vNum), text: vText });
+                }
+            }
+        }
+    }
+
+    const view = document.getElementById('bible-view');
+    if (results.length === 0) {
+        view.innerHTML = `<div class="welcome"><h2>Sin resultados</h2><p class="sub">No se encontraron versículos para "${query}"</p></div>`;
+        searchResults = [];
+        return;
+    }
+
+    searchResults = results;
+    let html = `<div class="chapter-card"><div class="chapter-title">Resultados: ${results.length} versículos</div>`;
+    const maxShow = Math.min(100, results.length);
+    for (let i = 0; i < maxShow; i++) {
+        const r = results[i];
+        const ref = `${r.book} ${r.chapter}:${r.verse}`;
+        let text = r.text.length > 120 ? r.text.slice(0, 120) + '…' : r.text;
+        text = markStrongWords(text);
+        html += `<div class="verse" style="cursor:pointer;padding:4px 0;" data-ref="${ref}"><span class="v-num">${ref}</span> ${text}</div>`;
+    }
+    if (results.length > 100) {
+        html += `<div class="verse" style="color:var(--text-muted);text-align:center;padding:8px;">… y ${results.length - 100} resultados más</div>`;
+    }
+    html += '</div>';
+    view.innerHTML = html;
+
+    view.querySelectorAll('.verse[data-ref]').forEach(el => {
+        el.addEventListener('click', function() {
+            const ref = this.dataset.ref;
+            const [book, rest] = [ref.slice(0, ref.lastIndexOf(' ')), ref.slice(ref.lastIndexOf(' ') + 1)];
+            const [ch, v] = rest.split(':').map(Number);
+            currentBook = book;
+            currentChapter = ch;
+            showChapter();
+            setTimeout(() => {
+                const target = document.querySelector(`.v-num`);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
+        });
+    });
+}
+
+function goToPrevChapter() {
+    if (!currentBook || !currentChapter) return;
+    if (currentChapter > 1) {
+        currentChapter--;
+        showChapter();
+    }
+}
+
+function goToNextChapter() {
+    if (!currentBook || !currentChapter) return;
+    const maxCh = Object.keys(BIBLE_DATA[currentBook]).length;
+    if (currentChapter < maxCh) {
+        currentChapter++;
+        showChapter();
+    }
+}
+document.getElementById('prevCh').addEventListener('click', goToPrevChapter);
+document.getElementById('nextCh').addEventListener('click', goToNextChapter);
+document.getElementById('mobileBack').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.remove('sidebar-hidden');
+});
+
+let searchTimer;
+document.getElementById('search').addEventListener('input', function() {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => searchBible(this.value), 200);
+});
+document.getElementById('search').addEventListener('focus', function() {
+    this.select();
+});
+document.querySelectorAll('#searchFilter .btn-tool[data-filter]').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('#searchFilter .btn-tool[data-filter]').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        searchFilter = this.dataset.filter;
+        const q = document.getElementById('search').value;
+        if (q.trim()) searchBible(q);
+    });
+});
+
+document.getElementById('strongToggle').addEventListener('click', function() {
+    strongEnabled = !strongEnabled;
+    this.textContent = `Strong: ${strongEnabled ? 'On' : 'Off'}`;
+    this.classList.toggle('active', strongEnabled);
+    if (currentBook && currentChapter) {
+        showChapter();
+    } else if (searchResults.length > 0) {
+        searchBible(document.getElementById('search').value);
+    }
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft' && !e.ctrlKey && !e.metaKey) { goToPrevChapter(); }
+    if (e.key === 'ArrowRight' && !e.ctrlKey && !e.metaKey) { goToNextChapter(); }
+});
+
+document.getElementById('content').addEventListener('click', function(e) {
+    if (e.target.classList.contains('strong-badge')) {
+        const strongNum = e.target.dataset.strong;
+        // Broadcast search to Kittel and Strong panels
+        const frameKittel = window.parent.document.getElementById('frameKittel');
+        const frameStrong = window.parent.document.getElementById('frameStrong');
+        if (frameKittel) frameKittel.contentWindow.postMessage({ type: 'search', query: strongNum }, '*');
+        if (frameStrong) frameStrong.contentWindow.postMessage({ type: 'search', query: strongNum }, '*');
+    }
+});
+
+// Navegación por Menú Hamburguesa
+function initNav() {
+    const navOverlay = document.getElementById('navOverlay');
+    const navPanel = document.getElementById('navPanel');
+    const navContent = document.getElementById('navContent');
+    const navTitle = document.getElementById('navTitle');
+    const menuBtn = document.getElementById('menuBtn');
+
+    function openNav(view) {
+        navOverlay.classList.add('open');
+        navPanel.classList.add('open');
+        renderNav(view);
+    }
+
+    function closeNav() {
+        navOverlay.classList.remove('open');
+        navPanel.classList.remove('open');
+    }
+
+    function renderNav(view, book = null, chapter = null) {
+        navContent.innerHTML = '';
+        
+        if (view === 'books') {
+            navTitle.textContent = 'Libros';
+            BOOK_NAMES.forEach(name => {
+                const item = document.createElement('div');
+                item.className = `nav-item ${name === currentBook ? 'active' : ''}`;
+                item.innerHTML = `<span>${name}</span> <span>❯</span>`;
+                item.onclick = () => renderNav('chapters', name);
+                navContent.appendChild(item);
+            });
+        } else if (view === 'chapters') {
+            navTitle.textContent = book;
+            const back = document.createElement('div');
+            back.className = 'nav-back';
+            back.innerHTML = '<span>◀ Volver a Libros</span>';
+            back.onclick = () => renderNav('books');
+            navContent.appendChild(back);
+
+            const grid = document.createElement('div');
+            grid.className = 'nav-grid';
+            const chapters = Object.keys(BIBLE_DATA[book]);
+            chapters.forEach(ch => {
+                const item = document.createElement('div');
+                item.className = `nav-grid-item ${ch == currentChapter ? 'active' : ''}`;
+                item.textContent = ch;
+                item.onclick = () => renderNav('verses', book, ch);
+                grid.appendChild(item);
+            });
+            navContent.appendChild(grid);
+        } else if (view === 'verses') {
+            navTitle.textContent = `${book} ${chapter}`;
+            const back = document.createElement('div');
+            back.className = 'nav-back';
+            back.innerHTML = `<span>◀ Volver a Capítulos de ${book}</span>`;
+            back.onclick = () => renderNav('chapters', book);
+            navContent.appendChild(back);
+
+            const verses = BIBLE_DATA[book][chapter];
+            Object.keys(verses).forEach(v => {
+                const item = document.createElement('div');
+                item.className = 'nav-item';
+                item.innerHTML = `<span>Versículo ${v}</span>`;
+                item.onclick = () => {
+                    currentBook = book;
+                    currentChapter = parseInt(chapter);
+                    showChapter();
+                    closeNav();
+                    setTimeout(() => {
+                        const allVNums = document.querySelectorAll('.v-num');
+                        allVNums.forEach(el => {
+                            if(el.textContent === v) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        });
+                    }, 200);
+                };
+                navContent.appendChild(item);
+            });
+        }
+    }
+
+    menuBtn.addEventListener('click', () => openNav('books'));
+    document.getElementById('navClose').addEventListener('click', closeNav);
+    navOverlay.addEventListener('click', closeNav);
+}
+
+// Initialize navigation
+initNav();
+
+// Messages from parent
+window.addEventListener('message', function(e) {
+    if (!e.data) return;
+    if (e.data.type === 'toggleDark') {
+        isDark = e.data.dark;
+        document.documentElement.classList.toggle('dark', isDark);
+        localStorage.setItem('bibliaDark', isDark);
+    }
+    if (e.data.type === 'search') {
+        document.getElementById('search').value = e.data.query || '';
+        searchBible(e.data.query || '');
+    }
+    if (e.data.type === 'fontChange') {
+        document.querySelectorAll('.verse').forEach(function(el) { el.style.fontSize = e.data.size + 'px'; });
+    }
+});
+
+// Init
+document.getElementById('search').value = '';
+showWelcome();
+</script>
+</body>
+</html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kittel — Diccionario Teológico del NT</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+<script src="datos.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+<style>
+/* SECTION: variables-colores */
+:root {
+    --accent: #C8B88A;
+    --accent-dark: #B8A87A;
+    --header-bg: #2A0808;
+    --bg: #F5F2EB;
+    --sidebar-bg: #FAF8F4;
+    --sidebar-border: #E8E0C8;
+    --card-bg: #FFFFFF;
+    --text: #1C1814;
+    --text-muted: #8A8072;
+    --text-light: #B0A898;
+    --badge-bg: #F0E8D0;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --shadow-lg: 0 4px 24px rgba(0,0,0,0.10);
+    --scrollbar-track: #F0ECE4;
+    --scrollbar-thumb: #C8B88A;
+    --griego-color: #2A0808;
+    --welcome-bg: #F5F2EB;
+}
+/* SECTION: dark-mode */
+.dark {
+    --bg: #1C1410;
+    --sidebar-bg: #261E18;
+    --sidebar-border: #3A3228;
+    --card-bg: #2E2620;
+    --text: #E8E0C8;
+    --text-muted: #A89880;
+    --text-light: #7A7062;
+    --badge-bg: #3A3228;
+    --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    --shadow-lg: 0 4px 24px rgba(0,0,0,0.4);
+    --scrollbar-track: #2E2620;
+    --scrollbar-thumb: #5A5040;
+    --griego-color: #E8E0C8;
+    --welcome-bg: #1C1410;
+}
+/* SECTION: reset-base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", system-ui, sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; transition: background 0.2s, color 0.2s; }
+
+/* SECTION: header */
+header { 
+    background: var(--header-bg); 
+    color: #fff; 
+    padding: 4px 12px; 
+    display: grid; 
+    grid-template-rows: auto auto auto; 
+    gap: 6px; 
+    flex-shrink: 0;
+}
+.header-row-1, .header-row-3 { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand .logo { height: 24px; width: auto; border-radius: 3px; }
+.brand h1 { font-size: 15px; font-weight: 700; }
+.menu-btn { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 2px; opacity: 0.8; }
+
+.header-row-2 { display: flex; width: 100%; }
+.search-container { width: 100%; }
+.search-container input { 
+    width: 100%; 
+    padding: 6px 12px; 
+    border: none; 
+    border-radius: 6px; 
+    font-size: 14px; 
+    outline: none; 
+    background: #fff; 
+    color: #333;
+}
+
+.toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 4px; }
+.btn-tool { 
+    background: rgba(255,255,255,0.1); 
+    border: 1px solid rgba(255,255,255,0.2); 
+    color: rgba(255,255,255,0.8); 
+    font-size: 10px; 
+    font-weight: 700; 
+    padding: 3px 8px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+}
+.btn-tool:hover, .btn-tool.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.font-ctrl { display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 6px; }
+#fontSizeLabel { font-size: 10px; font-weight: 700; min-width: 18px; text-align: center; }
+
+
+/* SECTION: index-panel */
+.index-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.index-overlay.open { opacity: 1; pointer-events: auto; }
+.index-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 420px; max-width: 90vw; background: #1C0E0A; z-index: 201; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); display: flex; flex-direction: column; color: #E8E0C8; }
+.index-panel.open { transform: translateX(0); }
+.index-panel .panel-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
+.index-panel .panel-header h2 { font-size: 15px; font-weight: 700; letter-spacing: 0.3px; }
+.index-panel .panel-header .panel-close { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 18px; cursor: pointer; padding: 4px 8px; border-radius: 6px; line-height: 1; }
+.index-panel .panel-header .panel-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.index-panel .panel-header .back-btn { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 16px; cursor: pointer; padding: 4px 8px; border-radius: 6px; line-height: 1; display: none; margin-right: 4px; }
+.index-panel .panel-header .back-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.index-panel .panel-header .back-btn.show { display: inline-block; }
+.index-panel .letter-grid.hide { display: none; }
+.index-panel .letter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 6px; padding: 20px; flex: 1; align-content: start; overflow-y: auto; }
+.index-panel .letter-grid .lg-item { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 56px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; cursor: pointer; transition: background 0.15s, border-color 0.15s; user-select: none; }
+.index-panel .letter-grid .lg-item:hover { background: var(--accent); border-color: var(--accent); }
+.index-panel .letter-grid .lg-item .lg-char { font-size: 18px; font-weight: 700; color: #E8E0C8; line-height: 1.2; }
+.index-panel .letter-grid .lg-item .lg-count { font-size: 10px; color: rgba(255,255,255,0.35); }
+.index-panel .letter-grid .lg-item:hover .lg-char { color: #fff; }
+.index-panel .letter-grid .lg-item:hover .lg-count { color: rgba(255,255,255,0.7); }
+.index-panel .panel-search { padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; display: none; }
+.index-panel .panel-search.show { display: block; }
+.index-panel .panel-search input { width: 100%; padding: 8px 14px; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; font-size: 14px; font-family: inherit; outline: none; background: rgba(255,255,255,0.06); color: #E8E0C8; transition: border-color 0.2s; }
+.index-panel .panel-search input::placeholder { color: rgba(255,255,255,0.3); }
+.index-panel .panel-search input:focus { border-color: var(--accent); }
+.index-panel .panel-words { flex: 1; overflow-y: auto; padding: 8px 0; display: none; }
+.index-panel .panel-words.show { display: block; }
+.index-panel .panel-words::-webkit-scrollbar { width: 5px; }
+.index-panel .panel-words::-webkit-scrollbar-track { background: transparent; }
+.index-panel .panel-words::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+.index-panel .pw-group { margin-bottom: 4px; }
+.index-panel .pw-group .pw-letter { padding: 6px 20px 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); background: rgba(255,255,255,0.03); }
+.index-panel .pw-item { display: flex; align-items: center; gap: 8px; padding: 5px 20px; cursor: pointer; transition: background 0.12s; font-size: 13px; color: rgba(255,255,255,0.7); }
+.index-panel .pw-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.index-panel .pw-item .pw-count { font-size: 10px; color: rgba(255,255,255,0.25); margin-left: auto; }
+.index-panel .pw-empty { padding: 30px 20px; text-align: center; color: rgba(255,255,255,0.3); font-size: 13px; }
+
+main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
+
+/* SECTION: sidebar */
+#sidebar { width: 35%; min-width: 240px; max-width: 500px; background: var(--sidebar-bg); border-right: 1px solid var(--sidebar-border); display: flex; flex-direction: column; overflow: hidden; min-height: 0; transition: background 0.2s; }
+#sidebar .results-header { padding: 10px 14px 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); flex-shrink: 0; text-align: center; }
+#sidebar .results-header .results-count { font-weight: 400; color: var(--text-light); margin-left: 4px; }
+#sidebar .sidebar-results { flex: 1; overflow-y: auto; min-height: 0; }
+#sidebar .sidebar-results::-webkit-scrollbar { width: 6px; }
+#sidebar .sidebar-results::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+#sidebar .sidebar-results::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+#sidebar .match { padding: 7px 14px; border-bottom: 1px solid var(--sidebar-border); cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+#sidebar .match:hover { background: #F5F0E4; }
+.dark #sidebar .match:hover { background: #322A20; }
+#sidebar .match.active { background: #F0E8D0; border-left: 4px solid var(--accent); }
+.dark #sidebar .match.active { background: #3A3220; }
+#sidebar .match .griego { font-size: 14px; font-weight: 600; color: var(--griego-color); transition: color 0.2s; }
+#sidebar .match .espanol { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+#sidebar .match .preview { font-size: 11px; color: var(--text-light); margin-top: 2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+#sidebar .no-results { padding: 40px 18px; text-align: center; color: var(--text-light); font-size: 15px; }
+#sidebar .results-footer { padding: 10px 18px; text-align: center; color: var(--text-light); font-size: 12px; border-top: 1px solid var(--sidebar-border); }
+
+#content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; min-height: 0; padding: 0; }
+
+#content::-webkit-scrollbar { width: 6px; }
+#content::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+#content::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+
+/* SECTION: entrada */
+#entry-view { flex: 1; padding: 30px 40px; max-width: 1030px; margin: 0 auto; width: 100%; }
+/* SECTION: responsive */
+#entry-view .entry-card { background: var(--card-bg); border-radius: 10px; padding: 32px 36px; box-shadow: var(--shadow); transition: box-shadow 0.2s, background 0.2s; }
+#entry-view .entry-card:hover { box-shadow: var(--shadow-lg); }
+#entry-view .entry-header { margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--accent); }
+#entry-view .entry-header .word-line { font-size: 28px; font-weight: 700; color: var(--griego-color); transition: color 0.2s; }
+#entry-view .entry-header .word-line .word-trans { font-size: 22px; font-weight: 400; color: var(--text-muted); margin-left: 12px; font-style: italic; }
+#entry-view .entry-header .espanol { font-size: 16px; color: var(--text-muted); margin-top: 4px; }
+#entry-view .entry-header .header-meta { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+#entry-view .entry-header .header-meta .page-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 10px; }
+#entry-view .entry-header .header-meta .fav-btn, #entry-view .entry-header .header-meta .copy-btn, #entry-view .entry-header .header-meta .share-btn { background: none; border: 1px solid var(--sidebar-border); font-size: 12px; padding: 3px 10px; border-radius: 6px; cursor: pointer; color: var(--text-muted); transition: background 0.15s, color 0.15s; }
+#entry-view .entry-header .header-meta .fav-btn:hover, #entry-view .entry-header .header-meta .copy-btn:hover, #entry-view .entry-header .header-meta .share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+#entry-view .entry-header .header-meta .fav-btn.saved { background: var(--accent); color: #fff; border-color: var(--accent); }
+.mobile-back { display: none; }
+#entry-view .entry-text { font-size: 18px; line-height: 1.85; color: var(--text); transition: color 0.2s; }
+#entry-view .entry-text br { content: ""; display: block; margin-top: 14px; }
+#entry-view .entry-text .greek-word { font-size: 1.15em; font-weight: 700; }
+#entry-view .entry-text .section-title { font-size: 1.1em; font-weight: 700; }
+
+.badge { display: inline-block; background: var(--badge-bg); color: var(--accent-dark); font-size: 13px; padding: 3px 10px; border-radius: 12px; margin-right: 4px; font-weight: 500; }
+
+.welcome { background: var(--welcome-bg); min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; transition: background 0.2s; }
+.welcome h2 { font-size: 30px; font-weight: 700; color: var(--griego-color); margin-bottom: 4px; transition: color 0.2s; }
+.welcome .sub { font-size: 16px; color: var(--text-muted); margin-bottom: 28px; }
+.welcome .quick-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 500px; }
+.welcome .quick-card { background: var(--card-bg); border: 1px solid var(--sidebar-border); border-radius: 10px; padding: 10px 18px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--griego-color); transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s; box-shadow: var(--shadow); }
+.welcome .quick-card:hover { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: var(--shadow-lg); }
+
+@media (max-width: 900px) {
+    #sidebar .match { padding: 9px 12px; }
+    #sidebar .match .griego { font-size: 14px; }
+    #entry-view { padding: 20px 24px; }
+    #entry-view .entry-card { padding: 24px 24px; }
+}
+@media (max-width: 700px) {
+    body { min-height: 100vh; overflow-y: auto; }
+    header { gap: 8px; padding: 8px 12px; }
+    header .logo { height: clamp(44px, 8vw, 60px); }
+    header h1 { font-size: 17px; }
+    .search-wrap { flex: 1 1 100%; min-width: 0; }
+    .lang-switch { display: flex; flex: 0 0 100%; justify-content: center; border: none; gap: 6px; margin-top: 4px; }
+    .lang-switch button { border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; padding: 3px 14px; }
+    main { flex-direction: column; overflow: visible; }
+    #sidebar { width: 100%; min-width: unset; height: auto; max-height: 3000px; border-right: none; border-bottom: 1px solid var(--sidebar-border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden; transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease, border 0.35s ease, box-shadow 0.35s ease; }
+    #sidebar.sidebar-hidden { max-height: 0 !important; padding: 0 !important; border: none !important; box-shadow: none !important; opacity: 0 !important; }
+    #sidebar .sidebar-results { flex: 1; min-height: 0; overflow-y: auto; }
+    .mobile-back { display: none; }
+    #sidebar.sidebar-hidden ~ #content .mobile-back { display: inline-flex; align-items: center; justify-content: center; position: fixed; bottom: 56px; right: 10px; z-index: 25; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #1C1814; border: none; box-shadow: 0 2px 10px rgba(0,0,0,0.2); cursor: pointer; font-size: 18px; line-height: 1; transition: transform 0.15s, background 0.15s; }
+    #sidebar.sidebar-hidden ~ #content .mobile-back:hover { transform: scale(1.1); background: var(--accent-dark); }
+    #entry-view { padding: 16px; }
+    #entry-view .entry-card { padding: 18px; }
+    #entry-view .entry-header .griego { font-size: 22px; }
+    #entry-view .entry-text { font-size: 17px; }
+    .welcome h2 { font-size: 24px; }
+    .welcome .quick-card { padding: 8px 14px; font-size: 12px; }
+}
+@media (max-width: 450px) {
+    header { padding: 6px 8px; gap: 4px; }
+    header .logo { height: 100%; max-height: 44px; width: auto; }
+    header h1 { display: none; }
+    .search-wrap { flex: 1; min-width: 60px; }
+    .search-wrap input { padding: 6px 10px; font-size: 13px; }
+    .search-wrap input::placeholder { font-size: 11px; }
+    .search-wrap .menu-btn { font-size: 15px; padding: 2px 4px; }
+    .lang-switch { margin-top: 2px; gap: 4px; }
+    .lang-switch button { font-size: 10px; padding: 2px 8px; }
+    #verseRef { display: none; }
+    #sidebar .match { padding: 6px 8px; }
+    #sidebar .match .griego { font-size: 12px; }
+    #sidebar .match .espanol { font-size: 11px; }
+    #sidebar .match .preview { font-size: 10px; -webkit-line-clamp: 1; }
+    #entry-view { padding: 10px 10px 48px; }
+    #entry-view .entry-card { padding: 12px; }
+    #entry-view .entry-header .griego { font-size: 17px; }
+    #entry-view .entry-text { font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SECTION: header -->
+<header>
+    <div class="header-row-1">
+        <div class="brand">
+            <img class="logo" src="logo.png" alt="Kittel">
+            <h1>Kittel</h1>
+        </div>
+        <button class="menu-btn" id="menuBtn">☰</button>
+    </div>
+    <div class="header-row-2">
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Escribí una palabra en español…" autocomplete="off" autofocus>
+        </div>
+    </div>
+    <div class="header-row-3">
+        <div class="toolbar-left" id="langSwitch">
+            <button class="btn-tool active" data-lang="ES">ES</button>
+            <button class="btn-tool" data-lang="GR">GR</button>
+        </div>
+        <div class="toolbar-right">
+            <div class="font-ctrl">
+                <button class="btn-tool" id="fontDecr">A−</button>
+                <span id="fontSizeLabel">16</span>
+                <button class="btn-tool" id="fontIncr">A+</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="index-overlay" id="indexOverlay"></div>
+<div class="index-panel" id="indexPanel">
+    <div class="panel-header">
+        <button class="back-btn" id="indexBack">←</button>
+        <h2 id="panelTitle">Índice de palabras</h2>
+        <button class="panel-close" id="panelClose">✕</button>
+    </div>
+    <div class="panel-search" id="panelSearch">
+        <input type="text" id="indexSearch" placeholder="Filtrar palabras…">
+    </div>
+    <div class="letter-grid" id="letterGrid"></div>
+    <div class="panel-words" id="panelWords"></div>
+</div>
+
+<!-- SECTION: main -->
+<main>
+    <!-- SECTION: sidebar -->
+    <div id="sidebar">
+        <div class="sidebar-results">
+            <div class="results-header">Resultados de Búsqueda</div>
+            <div class="no-results"></div>
+        </div>
+    </div>
+    <!-- SECTION: contenido -->
+    <div id="content">
+        <div id="entry-view"></div>
+    </div>
+</main>
+
+<script>
+/* SECTION: variables-globales */
+let entries = [];
+let currentMatch = null;
+let fontSize = parseInt(localStorage.getItem('kittelFontSize')) || 16;
+let isDark = localStorage.getItem('kittelDark') === 'true';
+let searchLang = 'ES';
+const FAV_KEY = 'kittelFav';
+
+/* SECTION: transliteracion-griega */
+const GREEK_MAP = {
+    'a':'α','b':'β','g':'γ','d':'δ','e':'ε','z':'ζ','h':'η','i':'ι','k':'κ',
+    'l':'λ','m':'μ','n':'ν','x':'ξ','o':'ο','p':'π','r':'ρ','s':'σ','t':'τ',
+    'y':'υ','f':'φ','j':'θ','c':'χ','u':'υ','w':'ω','v':'β',
+    'A':'Α','B':'Β','G':'Γ','D':'Δ','E':'Ε','Z':'Ζ','H':'Η','I':'Ι','K':'Κ',
+    'L':'Λ','M':'Μ','N':'Ν','X':'Ξ','O':'Ο','P':'Π','R':'Ρ','S':'Σ','T':'Τ',
+    'Y':'Υ','F':'Φ','J':'Θ','C':'Χ','U':'Υ','W':'Ω','V':'Β'
+};
+const GREEK_DIGRAPHS = { 'th':'θ','Th':'Θ','TH':'Θ','ph':'φ','Ph':'Φ','PH':'Φ','ch':'χ','Ch':'Χ','CH':'Χ','ps':'ψ','Ps':'Ψ','PS':'Ψ' };
+function applyGreekTranslit(text) {
+    if (searchLang !== 'GR') return text;
+    let skip = false, result = '';
+    for (let i = 0; i < text.length; i++) {
+        if (skip) { skip = false; continue; }
+        const digraph = text.slice(i, i+2);
+        if (GREEK_DIGRAPHS[digraph]) { result += GREEK_DIGRAPHS[digraph]; skip = true; continue; }
+        const ch = text[i];
+        if (GREEK_MAP[ch]) { result += GREEK_MAP[ch]; continue; }
+        result += ch;
+    }
+    const words = result.split(/(\s+)/);
+    for (let i = 0; i < words.length; i++) {
+        if (words[i].endsWith('σ') && /\S/.test(words[i])) {
+            words[i] = words[i].slice(0, -1) + 'ς';
+        }
+    }
+    return words.join('');
+}
+function stripGreekAccents(s) {
+    return s.normalize('NFD').replace(/[\u0300-\u036F]/g, '');
+}
+function cleanEntryGreek(g, t) {
+    let h = g.replace(/\[.*?\]/g,'').replace(/\[[^\]]*$/g,'').replace(/\s*,\s*/g,', ').replace(/, ,/g,',').replace(/^,|,$/g,'').trim();
+    if (g.includes('[') || h.split(',').filter(Boolean).length <= 1) {
+        const extra = (t||'').replace(/\[.*?\]/g,' ').replace(/\]/g,'').trim().match(/[\u0370-\u03FF\u1F00-\u1FFF ,]+/);
+        if (extra) {
+            const tw = extra[0].split(',').map(s=>s.trim()).filter(Boolean).slice(0,3);
+            if (tw.length) h = tw.join(', ');
+        }
+    }
+    return h;
+}
+
+const searchEl = document.getElementById('search');
+const sidebarEl = document.getElementById('sidebar');
+const sidebarResults = document.querySelector('.sidebar-results');
+const entryViewEl = document.getElementById('entry-view');
+if (isDark) document.documentElement.classList.add('dark');
+
+/* SECTION: favoritos */
+function getFavs() { try { return JSON.parse(localStorage.getItem(FAV_KEY)) || {}; } catch { return {}; } }
+function isFav(idx) { return !!getFavs()[idx]; }
+function toggleFav(idx) {
+    const f = getFavs();
+    if (f[idx]) { delete f[idx]; } else { f[idx] = true; }
+    saveFavs(f);
+    const btn = entryViewEl.querySelector('.fav-btn');
+    if (btn) btn.classList.toggle('saved', !!f[idx]);
+}
+
+/* SECTION: init */
+function init() {
+    entries = KITTEL_DATA; /* SECTION: datos-cargados */
+    buildWordIndex();
+    var totalTerms = entries.reduce(function(a, e) { return a + e.e.length; }, 0);
+    var grRaw = '';
+    searchEl.addEventListener('focus', function() {
+        document.getElementById('sidebar').classList.remove('sidebar-hidden');
+    });
+    searchEl.addEventListener('beforeinput', function(e) {
+        if (searchLang !== 'GR') return;
+        if (e.inputType === 'insertText' && e.data) {
+            e.preventDefault();
+            grRaw += e.data;
+            searchEl.value = applyGreekTranslit(grRaw);
+            onSearch();
+        } else if (e.inputType === 'deleteContentBackward' || e.inputType === 'deleteContentForward') {
+            e.preventDefault();
+            grRaw = grRaw.slice(0, -1);
+            searchEl.value = applyGreekTranslit(grRaw);
+            onSearch();
+        } else if (e.inputType === 'insertFromPaste' && e.data) {
+            e.preventDefault();
+            grRaw += e.data;
+            searchEl.value = applyGreekTranslit(grRaw);
+            onSearch();
+        }
+    });
+    searchEl.addEventListener('input', function() {
+        if (searchLang === 'GR' && grRaw) return;
+        document.getElementById('sidebar').classList.remove('sidebar-hidden');
+        onSearch();
+    });
+    if (searchEl.value) onSearch(); else showWelcome();
+    var langBtns = document.querySelectorAll('#langSwitch button');
+    langBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            searchLang = btn.dataset.lang;
+            langBtns.forEach(function(b) { b.classList.toggle('active', b === btn); });
+            searchEl.classList.toggle('gr', searchLang === 'GR');
+            searchEl.placeholder = searchLang === 'ES' ? 'Escribi una palabra en espanol...' : 'Escribi una palabra en griego...';
+            grRaw = '';
+            searchEl.value = '';
+            document.getElementById('sidebar').classList.remove('sidebar-hidden');
+            searchEl.focus();
+            onSearch();
+        });
+    });
+}
+
+/* SECTION: word-index */
+const wordIndexData = {};
+let currentLetter = null;
+
+function buildWordIndex() {
+    const groups = {};
+    for (let i = 0; i < entries.length; i++) {
+        const words = entries[i].e;
+        for (const w of words) {
+            const clean = w.charAt(0).toUpperCase().normalize('NFD').replace(/[\u0300-\u036F]/g, '');
+            const letter = /[A-ZÁÉÍÓÚÑ]/.test(clean) ? clean : '#';
+            if (!groups[letter]) groups[letter] = [];
+            if (!groups[letter].some(item => item.word === w)) {
+                groups[letter].push({ word: w, idx: i });
+            }
+        }
+    }
+    for (const k of Object.keys(groups)) {
+        groups[k].sort((a, b) => a.word.localeCompare(b.word, 'es'));
+        wordIndexData[k] = groups[k];
+    }
+}
+
+function showLetters() {
+    currentLetter = null;
+    document.getElementById('letterGrid').classList.remove('hide');
+    document.getElementById('panelWords').classList.remove('show');
+    document.getElementById('panelSearch').classList.remove('show');
+    document.getElementById('indexBack').classList.remove('show');
+    document.getElementById('panelTitle').textContent = 'Índice de palabras';
+    document.getElementById('indexSearch').value = '';
+    document.getElementById('indexSearch').blur();
+
+    const grid = document.getElementById('letterGrid');
+    const sorted = Object.keys(wordIndexData).sort((a, b) => a === '#' ? 1 : b === '#' ? -1 : a.localeCompare(b, 'es'));
+    grid.innerHTML = sorted.map(l => `
+        <div class="lg-item" data-l="${l}">
+            <span class="lg-char">${l}</span>
+            <span class="lg-count">${wordIndexData[l].length}</span>
+        </div>
+    `).join('');
+    grid.querySelectorAll('.lg-item').forEach(el => {
+        el.addEventListener('click', function() {
+            showWordsFor(this.dataset.l);
+        });
+    });
+}
+
+function showWordsFor(letter) {
+    currentLetter = letter;
+    document.getElementById('letterGrid').classList.add('hide');
+    document.getElementById('panelSearch').classList.add('show');
+    document.getElementById('panelWords').classList.add('show');
+    document.getElementById('indexBack').classList.add('show');
+    document.getElementById('panelTitle').textContent = letter;
+    document.getElementById('indexSearch').value = '';
+    document.getElementById('indexSearch').focus();
+    renderWordsFor(letter, '');
+}
+
+function renderWordsFor(letter, filter) {
+    const wordsEl = document.getElementById('panelWords');
+    let items = wordIndexData[letter] || [];
+    const f = filter ? stripAccents(filter.toLowerCase()) : '';
+    if (f) items = items.filter(item => stripAccents(item.word.toLowerCase()).includes(f));
+
+    let html = '';
+    for (const item of items) {
+        html += `<div class="pw-item" data-idx="${item.idx}">${escHtml(item.word)}</div>`;
+    }
+    wordsEl.innerHTML = html || '<div class="pw-empty">Sin resultados</div>';
+
+    wordsEl.querySelectorAll('.pw-item').forEach(el => {
+        el.addEventListener('click', function() {
+            const idx = parseInt(this.dataset.idx);
+            const word = entries[idx].e[0];
+            searchEl.value = word;
+            onSearch();
+            showEntry(idx);
+            closeIndex();
+        });
+    });
+}
+
+function openIndex() {
+    document.getElementById('indexOverlay').classList.add('open');
+    document.getElementById('indexPanel').classList.add('open');
+    showLetters();
+}
+function closeIndex() {
+    document.getElementById('indexOverlay').classList.remove('open');
+    document.getElementById('indexPanel').classList.remove('open');
+}
+
+document.getElementById('menuBtn').addEventListener('click', openIndex);
+document.getElementById('indexOverlay').addEventListener('click', closeIndex);
+document.getElementById('panelClose').addEventListener('click', closeIndex);
+document.getElementById('indexBack').addEventListener('click', showLetters);
+document.getElementById('indexSearch').addEventListener('input', function() {
+    if (currentLetter) renderWordsFor(currentLetter, this.value);
+});
+
+/* SECTION: welcome */
+function showWelcome() {
+    const cards = ['Amor', 'Fe', 'Gracia', 'Misericordia', 'Justicia', 'Reino', 'Espíritu'];
+    entryViewEl.innerHTML = `<div class="welcome">
+        <h2>Diccionario Teológico del Nuevo Testamento</h2>
+        <p class="sub">Basado en el Compendio de Kittel</p>
+        <div class="quick-grid">${cards.map(w => `<div class="quick-card" data-w="${w}">${w}</div>`).join('')}</div>
+    </div>`;
+    entryViewEl.querySelectorAll('.quick-card').forEach(el => {
+        el.addEventListener('click', () => {
+            searchEl.value = el.dataset.w;
+            grRaw = '';
+            document.getElementById('sidebar').classList.remove('sidebar-hidden');
+            onSearch();
+        });
+    });
+}
+
+/* SECTION: busqueda */
+function onSearch() {
+    const q = searchEl.value.toLowerCase().trim();
+    if (!q) {
+        sidebarResults.innerHTML = '<div class="no-results"></div>';
+        showWelcome();
+        currentMatch = null;
+        return;
+    }
+    const isGr = searchLang === 'GR';
+    const matches = [];
+    const sq = stripGreekAccents(q);
+    for (let i = 0; i < entries.length; i++) {
+        const e = entries[i];
+        const fields = [e.g, ...e.e];
+        let bestScore = 0;
+        for (const s of fields) {
+            const testStr = stripGreekAccents(s.toLowerCase());
+            if (isGr) {
+                if (testStr === sq) bestScore = Math.max(bestScore, 1000);
+                else if (testStr.startsWith(sq)) bestScore = Math.max(bestScore, 800);
+                else if (testStr.includes(sq)) bestScore = Math.max(bestScore, 600);
+            } else {
+                const re = new RegExp('\\b' + sq.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b');
+                if (re.test(testStr)) bestScore = Math.max(bestScore, 500);
+            }
+        }
+        if (bestScore > 0) {
+            matches.push({ idx: i, entry: e, score: bestScore + (entries.length - i) * 0.000001 });
+        }
+    }
+    matches.sort(function(a, b) { return b.score - a.score; });
+    renderSidebar(matches);
+    if (matches.length > 0) {
+        showEntry(matches[0].idx);
+    } else {
+        currentMatch = null;
+        entryViewEl.innerHTML = `<div class="welcome"><h2>Sin resultados</h2></div>`;
+    }
+}
+
+/* SECTION: render-sidebar */
+function renderSidebar(matches) {
+    if (matches.length === 0) {
+        sidebarResults.innerHTML = '<div class="results-header">Resultados de Búsqueda</div><div class="no-results">Sin resultados</div>';
+        return;
+    }
+    let html = '<div class="results-header">Resultados de Búsqueda <span class="results-count">' + matches.length + '</span></div>';
+    for (let m of matches) {
+        const e = m.entry;
+        const active = m.idx === currentMatch ? ' active' : '';
+        const preview = e.t.slice(0, 150).replace(/\s+/g, ' ') + '…';
+        html += `<div class="match${active}" data-idx="${m.idx}">
+            <div class="griego">${escHtml(cleanEntryGreek(e.g, e.t))}</div>
+            <div class="espanol">${e.e.map(s => escHtml(s)).join(', ')}</div>
+        </div>`;
+    }
+    html += '<div class="results-footer">' + matches.length + ' resultados</div>';
+    sidebarResults.innerHTML = html;
+    sidebarResults.querySelectorAll('.match').forEach(el => {
+        el.addEventListener('click', () => {
+            const idx = parseInt(el.dataset.idx);
+            if (window.innerWidth <= 700) {
+                document.getElementById('sidebar').classList.add('sidebar-hidden');
+            }
+            showEntry(idx);
+        });
+    });
+}
+
+/* SECTION: show-entry */
+function showEntry(idx) {
+    const e = entries[idx];
+    currentMatch = idx;
+    sidebarResults.querySelectorAll('.match').forEach(el => {
+        el.classList.toggle('active', parseInt(el.dataset.idx) === idx);
+    });
+    const fullEntry = e.t.replace(/\[.*?\]/g,' ').replace(/\[[^\]]*$/g,'').replace(/, ,/g, ',').replace(/,\s*$/, '').replace(/\s+,/g, ',').trim();
+    let text = fullEntry
+        .replace(/\s+(A\.|B\.|C\.|D\.|E\.|F\.|G\.)\s/g, '<br><br><span class="section-title">$1</span> ')
+        .replace(/\s+(\d+\.)\s/g, '<br><br><span class="section-title">$1</span> ');
+    const saved = isFav(idx) ? ' saved' : '';
+    const shareUrl = `${window.location.origin}${window.location.pathname}?q=${encodeURIComponent(e.e[0] || '')}`;
+    entryViewEl.innerHTML = `
+        <div class="entry-card">
+            <div class="entry-header">
+                <div class="word-line">${escHtml(cleanEntryGreek(e.g, e.t))} <span class="word-trans">${escHtml(e.e[0] || '')}</span></div>
+                ${e.e.length > 1 ? `<div class="espanol">${e.e.slice(1).map(s => '<span class="badge">' + escHtml(s) + '</span>').join('')}</div>` : ''}
+                <div class="header-meta">
+                    <span class="page-badge">Kittel pág. ${e.p || '—'}</span>
+                    <button class="mobile-back">←</button>
+                    <button class="fav-btn${saved}" data-idx="${idx}" title="Favorito">★</button>
+                    <button class="copy-btn" data-idx="${idx}" title="Copiar entrada">📋</button>
+                    <button class="share-btn" data-share="${escHtml(shareUrl)}" title="Compartir">🔗</button>
+                </div>
+            </div>
+            <div class="entry-text">${text}</div>
+        </div>`;
+    entryViewEl.querySelector('.entry-text').style.fontSize = fontSize + 'px';
+    entryViewEl.scrollTop = 0;
+    entryViewEl.querySelector('.fav-btn')?.addEventListener('click', () => toggleFav(idx));
+    entryViewEl.querySelector('.copy-btn')?.addEventListener('click', () => {
+        const plain = fullEntry;
+        navigator.clipboard.writeText(plain).then(() => {
+            const btn = entryViewEl.querySelector('.copy-btn');
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1500);
+        }).catch(() => {});
+    });
+    entryViewEl.querySelector('.share-btn')?.addEventListener('click', () => {
+        const url = entryViewEl.querySelector('.share-btn').dataset.share;
+        navigator.clipboard.writeText(url).then(() => {
+            const btn = entryViewEl.querySelector('.share-btn');
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '🔗'; }, 1500);
+        }).catch(() => {});
+    });
+    entryViewEl.querySelector('.mobile-back')?.addEventListener('click', () => {
+        document.getElementById('sidebar').classList.remove('sidebar-hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        searchEl.focus();
+    });
+}
+
+function toggleDark() {
+    isDark = !isDark;
+    document.documentElement.classList.toggle('dark', isDark);
+    localStorage.setItem('kittelDark', isDark);
+}
+
+window.addEventListener('message', function(e) {
+    if (!e.data) return;
+    if (e.data.type === 'toggleDark') {
+        isDark = e.data.dark;
+        document.documentElement.classList.toggle('dark', isDark);
+        localStorage.setItem('kittelDark', isDark);
+    }
+    if (e.data.type === 'fontChange') {
+        var sz = Math.min(28, Math.max(12, parseInt(e.data.size) || 16));
+        fontSize = sz;
+        localStorage.setItem('kittelFontSize', sz);
+        var el = entryViewEl.querySelector('.entry-text');
+        if (el) el.style.fontSize = sz + 'px';
+        fontSizeLabel.textContent = sz;
+    }
+});
+
+function escHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+}
+
+function changeFont(delta) {
+    fontSize = Math.min(28, Math.max(12, fontSize + delta));
+    localStorage.setItem('kittelFontSize', fontSize);
+    const el = entryViewEl.querySelector('.entry-text');
+    if (el) el.style.fontSize = fontSize + 'px';
+    fontSizeLabel.textContent = fontSize;
+}
+
+
+// Clear search history on reload
+searchEl.value = '';
+init();
+
+window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'search') {
+        searchEl.value = e.data.query;
+        grRaw = '';
+        onSearch();
+    }
+});
+</script>
+</body>
+</html>
