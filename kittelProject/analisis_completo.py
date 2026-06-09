@@ -278,7 +278,7 @@ SHORT_VERBS = {'es','son','soy','eres','somos','sois','seas','sea','sean',
                'haya','hayas','hayan','hayamos',
                'podia','podias','podian','podamos'}
 
-def classify_word(word):
+def classify_word(word, strong_index=None):
     """Classify a word into: articulo, pronombre, preposicion, verbo, nombre_propio, sustantivo"""
     lower = word.lower()
     stripped = strip_accents(lower)
@@ -297,15 +297,25 @@ def classify_word(word):
     for ve in STRONG_VERB_ENDINGS:
         if stripped.endswith(ve) and len(stripped) - len(ve) >= 2:
             return 'verbo'
-    # Known proper name patterns (biblical names)
-    proper_indicators = ('el','ab','am','ai','on','ah','ib','eb',
-                         'asir','eo','eo','eo')  # many end in el, am, on
-    # If word is capitalized in original, it's likely a proper name
-    # But we only have lowercased here, so use other heuristics
-    if any(stripped.endswith(p) for p in ['el','on','ai','am']) and len(stripped) <= 8:
-        # Simple check: if it doesn't look like Spanish
-        if not any(stripped.startswith(p) for p in ['con','des','por','par','sobr','tras','ante','bajo']):
-            pass  # Could be proper name or noun
+    # Proper name detection: not in strong_index + has biblical name patterns
+    # Check this AFTER verb checks to avoid classifying verb forms as names
+    if strong_index:
+        in_index = stripped in strong_index
+    else:
+        in_index = False
+    # Exclude common verb endings before trying proper name patterns
+    VERB_ENDING_EXCLUDE = ('io','ia','ian','ieron','iendo','iera','iese')
+    if not any(stripped.endswith(e) for e in VERB_ENDING_EXCLUDE):
+        if stripped.endswith(('el','ai')) and len(stripped) >= 3 and len(stripped) <= 10 and not in_index:
+            return 'nombre_propio'
+        if stripped.endswith('on') and len(stripped) >= 4 and len(stripped) <= 10 and not in_index:
+            return 'nombre_propio'
+        if stripped.endswith(('ea','eo')) and len(stripped) >= 4 and not in_index:
+            return 'nombre_propio'
+        if stripped.endswith('im') and len(stripped) >= 4 and not in_index:
+            return 'nombre_propio'
+        if stripped.endswith(('an','en','in')) and len(stripped) == 4 and not in_index and stripped[0].isalpha():
+            return 'nombre_propio'
     # Default: sustantivo
     return 'sustantivo'
 
@@ -397,7 +407,7 @@ def main():
                             missing_word_info[lower_word] = {
                                 'word': word_text,
                                 'freq': 0,
-                                'classification': classify_word(word_text)
+                                'classification': classify_word(word_text, strong_index)
                             }
                         missing_word_info[lower_word]['freq'] = missing_counter[lower_word]
         
@@ -419,10 +429,10 @@ def main():
     ot_pct = round(100 * strong_ot / total_ot, 1) if total_ot > 0 else 0
     nt_pct = round(100 * strong_nt / total_nt, 1) if total_nt > 0 else 0
     
-    # TOP 500 missing words
-    top_missing = missing_counter.most_common(500)
+    # ALL missing words (sorted)
+    top_missing = missing_counter.most_common()
     
-    # Generate normalization suggestions for top missing
+    # Generate normalization suggestions for all missing
     suggestions = []
     for word, freq in top_missing:
         info = missing_word_info.get(word, {})
@@ -531,7 +541,7 @@ def main():
             'aliases_count': len(aliases)
         },
         'top_missing': [{'word': w, 'freq': c} for w, c in top_missing],
-        'top_missing_suggestions': suggestions[:500],
+        'top_missing_suggestions': suggestions,
         'top_strong': [{'strong': s, 'freq': c} for s, c in top_strong],
         'top_recognized': [{'word': w, 'freq': c} for w, c in top_recognized],
         'book_coverage': book_coverage,
@@ -559,7 +569,8 @@ def main():
     print(f"{'Irrecuperables:':<30} {still_missing:>10,}")
     
     # Separate function words from content words
-    content_suggestions = [s for s in suggestions if s['classification'] not in ('articulo','pronombre','preposicion')]
+    EXCLUDED = ('articulo','pronombre','preposicion')
+    content_suggestions = [s for s in suggestions if s['classification'] not in EXCLUDED]
     
     print(f"\n--- TOP 20 PALABRAS SIN STRONG (TODAS) ---")
     print(f"{'Palabra':<25} {'Free.':>8} {'Clasif.':<14} {'Sugerencia':<20}")
@@ -569,19 +580,20 @@ def main():
         sug = s['possible_lemma'] or '-'
         print(f"{s['word']:<25} {s['freq']:>8} {cls:<14} {sug:<20}")
     
-    print(f"\n--- TOP 20 PALABRAS DE CONTENIDO SIN STRONG ---")
-    print(f"{'Palabra':<25} {'Free.':>8} {'Clasif.':<14} {'Sugerencia':<20}")
-    print("-"*70)
-    for s in content_suggestions[:20]:
+    print(f"\n--- TOP 1000 PALABRAS DE CONTENIDO SIN STRONG ---")
+    print(f"{'#':>4} {'Palabra':<25} {'Free.':>8} {'Clasif.':<14} {'Sugerencia':<20}")
+    print("-"*75)
+    for i, s in enumerate(content_suggestions[:1000], 1):
         cls = s['classification']
         sug = s['possible_lemma'] or '-'
-        print(f"{s['word']:<25} {s['freq']:>8} {cls:<14} {sug:<20}")
+        print(f"{i:>4} {s['word']:<25} {s['freq']:>8} {cls:<14} {sug:<20}")
     
     # Count function words total
-    func_missing = sum(s['freq'] for s in suggestions if s['classification'] in ('articulo','pronombre','preposicion'))
+    func_missing = sum(s['freq'] for s in suggestions if s['classification'] in EXCLUDED)
     content_missing = sum(s['freq'] for s in content_suggestions)
     print(f"\n  Palabras funcionales sin Strong: {func_missing:,} ({100*func_missing/missing_words:.1f}% del total sin Strong)")
     print(f"  Palabras de contenido sin Strong: {content_missing:,} ({100*content_missing/missing_words:.1f}% del total sin Strong)")
+    print(f"  Palabras de contenido unicas: {len(content_suggestions):,}")
     
     print(f"\n--- TOP 20 STRONG MAS USADOS ---")
     print(f"{'Strong':<12} {'Free.':>8}")
