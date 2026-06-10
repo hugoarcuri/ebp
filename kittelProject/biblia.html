@@ -560,26 +560,19 @@ function renderWordObjects(objects) {
     return objects.map(function(obj) {
         if (obj.type === 'html') return obj.html;
         if (obj.type === 'sep') return obj.text;
-        var strongDiv = '';
+        
+        var strongHtml = '';
         if (obj.strongs.length > 0) {
-            var badgeHtml = obj.strongs.map(function(num) {
+            strongHtml = obj.strongs.map(function(num) {
                 var detail = STRONG_MAP[num];
-                if (window.location.search.indexOf('debug=1') >= 0) {
-                    console.log('Strong solicitado: ' + num +
-                        ' | Diccionario usado: ' + (num.charAt(0) === 'H' ? 'Hebrew' : 'Greek') +
-                        ' | Resultado: ' + (detail ? (detail.w || detail.t || '(encontrado)') : 'NO ENCONTRADO'));
-                }
                 if (detail) {
-                    return '<span data-s="' + num + '" data-l="' + escHtml(detail.w) + '" data-t="' + escHtml(detail.t) + '" data-d="' + escHtml(detail.d.slice(0, 120).replace(/\n/g, ' ')) + '">' + num + '</span>';
+                    return '<span class="strong-badge" data-strong="' + num + '" data-lemma="' + escHtml(detail.w) + '" data-translit="' + escHtml(detail.t) + '" data-def="' + escHtml(detail.d.slice(0, 120).replace(/\\n/g, ' ')) + '">' + num + '</span>';
                 }
-                return '<span data-s="' + num + '">' + num + '</span>';
-            }).join(' ');
-            strongDiv = '<div class="s">' + badgeHtml + '</div>';
+                return '<span class="strong-badge" data-strong="' + num + '">' + num + '</span>';
+            }).join('');
         }
-        var wuClass = obj.strongs.length > 0 ? 'wu wu-has-strong' : 'wu wu-no-strong';
-        var attrs = 'data-w="' + escHtml(obj.text) + '"';
-        if (obj.strongs.length > 0) attrs += ' data-n="' + escHtml(obj.strongs.join(',')) + '"';
-        return '<div class="' + wuClass + '" ' + attrs + '>' + strongDiv + '<span class="w">' + obj.text + '</span></div>';
+        
+        return '<span class="strong-word-group">' + obj.text + strongHtml + '</span>';
     }).join('');
 }
 
@@ -1066,6 +1059,28 @@ document.getElementById('prevCh').addEventListener('click', goToPrevChapter);
 document.getElementById('nextCh').addEventListener('click', goToNextChapter);
 
 let searchTimer;
+document.getElementById('search').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        if (searchResults.length > 0) {
+            const firstResult = searchResults[0];
+            const ref = `${firstResult.book} ${firstResult.chapter}:${firstResult.verse}`;
+            
+            // Use the existing click logic for results
+            const [book, rest] = [ref.slice(0, ref.lastIndexOf(' ')), ref.slice(ref.lastIndexOf(' ') + 1)];
+            const [ch, v] = rest.split(':').map(Number);
+            currentBook = book;
+            currentChapter = ch;
+            showChapter();
+            setTimeout(() => {
+                const allVNums = document.querySelectorAll('.v-num');
+                allVNums.forEach(el => {
+                    if (el.textContent === String(v)) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            }, 200);
+        }
+    }
+});
+
 document.getElementById('search').addEventListener('input', function() {
     clearTimeout(searchTimer);
     searchTimer = setTimeout(() => searchBible(this.value), 200);
@@ -1238,9 +1253,11 @@ document.getElementById('wordInfoBody').addEventListener('click', function(e) {
 
 // Keyboard shortcuts
 
+let tooltipTimer;
 document.getElementById('content').addEventListener('mouseover', function(e) {
     var strongEl = e.target.closest('.wu .s');
     if (!strongEl) return;
+    clearTimeout(tooltipTimer);
     var badge = strongEl.querySelector('[data-s]');
     if (!badge) return;
     var tooltip = document.getElementById('strongTooltip');
@@ -1254,11 +1271,26 @@ document.getElementById('content').addEventListener('mouseover', function(e) {
 
 document.getElementById('content').addEventListener('mouseout', function(e) {
     if (e.target.closest('.wu .s')) {
+        tooltipTimer = setTimeout(function() {
+            var tooltip = document.getElementById('strongTooltip');
+            tooltip.style.opacity = '0';
+            setTimeout(function() { tooltip.style.display = 'none'; }, 200);
+        }, 300);
+    }
+});
+
+document.getElementById('strongTooltip').addEventListener('mouseover', function() {
+    clearTimeout(tooltipTimer);
+});
+
+document.getElementById('strongTooltip').addEventListener('mouseout', function() {
+    tooltipTimer = setTimeout(function() {
         var tooltip = document.getElementById('strongTooltip');
         tooltip.style.opacity = '0';
         setTimeout(function() { tooltip.style.display = 'none'; }, 200);
-    }
+    }, 300);
 });
+
 
 document.getElementById('content').addEventListener('click', function(e) {
     var debugMode = window.location.search.indexOf('debug=1') >= 0;
