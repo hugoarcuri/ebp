@@ -151,8 +151,8 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 .dark .strong-tooltip .lemma { color: #fff; }
 .strong-tooltip .translit { font-style: italic; color: #666; margin-left: 4px; }
 .dark .strong-tooltip .translit { color: #aaa; }
-.strong-tooltip .morph { font-size: 11px; color: #888; margin-top: 2px; }
-.dark .strong-tooltip .morph { color: #999; }
+.strong-tooltip .def { font-size: 11px; color: #555; margin-top: 3px; line-height: 1.3; }
+.dark .strong-tooltip .def { color: #bbb; }
 
 /* Lexical side panel */
 .lexical-overlay {
@@ -218,17 +218,21 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 }
 .lexical-tabs {
     display: flex; gap: 8px; flex-wrap: wrap;
-    padding: 0 16px 16px;
+    padding: 8px 16px 0;
+    border-bottom: 1px solid var(--border-color);
 }
 .lexical-tabs .tab-btn {
-    background: rgba(0,0,0,0.04); border: 1px solid var(--border-color);
-    color: var(--text-muted); font-size: 12px; font-weight: 600;
-    padding: 5px 12px; border-radius: 20px; cursor: pointer;
+    background: transparent; border: none;
+    color: var(--text-muted); font-size: 13px; font-weight: 600;
+    padding: 6px 14px; cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
 }
-.dark .lexical-tabs .tab-btn { background: rgba(255,255,255,0.06); }
-.lexical-tabs .tab-btn:hover { border-color: #4a90e2; color: #4a90e2; }
-.lexical-tabs .tab-btn.active { background: #4a90e2; color: #fff; border-color: #4a90e2; }
+.lexical-tabs .tab-btn:hover { color: #4a90e2; }
+.lexical-tabs .tab-btn.active { color: #4a90e2; border-bottom-color: #4a90e2; }
+.lexical-tab-content { padding: 0; }
 .lexical-empty { padding: 20px; text-align: center; color: var(--text-muted); font-size: 14px; }
+.kittel-loading { padding: 16px; text-align: center; color: var(--text-muted); font-style: italic; }
 
 .selection-menu {
     position: absolute;
@@ -310,8 +314,11 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
         </div>
         <button class="nav-close" id="lexicalClose">✕</button>
     </div>
+    <div class="lexical-tabs" id="lexicalHeaderTabs">
+        <button class="tab-btn active" data-tab="strong">Strong</button>
+        <button class="tab-btn" data-tab="kittel">Kittel</button>
+    </div>
     <div class="lexical-body" id="lexicalBody"></div>
-    <div class="lexical-tabs" id="lexicalTabs"></div>
 </div>
 
 <div class="nav-overlay" id="navOverlay"></div>
@@ -1245,47 +1252,38 @@ function buildOccurrences() {
 buildOccurrences();
 
 // Lexical side panel (double-click)
-function showLexicalPanel(word, strongsStr, ref) {
+function showLexicalPanel(word, strongsStr, ref, openKittel) {
     document.getElementById('lexicalTitle').textContent = word;
     document.getElementById('lexicalRef').textContent = ref || '';
     
     var body = document.getElementById('lexicalBody');
-    var tabs = document.getElementById('lexicalTabs');
     body.innerHTML = '';
-    tabs.innerHTML = '';
+    
+    // Store current lexical data for lazy loading
+    window._lexicalData = { word: word, strongsStr: strongsStr, ref: ref };
     
     if (!strongsStr) {
         body.innerHTML = '<div class="lexical-empty">No hay información Strong disponible para esta palabra.</div>';
         document.getElementById('lexicalOverlay').classList.add('open');
         document.getElementById('lexicalPanel').classList.add('open');
+        document.getElementById('lexicalKittelContent').innerHTML = '';
         return;
     }
     
     var allNums = strongsStr.split(',').filter(Boolean);
+    var hasKittel = false;
     
-    // If multiple Strong numbers, create tabs
-    if (allNums.length > 1) {
-        allNums.forEach(function(num, idx) {
-            var tab = document.createElement('button');
-            tab.className = 'tab-btn' + (idx === 0 ? ' active' : '');
-            tab.textContent = num;
-            tab.dataset.idx = idx;
-            tab.addEventListener('click', function() {
-                tabs.querySelectorAll('.tab-btn').forEach(function(t) { t.classList.remove('active'); });
-                this.classList.add('active');
-                body.querySelectorAll('.lexical-entry').forEach(function(e, i) {
-                    e.style.display = i === parseInt(this.dataset.idx) ? 'block' : 'none';
-                }.bind(this));
-            });
-            tabs.appendChild(tab);
-        });
-    }
+    // Check if any Strong number has Kittel data
+    allNums.forEach(function(num) {
+        var detail = STRONG_MAP[num];
+        if (num.startsWith('G') && detail && detail.w && findKittelForLemma(detail.w)) {
+            hasKittel = true;
+        }
+    });
     
-    allNums.forEach(function(num, idx) {
-        var entry = document.createElement('div');
-        entry.className = 'lexical-entry';
-        if (allNums.length > 1) entry.style.display = idx === 0 ? 'block' : 'none';
-        
+    // Build Strong tab header tabs (one per Strong number)
+    var strongContentHtml = '';
+    allNums.forEach(function(num) {
         var detail = STRONG_MAP[num];
         var occ = OCCURRENCES[num] || 0;
         
@@ -1310,38 +1308,137 @@ function showLexicalPanel(word, strongsStr, ref) {
                 html += '<div class="definition">' + escHtml(detail.d) + '</div>';
             }
             
-            // Occurrences count
             html += '<div class="occurrences">Ocurrencias: ' + occ + '</div>';
-            
-            // Kittel cross-reference for Greek lemmas
-            if (num.startsWith('G') && detail.w) {
-                var kittelRefs = findKittelForLemma(detail.w);
-                if (kittelRefs && kittelRefs.length > 0) {
-                    html += '<div class="kittel-ref">';
-                    html += '<strong style="color:#4a90e2;">Kittel / TDNT</strong><br>';
-                    kittelRefs.forEach(function(kr) {
-                        var pageStr = kr.p ? ' — pág. ' + kr.p : '';
-                        if (kr.t && kr.t.length > 100) {
-                            var preview = kr.t.slice(0, 150).replace(/\n/g, ' ') + '…';
-                            html += '<div style="margin-top:4px;">' + escHtml(preview) + '</div>';
-                        }
-                        html += '<a href="#" class="kittel-link" data-page="' + (kr.p || '') + '" data-text="' + escHtml(kr.t || '') + '">Ver artículo en Kittel' + pageStr + '</a>';
-                    });
-                    html += '</div>';
-                }
-            }
         } else {
             html += '<div class="definition">No se encontró información detallada para este número.</div>';
             html += '<div class="occurrences">Ocurrencias: ' + occ + '</div>';
         }
         
-        entry.innerHTML = html;
-        body.appendChild(entry);
+        strongContentHtml += html;
     });
     
+    // Build Strong tab
+    var strongTab = document.createElement('div');
+    strongTab.className = 'lexical-tab-content';
+    strongTab.id = 'lexicalStrongContent';
+    strongTab.innerHTML = '<div class="lexical-entry">' + strongContentHtml + '</div>';
+    body.appendChild(strongTab);
+    
+    // Build Kittel tab
+    var kittelTab = document.createElement('div');
+    kittelTab.className = 'lexical-tab-content';
+    kittelTab.id = 'lexicalKittelContent';
+    kittelTab.style.display = 'none';
+    
+    if (hasKittel) {
+        kittelTab.innerHTML = '<div class="lexical-entry"><div class="kittel-loading">Cargando datos Kittel...</div></div>';
+    } else {
+        kittelTab.innerHTML = '<div class="lexical-entry"><div class="lexical-empty">No existe entrada Kittel para este lema.</div></div>';
+    }
+    body.appendChild(kittelTab);
+    
+    // Store Kittel data for lazy loading
+    window._lexicalKittelData = null;
+    window._lexicalHasKittel = hasKittel;
+    
+    // Show/hide Kittel tab button
+    document.querySelectorAll('#lexicalHeaderTabs .tab-btn').forEach(function(btn) {
+        if (btn.dataset.tab === 'kittel') {
+            btn.style.display = hasKittel ? '' : 'none';
+        }
+    });
+    
+    // Open panel
     document.getElementById('lexicalOverlay').classList.add('open');
     document.getElementById('lexicalPanel').classList.add('open');
+    
+    // Switch to Kittel tab if requested (Ctrl+Click)
+    if (openKittel && hasKittel) {
+        switchLexicalTab('kittel');
+    } else {
+        switchLexicalTab('strong');
+    }
 }
+
+function switchLexicalTab(tabId) {
+    // Update tab buttons
+    document.querySelectorAll('#lexicalHeaderTabs .tab-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.tab === tabId);
+    });
+    
+    // Show/hide content
+    document.getElementById('lexicalStrongContent').style.display = tabId === 'strong' ? 'block' : 'none';
+    var kittelContent = document.getElementById('lexicalKittelContent');
+    if (kittelContent) {
+        kittelContent.style.display = tabId === 'kittel' ? 'block' : 'none';
+    }
+    
+    // Lazy load Kittel data when tab is first opened
+    if (tabId === 'kittel' && window._lexicalHasKittel && !window._lexicalKittelData) {
+        loadKittelData();
+    }
+}
+
+function loadKittelData() {
+    var data = window._lexicalData;
+    if (!data || !data.strongsStr) return;
+    
+    var kittelContent = document.getElementById('lexicalKittelContent');
+    if (!kittelContent) return;
+    
+    kittelContent.innerHTML = '<div class="lexical-entry"><div class="kittel-loading">Cargando datos Kittel...</div></div>';
+    
+    // Collect all Kittel references
+    var allNums = data.strongsStr.split(',').filter(Boolean);
+    var allKittel = [];
+    
+    allNums.forEach(function(num) {
+        var detail = STRONG_MAP[num];
+        if (num.startsWith('G') && detail && detail.w) {
+            var refs = findKittelForLemma(detail.w);
+            if (refs && refs.length > 0) {
+                refs.forEach(function(kr) {
+                    allKittel.push({ num: num, lemma: detail.w, entry: kr });
+                });
+            }
+        }
+    });
+    
+    window._lexicalKittelData = allKittel;
+    
+    if (allKittel.length === 0) {
+        kittelContent.innerHTML = '<div class="lexical-entry"><div class="lexical-empty">No existe entrada Kittel para este lema.</div></div>';
+        return;
+    }
+    
+    var html = '';
+    allKittel.forEach(function(kr) {
+        html += '<div class="lexical-entry">';
+        html += '<div class="snum">' + kr.num + ' — <span class="lemma" style="font-size:16px;">' + escHtml(kr.lemma) + '</span></div>';
+        html += '<div style="font-size:12px;color:var(--text-muted);margin:4px 0;">TDNT / Kittel</div>';
+        if (kr.entry.t) {
+            var text = kr.entry.t;
+            text = escHtml(text).replace(/\n/g, '<br>');
+            html += '<div class="definition">' + text + '</div>';
+        }
+        if (kr.entry.p) {
+            html += '<div class="occurrences">Vol. ' + kr.entry.p + '</div>';
+        }
+        html += '</div>';
+    });
+    
+    kittelContent.innerHTML = html;
+}
+
+// Tab switching for lexical panel
+document.getElementById('lexicalHeaderTabs').addEventListener('click', function(e) {
+    var btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    var tab = btn.dataset.tab;
+    if (tab === 'kittel' || tab === 'strong') {
+        switchLexicalTab(tab);
+    }
+});
 
 // Close lexical panel
 function closeLexicalPanel() {
@@ -1351,23 +1448,9 @@ function closeLexicalPanel() {
 document.getElementById('lexicalClose').addEventListener('click', closeLexicalPanel);
 document.getElementById('lexicalOverlay').addEventListener('click', closeLexicalPanel);
 
-// Double-click on word-unit → open lexical side panel
+// Double-click on word-unit → open lexical side panel (same as click, but allowed to pass through)
 document.getElementById('content').addEventListener('dblclick', function(e) {
-    var unit = e.target.closest('.wu');
-    if (!unit) return;
-    var word = unit.dataset.w;
-    // Gather all strong numbers from .s spans
-    var strongEls = unit.querySelectorAll('.s');
-    var strongs = [];
-    strongEls.forEach(function(el) { if (el.dataset.s) strongs.push(el.dataset.s); });
-    var strongsStr = strongs.length > 0 ? strongs.join(',') : '';
-    var verseEl = unit.closest('.verse');
-    var ref = '';
-    if (verseEl) {
-        var vNum = verseEl.querySelector('.v-num');
-        if (vNum) ref = (currentBook || '') + ' ' + (currentChapter || '') + ':' + vNum.textContent;
-    }
-    showLexicalPanel(word, strongsStr, ref);
+    // dblclick already triggers click, so this is just a passthrough
 });
 
 // Handle clicks on Kittel links inside lexical panel
@@ -1396,11 +1479,11 @@ document.getElementById('content').addEventListener('mouseover', function(e) {
     var s = unit.dataset.s || '';
     var l = unit.dataset.l || '';
     var t = unit.dataset.t || '';
-    var m = unit.dataset.m || '';
+    var d = unit.dataset.d || '';
     var html = '<span class="snum">' + s + '</span>';
     if (l) html += ' <span class="lemma">' + escHtml(l) + '</span>';
     if (t) html += ' <span class="translit">' + escHtml(t) + '</span>';
-    if (m) html += ' <div class="morph">' + escHtml(m) + '</div>';
+    if (d) html += ' <div class="def">' + escHtml(d.slice(0, 120)) + '</div>';
     tooltip.innerHTML = html;
     tooltip.style.display = 'block';
     var rect = unit.getBoundingClientRect();
@@ -1428,13 +1511,21 @@ document.getElementById('strongTooltip').addEventListener('mouseout', function()
 
 
 document.getElementById('content').addEventListener('click', function(e) {
-    var debugMode = window.location.search.indexOf('debug=1') >= 0;
     var unit = e.target.closest('.wu');
-    if (unit && debugMode) {
-        var w = unit.dataset.w;
-        var n = unit.dataset.s || '';
-        console.log('Palabra: ' + w + ' -> Strong: ' + (n || '(ninguno)'));
+    if (!unit) return;
+    var word = unit.dataset.w;
+    var strongEls = unit.querySelectorAll('.s');
+    var strongs = [];
+    strongEls.forEach(function(el) { if (el.dataset.s) strongs.push(el.dataset.s); });
+    var strongsStr = strongs.length > 0 ? strongs.join(',') : '';
+    var verseEl = unit.closest('.verse');
+    var ref = '';
+    if (verseEl) {
+        var vNum = verseEl.querySelector('.v-num');
+        if (vNum) ref = (currentBook || '') + ' ' + (currentChapter || '') + ':' + vNum.textContent;
     }
+    var openKittel = e.ctrlKey || e.metaKey;
+    showLexicalPanel(word, strongsStr, ref, openKittel);
 });
 
 // Navegación por Menú Hamburguesa
