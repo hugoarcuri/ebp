@@ -301,6 +301,7 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
             <button class="btn-tool" data-filter="AT">AT</button>
             <button class="btn-tool" data-filter="NT">NT</button>
             <button class="btn-tool" id="strongToggle">Strong: Off</button>
+            <button class="btn-tool" id="allStrongToggle">S: Todos Off</button>
         </div>
         <div class="toolbar-right"></div>
     </div>
@@ -347,6 +348,7 @@ let currentChapter = null;
 let searchResults = [];
 let searchFilter = 'ALL';
 let strongEnabled = localStorage.getItem('bibliaStrong') === 'true';
+let showAllStrong = localStorage.getItem('bibliaShowAllStrong') === 'true';
 let highlights = JSON.parse(localStorage.getItem('bibliaHighlights') || '{}');
 
 const STRONG_MAP = {};
@@ -578,26 +580,65 @@ function renderWordObjects(objects) {
 
 function lemmatize(w) {
     var candidates = [w];
-    // Plural → singular
-    if (w.endsWith('ces') && w.length > 4) { candidates.push(w.slice(0, -3) + 'z'); }
-    if (w.endsWith('es') && w.length > 4) { candidates.push(w.slice(0, -2)); }
-    if (w.endsWith('es') && w.length > 4) { candidates.push(w.slice(0, -1)); }
-    if (w.endsWith('s') && w.length > 3 && !w.endsWith('es')) { candidates.push(w.slice(0, -1)); }
-    // Verb → infinitive: -ar
-    ['aron','ado','ando','aba','aban','abas','ara','ase','aste','\u00e9','\u00f3'].forEach(function(e) {
-        if (w.endsWith(e) && w.length > e.length + 1) candidates.push(w.slice(0, -e.length) + 'ar');
-    });
-    // Verb → infinitive: -er/-ir  
-    ['ieron','ido','iendo','\u00eda','\u00edan','iera','iese','iste'].forEach(function(e) {
-        if (w.endsWith(e) && w.length > e.length + 1) {
-            candidates.push(w.slice(0, -e.length) + 'er');
-            candidates.push(w.slice(0, -e.length) + 'ir');
-        }
-    });
-    if (w.endsWith('yeron') && w.length > 6) {
-        candidates.push(w.slice(0, -5) + 'er');
-        candidates.push(w.slice(0, -5) + 'ir');
+    var lower = w.toLowerCase();
+    
+    // Plurales y singulares
+    if (lower.endsWith('ces') && lower.length > 4) candidates.push(lower.slice(0, -3) + 'z');
+    if (lower.endsWith('es') && lower.length > 4) {
+        candidates.push(lower.slice(0, -2));
+        candidates.push(lower.slice(0, -1));
     }
+    if (lower.endsWith('s') && lower.length > 3 && !lower.endsWith('es')) candidates.push(lower.slice(0, -1));
+
+    // Verbos: terminaciones → infinitivo
+    const verbEndings = {
+        'ar': ['aron', 'ado', 'ando', 'aba', 'abas', 'aban', 'ara', 'aras', 'aran', 'ase', 'ases', 'asen', 'aste', 'asteis', 'aré', 'arás', 'arán', 'aría', 'arías', 'arían', 'amos', 'áis', 'an'],
+        'er': ['ieron', 'ido', 'iendo', 'ía', 'ías', 'ían', 'iera', 'ieras', 'ieran', 'iese', 'ieses', 'iesen', 'iste', 'isteis', 'eré', 'erás', 'erán', 'ería', 'erías', 'erían', 'emos', 'éis', 'en'],
+        'ir': ['ieron', 'ido', 'iendo', 'ía', 'ías', 'ían', 'iera', 'ieras', 'ieran', 'iese', 'ieses', 'iesen', 'iste', 'isteis', 'iré', 'irás', 'irán', 'iría', 'irías', 'irían', 'imos', 'ís', 'en']
+    };
+
+    for (var inf in verbEndings) {
+        if (verbEndings.hasOwnProperty(inf)) {
+            var suffixes = verbEndings[inf];
+            for (var si = 0; si < suffixes.length; si++) {
+                var suf = suffixes[si];
+                if (lower.endsWith(suf) && lower.length > suf.length + 1) {
+                    candidates.push(lower.slice(0, -suf.length) + inf);
+                }
+            }
+        }
+    }
+
+    // Irregulares bíblicos comunes
+    var irregulars = {
+        'fue': 'ser', 'fueron': 'ser', 'fuera': 'ser', 'fuese': 'ser', 'era': 'ser', 'eran': 'ser', 'eras': 'ser', 'eres': 'ser', 'soy': 'ser', 'es': 'ser', 'somos': 'ser', 'sois': 'ser', 'son': 'ser', 'sido': 'ser', 'siendo': 'ser', 'sea': 'ser', 'seas': 'ser', 'sean': 'ser', 'seamos': 'ser', 'seáis': 'ser',
+        'estuvo': 'estar', 'estuvieron': 'estar', 'estuviera': 'estar', 'estuviese': 'estar', 'estaba': 'estar', 'estabas': 'estar', 'estaban': 'estar', 'estoy': 'estar', 'estás': 'estar', 'está': 'estar', 'estamos': 'estar', 'estáis': 'estar', 'están': 'estar', 'estado': 'estar', 'estando': 'estar', 'esté': 'estar', 'estés': 'estar', 'estén': 'estar',
+        'tuvo': 'tener', 'tuvieron': 'tener', 'tuviera': 'tener', 'tuviese': 'tener', 'tenía': 'tener', 'tenías': 'tener', 'tenían': 'tener', 'tengo': 'tener', 'tienes': 'tener', 'tiene': 'tener', 'tenemos': 'tener', 'tenéis': 'tener', 'tienen': 'tener', 'tenido': 'tener',
+        'dijo': 'decir', 'dijeron': 'decir', 'dijera': 'decir', 'dijese': 'decir', 'decía': 'decir', 'decías': 'decir', 'decían': 'decir', 'digo': 'decir', 'dices': 'decir', 'dice': 'decir', 'decimos': 'decir', 'decís': 'decir', 'dicen': 'decir', 'dicho': 'decir', 'diciendo': 'decir', 'diga': 'decir', 'digas': 'decir', 'digan': 'decir',
+        'hizo': 'hacer', 'hicieron': 'hacer', 'hiciera': 'hacer', 'hiciese': 'hacer', 'hacía': 'hacer', 'hacías': 'hacer', 'hacían': 'hacer', 'hago': 'hacer', 'haces': 'hacer', 'hace': 'hacer', 'hacemos': 'hacer', 'hacéis': 'hacer', 'hacen': 'hacer', 'hecho': 'hacer', 'haciendo': 'hacer', 'haga': 'hacer', 'hagas': 'hacer', 'hagan': 'hacer',
+        'vino': 'venir', 'vinieron': 'venir', 'viniera': 'venir', 'viniese': 'venir', 'venía': 'venir', 'venías': 'venir', 'venían': 'venir', 'vengo': 'venir', 'vienes': 'venir', 'viene': 'venir', 'venimos': 'venir', 'venís': 'venir', 'vienen': 'venir', 'venido': 'venir', 'viniendo': 'venir', 'venga': 'venir', 'vengas': 'venir', 'vengan': 'venir',
+        'vio': 'ver', 'vieron': 'ver', 'viera': 'ver', 'viese': 'ver', 'veía': 'ver', 'veías': 'ver', 'veían': 'ver', 'veo': 'ver', 'ves': 'ver', 've': 'ver', 'vemos': 'ver', 'veis': 'ver', 'ven': 'ver', 'visto': 'ver', 'viendo': 'ver', 'vea': 'ver', 'veas': 'ver', 'vean': 'ver',
+        'dio': 'dar', 'dieron': 'dar', 'diera': 'dar', 'diese': 'dar', 'daba': 'dar', 'dabas': 'dar', 'daban': 'dar', 'doy': 'dar', 'das': 'dar', 'da': 'dar', 'damos': 'dar', 'dais': 'dar', 'dan': 'dar', 'dado': 'dar', 'dando': 'dar', 'dé': 'dar', 'des': 'dar', 'den': 'dar',
+        'puso': 'poner', 'pusieron': 'poner', 'pusiera': 'poner', 'pusiese': 'poner', 'ponía': 'poner', 'ponías': 'poner', 'ponían': 'poner', 'pongo': 'poner', 'pones': 'poner', 'pone': 'poner', 'ponemos': 'poner', 'ponéis': 'poner', 'ponen': 'poner', 'puesto': 'poner', 'poniendo': 'poner', 'ponga': 'poner', 'pongas': 'poner', 'pongan': 'poner',
+        'quiso': 'querer', 'quisieron': 'querer', 'quisiera': 'querer', 'quisiese': 'querer', 'quería': 'querer', 'querías': 'querer', 'querían': 'querer', 'quiero': 'querer', 'quieres': 'querer', 'quiere': 'querer', 'queremos': 'querer', 'queréis': 'querer', 'quieren': 'querer', 'querido': 'querer',
+        'supo': 'saber', 'supieron': 'saber', 'supiera': 'saber', 'supiese': 'saber', 'sabía': 'saber', 'sabías': 'saber', 'sabían': 'saber', 'sé': 'saber', 'sabes': 'saber', 'sabe': 'saber', 'sabemos': 'saber', 'sabéis': 'saber', 'saben': 'saber', 'sabido': 'saber', 'sabiendo': 'saber', 'sepa': 'saber', 'sepas': 'saber', 'sepan': 'saber',
+        'anda': 'andar', 'anduvo': 'andar', 'anduvieron': 'andar', 'andaba': 'andar', 'andaban': 'andar',
+        'trajo': 'traer', 'trajeron': 'traer', 'traía': 'traer', 'traían': 'traer', 'traigo': 'traer', 'traes': 'traer', 'traemos': 'traer', 'traen': 'traer', 'traído': 'traer', 'trayendo': 'traer',
+        'sal': 'salir', 'salió': 'salir', 'salieron': 'salir', 'salía': 'salir', 'salían': 'salir', 'salgo': 'salir', 'sales': 'salir', 'salimos': 'salir', 'salen': 'salir', 'salido': 'salir',
+        'val': 'valer', 'valió': 'valer', 'valieron': 'valer', 'valía': 'valer', 'valían': 'valer', 'valgo': 'valer', 'vales': 'valer', 'vale': 'valer', 'valemos': 'valer', 'valen': 'valer',
+        'cabe': 'caber', 'cupo': 'caber', 'cupieron': 'caber', 'cabía': 'caber', 'cabían': 'caber', 'quepo': 'caber', 'cabes': 'caber', 'cabemos': 'caber', 'caben': 'caber',
+        'oyó': 'oír', 'oyeron': 'oír', 'oía': 'oír', 'oían': 'oír', 'oigo': 'oír', 'oyes': 'oír', 'oye': 'oír', 'oímos': 'oír', 'oís': 'oír', 'oyen': 'oír', 'oído': 'oír', 'oyendo': 'oír', 'oiga': 'oír', 'oigan': 'oír',
+        'cae': 'caer', 'cayó': 'caer', 'cayeron': 'caer', 'caía': 'caer', 'caían': 'caer', 'caigo': 'caer', 'caemos': 'caer', 'caen': 'caer', 'caído': 'caer', 'cayendo': 'caer',
+        'sale': 'salir', 'hará': 'hacer', 'haré': 'hacer', 'harían': 'hacer',
+        'van': 'ir', 'voy': 'ir', 'vas': 'ir', 'va': 'ir', 'vamos': 'ir', 'vais': 'ir', 'iban': 'ir', 'iba': 'ir'
+    };
+
+    if (irregulars[lower]) candidates.push(irregulars[lower]);
+
+    // También intentar sin acentos
+    var plain = stripAccents(lower);
+    if (plain !== lower) candidates.push(plain);
+
     return candidates;
 }
 
@@ -621,12 +662,12 @@ var FUNC_WORDS = {
     'estuvo':1,'estuvieron':1,'estara':1,'estaran':1
 };
 
-function findStrongFallback(word, isOT, isNT) {
+function findStrongFallback(word, isOT, isNT, showAll) {
     if (typeof STRONG_INDEX === 'undefined' || !STRONG_INDEX.single) return [];
     var lower = word.toLowerCase();
     var debug = window.location.search.indexOf('debug=1') >= 0;
     var isFuncWord = FUNC_WORDS[stripAccents(lower)] !== undefined;
-    if (isFuncWord) {
+    if (isFuncWord && !showAll) {
         if (debug) console.log('Palabra: ' + word + ' | Confianza: baja (funcional) | Resultado: ocultar');
         return [];
     }
@@ -702,7 +743,45 @@ function findStrongFallback(word, isOT, isNT) {
             bestKey = unique[i];
         }
     }
-    if (!bestMatch) return [];
+    if (!bestMatch) {
+        // Fuzzy fallback: buscar coincidencia parcial en el índice Strong
+        var origPlain = stripAccents(lower);
+        var bestFuzzy = null, bestFuzzyKey = null;
+        for (var idxKey in STRONG_INDEX.single) {
+            if (!STRONG_INDEX.single.hasOwnProperty(idxKey)) continue;
+            var idxEntry = STRONG_INDEX.single[idxKey];
+            var idxNums = filterByTestament(idxEntry.split('||')[0].split(';'));
+            if (idxNums.length === 0) continue;
+            // Prefijo de 4+ caracteres
+            if (origPlain.length >= 4 && idxKey.indexOf(origPlain) === 0) {
+                bestFuzzy = idxNums;
+                bestFuzzyKey = idxKey;
+                break;
+            }
+            // El lemma del índice contiene la palabra completa o viceversa
+            if (origPlain.length >= 3) {
+                if (idxKey.indexOf(origPlain) >= 0 || origPlain.indexOf(idxKey) >= 0) {
+                    if (idxNums.length === 1) {
+                        bestFuzzy = idxNums;
+                        bestFuzzyKey = idxKey;
+                        break;
+                    }
+                    if (!bestFuzzy || idxNums.length <= bestFuzzy.length) {
+                        bestFuzzy = idxNums;
+                        bestFuzzyKey = idxKey;
+                    }
+                }
+            }
+        }
+        if (bestFuzzy && bestFuzzy.length === 1) {
+            if (debug) {
+                var info = strongInfo(bestFuzzy[0]);
+                console.log('Palabra: ' + word + '\nStrong asignado: ' + bestFuzzy[0] + '\nLema Strong: ' + info.lemma + '\nDefinicion: ' + info.def.slice(0, 120) + '\nCoincidencia: baja (fuzzy con ' + bestFuzzyKey + ')');
+            }
+            return bestFuzzy;
+        }
+        return [];
+    }
     if (bestCount > 1) {
         if (debug) {
             var info = strongInfo(bestMatch[0]);
@@ -739,7 +818,7 @@ function markStrongWords(text, verseRef) {
                 strongs = wordStrongs[wordIdx];
                 if (strongs && strongs.length > 0) fromInterlinear = true;
             }
-            if ((!strongs || strongs.length === 0) && (isOT || isNT)) strongs = findStrongFallback(token, isOT, isNT);
+            if ((!strongs || strongs.length === 0) && (isOT || isNT)) strongs = findStrongFallback(token, isOT, isNT, showAllStrong);
             if (debugMode && strongs && strongs.length > 0) {
                 var origen = fromInterlinear ? 'interlinear' : 'fallback';
                 var strongStr = strongs.join(',');
@@ -1115,6 +1194,19 @@ document.getElementById('strongToggle').addEventListener('click', function() {
     setStrongEnabled(!strongEnabled);
 });
 
+document.getElementById('allStrongToggle').addEventListener('click', function() {
+    showAllStrong = !showAllStrong;
+    localStorage.setItem('bibliaShowAllStrong', showAllStrong);
+    var btn = document.getElementById('allStrongToggle');
+    btn.textContent = 'S: Todos ' + (showAllStrong ? 'On' : 'Off');
+    btn.classList.toggle('active', showAllStrong);
+    if (currentBook && currentChapter) {
+        showChapter();
+    } else if (searchResults.length > 0) {
+        searchBible(document.getElementById('search').value);
+    }
+});
+
 // Word info panel (double-click)
 function showWordInfo(word, strongsStr, ref) {
     var overlay = document.getElementById('wordInfoOverlay');
@@ -1463,6 +1555,11 @@ applyFontSize(currentFontSize);
 var strongBtn = document.getElementById('strongToggle');
 strongBtn.textContent = 'Strong: ' + (strongEnabled ? 'On' : 'Off');
 strongBtn.classList.toggle('active', strongEnabled);
+
+// Init allStrong toggle state from localStorage
+var allStrongBtn = document.getElementById('allStrongToggle');
+allStrongBtn.textContent = 'S: Todos ' + (showAllStrong ? 'On' : 'Off');
+allStrongBtn.classList.toggle('active', showAllStrong);
 
 // Init
 document.getElementById('search').value = '';
