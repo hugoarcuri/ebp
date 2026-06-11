@@ -338,7 +338,7 @@ let currentBook = null;
 let currentChapter = null;
 let searchResults = [];
 let searchFilter = 'ALL';
-let strongEnabled = localStorage.getItem('bibliaStrong') === 'true';
+let strongEnabled = localStorage.getItem('bibliaStrong') !== 'false';
 let highlights = JSON.parse(localStorage.getItem('bibliaHighlights') || '{}');
 
 const STRONG_MAP = {};
