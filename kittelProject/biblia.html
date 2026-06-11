@@ -302,7 +302,6 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
             <button class="btn-tool" data-filter="AT">AT</button>
             <button class="btn-tool" data-filter="NT">NT</button>
             <button class="btn-tool" id="strongToggle">Strong: Off</button>
-            <button class="btn-tool" id="allStrongToggle">S: Todos Off</button>
         </div>
         <div class="toolbar-right"></div>
     </div>
@@ -349,7 +348,6 @@ let currentChapter = null;
 let searchResults = [];
 let searchFilter = 'ALL';
 let strongEnabled = localStorage.getItem('bibliaStrong') === 'true';
-let showAllStrong = localStorage.getItem('bibliaShowAllStrong') === 'true';
 let highlights = JSON.parse(localStorage.getItem('bibliaHighlights') || '{}');
 
 const STRONG_MAP = {};
@@ -843,7 +841,7 @@ function markStrongWords(text, verseRef) {
                 strongs = wordStrongs[wordIdx];
                 if (strongs && strongs.length > 0) fromInterlinear = true;
             }
-            if ((!strongs || strongs.length === 0) && (isOT || isNT)) strongs = findStrongFallback(token, isOT, isNT, showAllStrong);
+            if ((!strongs || strongs.length === 0) && (isOT || isNT)) strongs = findStrongFallback(token, isOT, isNT, false);
             if (debugMode && strongs && strongs.length > 0) {
                 var origen = fromInterlinear ? 'interlinear' : 'fallback';
                 var strongStr = strongs.join(',');
@@ -1219,18 +1217,6 @@ document.getElementById('strongToggle').addEventListener('click', function() {
     setStrongEnabled(!strongEnabled);
 });
 
-document.getElementById('allStrongToggle').addEventListener('click', function() {
-    showAllStrong = !showAllStrong;
-    localStorage.setItem('bibliaShowAllStrong', showAllStrong);
-    var btn = document.getElementById('allStrongToggle');
-    btn.textContent = 'S: Todos ' + (showAllStrong ? 'On' : 'Off');
-    btn.classList.toggle('active', showAllStrong);
-    if (currentBook && currentChapter) {
-        showChapter();
-    } else if (searchResults.length > 0) {
-        searchBible(document.getElementById('search').value);
-    }
-});
 
 // Word info panel (double-click)
 function showWordInfo(word, strongsStr, ref) {
@@ -1580,11 +1566,6 @@ applyFontSize(currentFontSize);
 var strongBtn = document.getElementById('strongToggle');
 strongBtn.textContent = 'Strong: ' + (strongEnabled ? 'On' : 'Off');
 strongBtn.classList.toggle('active', strongEnabled);
-
-// Init allStrong toggle state from localStorage
-var allStrongBtn = document.getElementById('allStrongToggle');
-allStrongBtn.textContent = 'S: Todos ' + (showAllStrong ? 'On' : 'Off');
-allStrongBtn.classList.toggle('active', showAllStrong);
 
 // Init
 document.getElementById('search').value = '';
