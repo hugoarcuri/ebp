@@ -569,13 +569,19 @@ function renderWordObjects(objects) {
             strongHtml = obj.strongs.map(function(num) {
                 var detail = STRONG_MAP[num];
                 if (detail) {
-                    return '<span class="strong-badge" data-strong="' + num + '" data-lemma="' + escHtml(detail.w) + '" data-translit="' + escHtml(detail.t) + '" data-def="' + escHtml(detail.d.slice(0, 120).replace(/\\n/g, ' ')) + '">' + num + '</span>';
+                    return '<span class="s" data-s="' + num + '" data-l="' + escHtml(detail.w) + '" data-t="' + escHtml(detail.t) + '" data-d="' + escHtml(detail.d.slice(0, 120).replace(/\\n/g, ' ')) + '">' + num + '</span>';
                 }
-                return '<span class="strong-badge" data-strong="' + num + '">' + num + '</span>';
+                return '<span class="s" data-s="' + num + '">' + num + '</span>';
             }).join('');
         }
         
-        return '<span class="strong-word-group">' + obj.text + strongHtml + '</span>';
+        var wClass = 'wu';
+        if (obj.strongs && obj.strongs.length > 0) {
+            wClass += ' wu-has-strong';
+        } else {
+            wClass += ' wu-no-strong';
+        }
+        return '<span class="' + wClass + '"><span class="w">' + obj.text + '</span>' + strongHtml + '</span>';
     }).join('');
 }
 
@@ -1369,8 +1375,8 @@ document.getElementById('content').addEventListener('mouseover', function(e) {
     var strongEl = e.target.closest('.wu .s');
     if (!strongEl) return;
     clearTimeout(tooltipTimer);
-    var badge = strongEl.querySelector('[data-s]');
-    if (!badge) return;
+    var badge = strongEl;
+    if (!badge.dataset.s) return;
     var tooltip = document.getElementById('strongTooltip');
     tooltip.innerHTML = '<b>' + badge.dataset.s + '</b> <span class="orig">' + (badge.dataset.l || '') + '</span> <span class="trans">' + (badge.dataset.t || '') + '</span><span class="def">' + (badge.dataset.d || '') + '</span>';
     tooltip.style.display = 'block';
