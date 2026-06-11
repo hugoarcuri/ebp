@@ -122,121 +122,113 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 .verse { padding: 4px 0; font-size: var(--verse-font-size, 16px); line-height: 1.8; color: var(--text); }
 .verse .v-num { font-size: 11px; font-weight: 700; color: var(--accent); margin-right: 4px; cursor: pointer; }
 
-.wu { display: inline-flex; flex-direction: column; align-items: center; vertical-align: top; margin: 0 3px; }
-.wu .s { font-size: 0.55em; font-weight: 600; color: #4a90e2; line-height: 1.1; text-align: center; white-space: nowrap; cursor: pointer; }
-.wu .s:hover { color: #2a6cb8; text-decoration: underline; }
-.wu .w { font-size: 1em; line-height: 1.4; cursor: pointer; }
-.wu-has-strong .w { color: #2563eb; }
-.wu-no-strong .w { color: #9ca3af; }
-.dark .wu-has-strong .w { color: #60a5fa; }
-.dark .wu-no-strong .w { color: #6b7280; }
+.wu { display: inline; margin: 0 1px; cursor: pointer; }
+.wu .s { display: none; }
+.wu .w { font-size: 1em; line-height: 1.8; }
+.wu-has-strong .w { border-bottom: 1px dotted rgba(0,0,0,0.15); }
+.dark .wu-has-strong .w { border-bottom-color: rgba(255,255,255,0.2); }
+.wu-has-strong .w:hover { background: rgba(74,144,226,0.06); border-radius: 2px; }
+.dark .wu-has-strong .w:hover { background: rgba(74,144,226,0.12); }
 
 .strong-tooltip {
-    position: absolute;
-    z-index: 2000;
+    position: fixed;
+    z-index: 5000;
     background: #fff;
     color: #333;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 13px;
-    line-height: 1.5;
-    max-width: 280px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+    max-width: 320px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
     border: 1px solid #ddd;
-    pointer-events: auto;
+    pointer-events: none;
     display: none;
-    opacity: 0;
-    transition: opacity 0.2s;
 }
 .dark .strong-tooltip { background: #222; color: #eee; border-color: #444; }
-.strong-tooltip b { color: #4a90e2; font-size: 14px; display: block; margin-bottom: 4px; }
-.strong-tooltip .orig { font-size: 16px; font-weight: 700; color: #333; }
-.dark .strong-tooltip .orig { color: #fff; }
-.strong-tooltip .trans { font-style: italic; color: #666; margin-left: 6px; }
-.dark .strong-tooltip .trans { color: #aaa; }
-.strong-tooltip .def { margin-top: 6px; font-size: 12px; color: #444; display: block; }
-.dark .strong-tooltip .def { color: #ccc; }
-.wu { cursor: pointer; }
+.strong-tooltip .snum { font-weight: 700; color: #4a90e2; font-size: 13px; }
+.strong-tooltip .lemma { font-size: 15px; font-weight: 700; color: #333; }
+.dark .strong-tooltip .lemma { color: #fff; }
+.strong-tooltip .translit { font-style: italic; color: #666; margin-left: 4px; }
+.dark .strong-tooltip .translit { color: #aaa; }
+.strong-tooltip .morph { font-size: 11px; color: #888; margin-top: 2px; }
+.dark .strong-tooltip .morph { color: #999; }
 
-.word-info-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(4px); z-index: 3000;
-    display: none; align-items: center; justify-content: center;
-    padding: 20px;
+/* Lexical side panel */
+.lexical-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 2999;
+    display: none;
 }
-.word-info-overlay.open { display: flex; }
-.word-info-panel {
+.lexical-overlay.open { display: block; }
+.lexical-panel {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 380px; max-width: 90vw;
     background: var(--card-bg); color: var(--text);
-    border-radius: 14px; max-width: 520px; width: 100%;
-    max-height: 80vh; overflow-y: auto;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.25);
-    padding: 0; animation: fadeSlideIn 0.2s ease;
+    z-index: 3000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    display: flex; flex-direction: column;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.15);
 }
-@keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.word-info-header {
-    padding: 16px 20px 12px;
+.lexical-panel.open { transform: translateX(0); }
+.lexical-header {
+    padding: 12px 16px;
     border-bottom: 1px solid var(--border-color);
-    display: flex; justify-content: space-between; align-items: flex-start;
+    display: flex; align-items: flex-start; justify-content: space-between;
 }
-.word-info-header h3 { font-size: 18px; font-weight: 800; margin: 0; }
-.word-info-header .close-btn {
-    background: none; border: none; font-size: 22px;
-    cursor: pointer; color: var(--text-muted);
-    padding: 0 4px; line-height: 1;
-}
-.word-info-header .close-btn:hover { color: var(--text); }
-.word-info-body { padding: 16px 20px; }
-.word-info-entry {
+.lexical-header h3 { font-size: 16px; font-weight: 700; margin: 0; }
+.lexical-body { flex: 1; overflow-y: auto; padding: 16px; }
+.lexical-entry {
     background: rgba(0,0,0,0.03); border-radius: 10px;
     padding: 14px; margin-bottom: 12px;
 }
-.dark .word-info-entry { background: rgba(255,255,255,0.05); }
-.word-info-entry:last-child { margin-bottom: 0; }
-.word-info-entry .strong-num {
-    font-size: 13px; font-weight: 700; color: #4a90e2;
+.dark .lexical-entry { background: rgba(255,255,255,0.05); }
+.lexical-entry:last-child { margin-bottom: 0; }
+.lexical-entry .snum {
+    font-size: 14px; font-weight: 700; color: #4a90e2;
     margin-bottom: 6px;
 }
-.word-info-entry .lemma-row {
+.lexical-entry .lemma-row {
     display: flex; align-items: center; gap: 10px;
     margin-bottom: 6px;
 }
-.word-info-entry .orig-lemma {
+.lexical-entry .orig-lemma {
     font-size: 22px; font-weight: 700;
     direction: rtl; unicode-bidi: embed;
 }
-.word-info-entry .translit-lemma {
+.lexical-entry .translit-lemma {
     font-size: 14px; font-style: italic; color: var(--text-muted);
 }
-.word-info-entry .definition {
+.lexical-entry .definition {
     font-size: 13px; line-height: 1.5; color: var(--text);
     margin-top: 6px;
 }
-.word-info-entry .kittel-ref {
+.lexical-entry .kittel-ref {
     margin-top: 10px; padding: 8px 10px;
     background: rgba(74, 144, 226, 0.1);
     border-radius: 6px; font-size: 13px;
     border-left: 3px solid #4a90e2;
 }
-.word-info-entry .kittel-ref a {
+.lexical-entry .kittel-ref a {
     color: #4a90e2; text-decoration: none; font-weight: 600;
 }
-.word-info-entry .kittel-ref a:hover { text-decoration: underline; }
-.word-info-tabs {
-    display: flex; gap: 8px; flex-wrap: wrap;
-    padding: 0 20px 16px;
+.lexical-entry .kittel-ref a:hover { text-decoration: underline; }
+.lexical-entry .occurrences {
+    margin-top: 8px; font-size: 12px; color: var(--text-muted);
 }
-.word-info-tabs .tab-btn {
+.lexical-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    padding: 0 16px 16px;
+}
+.lexical-tabs .tab-btn {
     background: rgba(0,0,0,0.04); border: 1px solid var(--border-color);
     color: var(--text-muted); font-size: 12px; font-weight: 600;
     padding: 5px 12px; border-radius: 20px; cursor: pointer;
 }
-.dark .word-info-tabs .tab-btn { background: rgba(255,255,255,0.06); }
-.word-info-tabs .tab-btn:hover { border-color: #4a90e2; color: #4a90e2; }
-.word-info-tabs .tab-btn.active { background: #4a90e2; color: #fff; border-color: #4a90e2; }
-.word-info-empty { padding: 20px; text-align: center; color: var(--text-muted); font-size: 14px; }
+.dark .lexical-tabs .tab-btn { background: rgba(255,255,255,0.06); }
+.lexical-tabs .tab-btn:hover { border-color: #4a90e2; color: #4a90e2; }
+.lexical-tabs .tab-btn.active { background: #4a90e2; color: #fff; border-color: #4a90e2; }
+.lexical-empty { padding: 20px; text-align: center; color: var(--text-muted); font-size: 14px; }
 
 .selection-menu {
     position: absolute;
@@ -309,18 +301,17 @@ main { flex: 1; display: flex; flex-direction: column; overflow: hidden; positio
 
 <div id="strongTooltip" class="strong-tooltip"></div>
 <div id="highlightMenu" class="highlight-menu"></div>
-<div id="wordInfoOverlay" class="word-info-overlay">
-    <div class="word-info-panel">
-        <div class="word-info-header">
-            <div>
-                <h3 id="wordInfoWord"></h3>
-                <span id="wordInfoRef" style="font-size:12px;color:var(--text-muted);"></span>
-            </div>
-            <button class="close-btn" id="wordInfoClose">✕</button>
+<div class="lexical-overlay" id="lexicalOverlay"></div>
+<div class="lexical-panel" id="lexicalPanel">
+    <div class="lexical-header">
+        <div>
+            <h3 id="lexicalTitle">Léxico</h3>
+            <span id="lexicalRef" style="font-size:12px;color:var(--text-muted);"></span>
         </div>
-        <div class="word-info-body" id="wordInfoBody"></div>
-        <div class="word-info-tabs" id="wordInfoTabs"></div>
+        <button class="nav-close" id="lexicalClose">✕</button>
     </div>
+    <div class="lexical-body" id="lexicalBody"></div>
+    <div class="lexical-tabs" id="lexicalTabs"></div>
 </div>
 
 <div class="nav-overlay" id="navOverlay"></div>
@@ -562,6 +553,22 @@ function renderWordObjects(objects) {
         if (obj.type === 'html') return obj.html;
         if (obj.type === 'sep') return obj.text;
         
+        var strongData = '';
+        var firstNum = obj.strongs && obj.strongs.length > 0 ? obj.strongs[0] : '';
+        var firstDetail = firstNum ? STRONG_MAP[firstNum] : null;
+        var dataAttrs = 'data-w="' + escHtml(obj.text) + '"';
+        if (firstNum) {
+            dataAttrs += ' data-s="' + firstNum + '"';
+            if (firstDetail) {
+                dataAttrs += ' data-l="' + escHtml(firstDetail.w || '') + '"';
+                dataAttrs += ' data-t="' + escHtml(firstDetail.t || '') + '"';
+                dataAttrs += ' data-d="' + escHtml((firstDetail.d || '').slice(0, 120).replace(/\\n/g, ' ')) + '"';
+            }
+        }
+        if (obj.morph) {
+            dataAttrs += ' data-m="' + escHtml(obj.morph) + '"';
+        }
+        
         var strongHtml = '';
         if (obj.strongs.length > 0) {
             strongHtml = obj.strongs.map(function(num) {
@@ -579,7 +586,7 @@ function renderWordObjects(objects) {
         } else {
             wClass += ' wu-no-strong';
         }
-        return '<span class="' + wClass + '"><span class="w">' + obj.text + '</span>' + strongHtml + '</span>';
+        return '<span class="' + wClass + '"' + dataAttrs + '><span class="w">' + obj.text + '</span>' + strongHtml + '</span>';
     }).join('');
 }
 
@@ -1068,7 +1075,7 @@ function searchBible(query) {
             view.querySelectorAll('.verse[data-s]').forEach(function(el) {
                 el.addEventListener('click', function() {
                     var num = this.dataset.s;
-                    showWordInfo(num, num, 'Strong: ' + num);
+                    showLexicalPanel(num, num, 'Strong: ' + num);
                 });
             });
             
@@ -1218,20 +1225,39 @@ document.getElementById('strongToggle').addEventListener('click', function() {
 });
 
 
-// Word info panel (double-click)
-function showWordInfo(word, strongsStr, ref) {
-    var overlay = document.getElementById('wordInfoOverlay');
-    document.getElementById('wordInfoWord').textContent = word;
-    document.getElementById('wordInfoRef').textContent = ref || '';
+// --- Occurrences index ---
+var OCCURRENCES = {};
+function buildOccurrences() {
+    if (typeof INTERLINEAR_LOOKUP === 'undefined') return;
+    for (var ref in INTERLINEAR_LOOKUP) {
+        var wordStrongs = INTERLINEAR_LOOKUP[ref];
+        for (var i = 0; i < wordStrongs.length; i++) {
+            var nums = wordStrongs[i];
+            if (!nums) continue;
+            for (var j = 0; j < nums.length; j++) {
+                var n = nums[j];
+                if (!OCCURRENCES[n]) OCCURRENCES[n] = 0;
+                OCCURRENCES[n]++;
+            }
+        }
+    }
+}
+buildOccurrences();
+
+// Lexical side panel (double-click)
+function showLexicalPanel(word, strongsStr, ref) {
+    document.getElementById('lexicalTitle').textContent = word;
+    document.getElementById('lexicalRef').textContent = ref || '';
     
-    var body = document.getElementById('wordInfoBody');
-    var tabs = document.getElementById('wordInfoTabs');
+    var body = document.getElementById('lexicalBody');
+    var tabs = document.getElementById('lexicalTabs');
     body.innerHTML = '';
     tabs.innerHTML = '';
     
     if (!strongsStr) {
-        body.innerHTML = '<div class="word-info-empty">No hay información Strong disponible para esta palabra.</div>';
-        overlay.classList.add('open');
+        body.innerHTML = '<div class="lexical-empty">No hay información Strong disponible para esta palabra.</div>';
+        document.getElementById('lexicalOverlay').classList.add('open');
+        document.getElementById('lexicalPanel').classList.add('open');
         return;
     }
     
@@ -1247,7 +1273,7 @@ function showWordInfo(word, strongsStr, ref) {
             tab.addEventListener('click', function() {
                 tabs.querySelectorAll('.tab-btn').forEach(function(t) { t.classList.remove('active'); });
                 this.classList.add('active');
-                body.querySelectorAll('.word-info-entry').forEach(function(e, i) {
+                body.querySelectorAll('.lexical-entry').forEach(function(e, i) {
                     e.style.display = i === parseInt(this.dataset.idx) ? 'block' : 'none';
                 }.bind(this));
             });
@@ -1257,17 +1283,13 @@ function showWordInfo(word, strongsStr, ref) {
     
     allNums.forEach(function(num, idx) {
         var entry = document.createElement('div');
-        entry.className = 'word-info-entry';
+        entry.className = 'lexical-entry';
         if (allNums.length > 1) entry.style.display = idx === 0 ? 'block' : 'none';
         
         var detail = STRONG_MAP[num];
-        if (window.location.search.indexOf('debug=1') >= 0) {
-            console.log('[word-info] Strong solicitado: ' + num +
-                ' | Diccionario usado: ' + (num.charAt(0) === 'H' ? 'Hebrew' : 'Greek') +
-                ' | Resultado: ' + (detail ? (detail.w || detail.t || '(encontrado)') : 'NO ENCONTRADO'));
-        }
-
-        var html = '<div class="strong-num">' + num + '</div>';
+        var occ = OCCURRENCES[num] || 0;
+        
+        var html = '<div class="snum">' + num + '</div>';
         
         if (detail) {
             html += '<div class="lemma-row">';
@@ -1288,12 +1310,15 @@ function showWordInfo(word, strongsStr, ref) {
                 html += '<div class="definition">' + escHtml(detail.d) + '</div>';
             }
             
+            // Occurrences count
+            html += '<div class="occurrences">Ocurrencias: ' + occ + '</div>';
+            
             // Kittel cross-reference for Greek lemmas
             if (num.startsWith('G') && detail.w) {
                 var kittelRefs = findKittelForLemma(detail.w);
                 if (kittelRefs && kittelRefs.length > 0) {
                     html += '<div class="kittel-ref">';
-                    html += '<strong style="color:#4a90e2;">📖 Kittel / TDNT</strong><br>';
+                    html += '<strong style="color:#4a90e2;">Kittel / TDNT</strong><br>';
                     kittelRefs.forEach(function(kr) {
                         var pageStr = kr.p ? ' — pág. ' + kr.p : '';
                         if (kr.t && kr.t.length > 100) {
@@ -1307,40 +1332,46 @@ function showWordInfo(word, strongsStr, ref) {
             }
         } else {
             html += '<div class="definition">No se encontró información detallada para este número.</div>';
+            html += '<div class="occurrences">Ocurrencias: ' + occ + '</div>';
         }
         
         entry.innerHTML = html;
         body.appendChild(entry);
     });
     
-    overlay.classList.add('open');
+    document.getElementById('lexicalOverlay').classList.add('open');
+    document.getElementById('lexicalPanel').classList.add('open');
 }
 
-// Close info panel
-document.getElementById('wordInfoClose').addEventListener('click', function() {
-    document.getElementById('wordInfoOverlay').classList.remove('open');
-});
-document.getElementById('wordInfoOverlay').addEventListener('click', function(e) {
-    if (e.target === this) this.classList.remove('open');
-});
+// Close lexical panel
+function closeLexicalPanel() {
+    document.getElementById('lexicalOverlay').classList.remove('open');
+    document.getElementById('lexicalPanel').classList.remove('open');
+}
+document.getElementById('lexicalClose').addEventListener('click', closeLexicalPanel);
+document.getElementById('lexicalOverlay').addEventListener('click', closeLexicalPanel);
 
-// Double-click on word-unit
+// Double-click on word-unit → open lexical side panel
 document.getElementById('content').addEventListener('dblclick', function(e) {
     var unit = e.target.closest('.wu');
     if (!unit) return;
     var word = unit.dataset.w;
-    var strongs = unit.dataset.n;
+    // Gather all strong numbers from .s spans
+    var strongEls = unit.querySelectorAll('.s');
+    var strongs = [];
+    strongEls.forEach(function(el) { if (el.dataset.s) strongs.push(el.dataset.s); });
+    var strongsStr = strongs.length > 0 ? strongs.join(',') : '';
     var verseEl = unit.closest('.verse');
     var ref = '';
     if (verseEl) {
         var vNum = verseEl.querySelector('.v-num');
         if (vNum) ref = (currentBook || '') + ' ' + (currentChapter || '') + ':' + vNum.textContent;
     }
-    showWordInfo(word, strongs, ref);
+    showLexicalPanel(word, strongsStr, ref);
 });
 
-// Handle clicks on Kittel links inside info panel
-document.getElementById('wordInfoBody').addEventListener('click', function(e) {
+// Handle clicks on Kittel links inside lexical panel
+document.getElementById('lexicalBody').addEventListener('click', function(e) {
     if (e.target.classList.contains('kittel-link')) {
         e.preventDefault();
         var query = e.target.dataset.text || e.target.textContent;
@@ -1358,27 +1389,32 @@ document.getElementById('wordInfoBody').addEventListener('click', function(e) {
 
 let tooltipTimer;
 document.getElementById('content').addEventListener('mouseover', function(e) {
-    var strongEl = e.target.closest('.wu .s');
-    if (!strongEl) return;
+    var unit = e.target.closest('.wu.wu-has-strong');
+    if (!unit) return;
     clearTimeout(tooltipTimer);
-    var badge = strongEl;
-    if (!badge.dataset.s) return;
     var tooltip = document.getElementById('strongTooltip');
-    tooltip.innerHTML = '<b>' + badge.dataset.s + '</b> <span class="orig">' + (badge.dataset.l || '') + '</span> <span class="trans">' + (badge.dataset.t || '') + '</span><span class="def">' + (badge.dataset.d || '') + '</span>';
+    var s = unit.dataset.s || '';
+    var l = unit.dataset.l || '';
+    var t = unit.dataset.t || '';
+    var m = unit.dataset.m || '';
+    var html = '<span class="snum">' + s + '</span>';
+    if (l) html += ' <span class="lemma">' + escHtml(l) + '</span>';
+    if (t) html += ' <span class="translit">' + escHtml(t) + '</span>';
+    if (m) html += ' <div class="morph">' + escHtml(m) + '</div>';
+    tooltip.innerHTML = html;
     tooltip.style.display = 'block';
-    var rect = strongEl.getBoundingClientRect();
-    tooltip.style.left = (rect.left + window.scrollX) + 'px';
-    tooltip.style.top = (rect.top + window.scrollY - tooltip.offsetHeight - 8) + 'px';
-    setTimeout(function() { tooltip.style.opacity = '1'; }, 10);
+    var rect = unit.getBoundingClientRect();
+    var top = rect.top - tooltip.offsetHeight - 6;
+    if (top < 4) top = rect.bottom + 6;
+    tooltip.style.left = Math.max(4, Math.min(rect.left + window.scrollX, window.innerWidth - tooltip.offsetWidth - 4)) + 'px';
+    tooltip.style.top = top + 'px';
 });
 
 document.getElementById('content').addEventListener('mouseout', function(e) {
-    if (e.target.closest('.wu .s')) {
+    if (e.target.closest('.wu')) {
         tooltipTimer = setTimeout(function() {
-            var tooltip = document.getElementById('strongTooltip');
-            tooltip.style.opacity = '0';
-            setTimeout(function() { tooltip.style.display = 'none'; }, 200);
-        }, 300);
+            document.getElementById('strongTooltip').style.display = 'none';
+        }, 150);
     }
 });
 
@@ -1387,36 +1423,17 @@ document.getElementById('strongTooltip').addEventListener('mouseover', function(
 });
 
 document.getElementById('strongTooltip').addEventListener('mouseout', function() {
-    tooltipTimer = setTimeout(function() {
-        var tooltip = document.getElementById('strongTooltip');
-        tooltip.style.opacity = '0';
-        setTimeout(function() { tooltip.style.display = 'none'; }, 200);
-    }, 300);
+    document.getElementById('strongTooltip').style.display = 'none';
 });
 
 
 document.getElementById('content').addEventListener('click', function(e) {
     var debugMode = window.location.search.indexOf('debug=1') >= 0;
     var unit = e.target.closest('.wu');
-    if (unit && debugMode && !e.target.closest('.wu .s')) {
+    if (unit && debugMode) {
         var w = unit.dataset.w;
-        var n = unit.dataset.n;
+        var n = unit.dataset.s || '';
         console.log('Palabra: ' + w + ' -> Strong: ' + (n || '(ninguno)'));
-        return;
-    }
-    var strongEl = e.target.closest('.wu .s');
-    if (strongEl) {
-        var badge = strongEl.querySelector('[data-s]');
-        if (badge) {
-            var strongNum = badge.dataset.s;
-            try {
-                var parentDoc = window.parent.document;
-                var fk = parentDoc.getElementById('frameKittel');
-                var fs = parentDoc.getElementById('frameStrong');
-                if (fk) fk.contentWindow.postMessage({ type: 'search', query: strongNum }, '*');
-                if (fs) fs.contentWindow.postMessage({ type: 'search', query: strongNum }, '*');
-            } catch(e) {}
-        }
     }
 });
 
