@@ -7,6 +7,7 @@
 <script src="rv1960.js"></script>
 <script src="interlinear_lookup.js"></script>
 <script src="aliases.js"></script>
+<script src="direct_strong.js"></script>
 <script src="strong_index.js"></script>
 <script src="datos_strong.js"></script>
 <script src="datos.js"></script>
@@ -704,6 +705,24 @@ function findStrongFallback(word, isOT, isNT, showAll) {
                     if (debug) console.log('Palabra: ' + word + ' | Confianza: baja (alias ambiguo) | Resultado: ocultar');
                     return [];
                 }
+            }
+        }
+    }
+    // Check direct word->Strong mappings from STEPBible (TAGNT + TIPNR)
+    if (typeof DIRECT_STRONG !== 'undefined') {
+        var directKey = stripAccents(lower);
+        var directStrong = DIRECT_STRONG[directKey];
+        if (directStrong) {
+            var filtered = filterByTestament([directStrong]);
+            if (filtered.length === 1) {
+                if (debug) {
+                    var info = strongInfo(filtered[0]);
+                    console.log('Palabra: ' + word + '\nStrong asignado: ' + filtered[0] + '\nLema Strong: ' + info.lemma + '\nDefinicion: ' + info.def.slice(0, 120) + '\nCoincidencia: alta (directo STEPBible)');
+                }
+                return filtered;
+            }
+            if (filtered.length > 1) {
+                return [];
             }
         }
     }

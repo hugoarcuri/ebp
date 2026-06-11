@@ -175,7 +175,22 @@ def load_aliases():
 
 # === FALLBACK LOGIC (mirrors biblia.html) ===
 
-def find_fallback(word, is_ot, is_nt, strong_index, aliases):
+def load_direct_strong():
+    path = os.path.join(BASE, 'direct_strong.js')
+    if not os.path.exists(path):
+        return {}
+    with open(path, 'r', encoding='utf-8') as f:
+        js = f.read()
+    m = re.search(r'const\s+DIRECT_STRONG\s*=\s*({.*?});', js, re.DOTALL)
+    if not m:
+        return {}
+    obj_str = m.group(1)
+    result = {}
+    for m2 in re.finditer(r'"([^"]+)"\s*:\s*"([^"]+)"', obj_str):
+        result[m2.group(1)] = m2.group(2)
+    return result
+
+def find_fallback(word, is_ot, is_nt, strong_index, aliases, direct_strong):
     lower = word.lower()
     stripped = strip_accents(lower)
     if stripped in FUNC_WORDS:
@@ -195,6 +210,11 @@ def find_fallback(word, is_ot, is_nt, strong_index, aliases):
                         return None, 'alias_ambiguous'
             if candidate:
                 return candidate, 'alias'
+    # 1b. Check direct_strong (word -> Strong number, bypass lemma lookup)
+    if stripped in direct_strong:
+        strong = direct_strong[stripped]
+        if (is_ot and strong.startswith('H')) or (is_nt and strong.startswith('G')):
+            return strong, 'direct_strong'
     # 2. Try original form
     entry = strong_index.get(stripped)
     if entry:
@@ -325,10 +345,12 @@ def main():
     ilookup = load_interlinear_lookup()
     strong_index = load_strong_index()
     aliases = load_aliases()
+    direct_strong = load_direct_strong()
     print(f"  Libros: {len(bible)}")
     print(f"  Interlinear verses: {len(ilookup)}")
     print(f"  Strong index entries: {len(strong_index)}")
     print(f"  Aliases: {len(aliases)}")
+    print(f"  Direct strong: {len(direct_strong)}")
     
     # === STATS ===
     total_words = 0
@@ -384,7 +406,7 @@ def main():
                     
                     # Check fallback
                     if not has_strong:
-                        result, src = find_fallback(word_text, is_ot, is_nt, strong_index, aliases)
+                        result, src = find_fallback(word_text, is_ot, is_nt, strong_index, aliases, direct_strong)
                         if result:
                             has_strong = True
                             strong_num = result
