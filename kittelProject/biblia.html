@@ -724,7 +724,7 @@ function findStrongFallback(word, isOT, isNT, showAll) {
         var directKey = stripAccents(lower);
         var directStrong = DIRECT_STRONG[directKey];
         if (directStrong) {
-            var filtered = filterByTestament([directStrong]);
+            var filtered = filterByTestament(directStrong.split(';'));
             if (filtered.length === 1) {
                 if (debug) {
                     var info = strongInfo(filtered[0]);
